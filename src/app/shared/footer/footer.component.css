@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css?family=Baskervville&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lora&display=swap');
+.footer {
+    position: fixed;
+    bottom: 0;
+    height: 110px;
+    margin-right: 0%;
+    left: 0%;
+    width: 100%;
+    
+   
+}
+
+.footer-copyright{
+    background-color: lightgrey;
+}
+
+.mb-4{
+    font-family: 'Baskervville', serif;
+    font-weight: bold;
+}
+
+p,a,i,.footer-copyright,span{
+    font-family: 'Lora', serif;
+}
+
+p{
+    size: 28px; 
+}
+
+@media screen and (max-width:360px){
+    footer{
+      width: 653px;
+    }
+  }
+
+  @media screen and (max-width:414px){
+    footer{
+        width: 673px;
+      }
+  }

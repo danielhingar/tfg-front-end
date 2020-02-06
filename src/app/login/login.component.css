@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css?family=Cinzel|Muli&display=swap');
+.container{
+    border-radius: 5px;
+    padding: 17px;
+    width: 330px;
+    position: relative;
+    margin-top: 80px;
+    margin-bottom: 10%;
+    
+}
+
+.label{
+    font-weight: bold;
+}
+
+.btn{
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+.brand{
+    font-family: 'Cinzel', serif;
+    font-size: 30px;
+    margin-top: 20px;
+    color: rgb(29, 29, 31);
+}
+
+.title{
+    font-family: 'Muli', sans-serif;
+    font-size: 20px;
+    
+}
+
+.register{
+    color: lightslategrey;
+    font-size: small;
+    opacity: 75%;
+}
+
+

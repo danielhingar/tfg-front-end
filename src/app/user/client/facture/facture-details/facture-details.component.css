@@ -1,0 +1,15 @@
+.container-xl {
+    margin-top: 8%;
+    margin-bottom: 15%;
+  }
+
+  .container{
+    margin-bottom: 5%;
+}
+
+  .card-header {
+    font-family: "Muli", sans-serif;
+    font-size: 25px;
+    text-align: left;
+    background-color: transparent !important;
+  }

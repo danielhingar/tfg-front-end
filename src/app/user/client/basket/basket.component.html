@@ -1,0 +1,89 @@
+<div class="animated fadeInDown container-xl" style="background-color:#c0c0c0">
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-8">
+            <div class="animated fadeInDown container" style="background-color: #ffffff;">
+                <br>
+                <h2>Mi cesta</h2>
+                <div *ngIf="itemBasket.length == 0" class="alert alert-info" >No hay productos en su cesta</div>
+                <table class="table">
+                    <tbody>
+                        <tr *ngFor="let item of itemBasket">
+                            <td>
+                                <img *ngIf="item.product?.photo" src="{{item.product.photo}}"
+                                    alt="{{item.product.photo}}" class="img-thumbnail rounded"
+                                    style="width: 64px;cursor: pointer;">
+                                <img *ngIf="!item.product?.photo"
+                                    src="https://i1.wp.com/www.lagraderia.com/wp-content/uploads/2018/12/no-imagen.jpg?fit=300%2C300"
+                                    alt="Sin foto" class="img-thumbnail rounded" style="width: 64px;cursor: pointer;">
+                            </td>
+                            <td style="font-weight: 500;color: black;size: 19px;">{{item.product.name}}</td>
+                            <td *ngIf="item.size !== 'null'">
+                                {{item.size}}
+                            </td>
+                            <td *ngIf="item.capacity !== 'null'">
+                                {{item.capacity}}
+                            </td>
+                            <td *ngIf="item.capacity === 'null' && item.size === 'null' " >
+                                
+                            </td>
+
+                            
+                            <td>{{item.product.price.toFixed(2)}}€</td>
+                            <td>
+                                <input type="number" min="1" max="10" autocomplete="off" value="{{item.quantity}}"
+                                    class="form-control" (change)="updateQuantity(item.id,item.product.id,$event)">
+                            </td>
+                            <td style="font-weight: 700;color: darkred;">{{calculatePrice(item).toFixed(2)}}€</td>
+                            <td>  <a  name="eliminar" (click)="delete(item)" class="btn-link">Eliminar</a></td>
+
+
+
+                        </tr>
+                    </tbody>
+                    <br>
+                </table>
+            </div>
+        </div>
+        <div class="col-8 col-md-4">
+            <div class="animated fadeInDown container1" style="background-color: #ffffff;">
+                <div class="resumen" style="margin-left: 4%;">
+                    <h3>Total</h3>
+                    <br>
+                    <div class="row">
+                        <div class="col-8">
+                            <h5 style="font-weight: 300;">Subtotal</h5>
+                        </div>
+                        <div class="col-2">
+                            <h5 style="font-weight: 300;">{{(caculateTotal()-(caculateTotal()*0.21)).toFixed(2)}}€</h5>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-8">
+                            <h5 style="font-weight: 300;">IVA</h5>
+                        </div>
+                        <div class="col-2">
+                            <h5 style="font-weight: 300;">{{(caculateTotal()*0.21).toFixed(2)}}€</h5>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-8">
+                            <h5>Total</h5><span>(IVA incluido)</span>
+                        </div>
+                        <div class="col-2">
+                            <h5 style="color: darkred;margin-left: -15%;">{{caculateTotal().toFixed(2)}}€</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <button type="button" (click)='createFactureUnify()' (click)='createFacturas()' name="facturar" class="btn" style="margin-left: 7%;width: 300px;margin-bottom: 5%;">Comenzar
+                pedido</button>
+            
+        </div>
+    </div>
+</div>
+<div class="container3">
+<img  style="margin-left: -4%;margin-bottom: -4%;" src="assets\img\iconfinder_Arrow_Back_1063891.png" height="35" width="35"><a href="/home" style="color:black;"><h3>Seguir comprando</h3></a>
+</div>

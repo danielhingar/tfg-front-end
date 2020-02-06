@@ -1,0 +1,100 @@
+<div class="animated fadeInDown card bg-white text-dark">
+    <div class="card-header">Registro</div>
+    <div class="card-body">
+        <br>
+        <form #clientForm="ngForm">
+
+            <div class="form-group row" *ngIf="!client.id">
+                <label for="username" class="col-form-label">Usuario:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="client.username" name="username" required 
+                    minlength="4" maxlength="20" #username="ngModel">
+                    <div class="alert" *ngIf="username.invalid && (username.dirty || username.touched)">
+                        <div *ngIf="username.errors.required">
+                            Este campo es obligatorio
+                        </div>
+                        <div *ngIf="username.errors.minlength">
+                            Debe ser mayor a 3 caracteres
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="name" class="col-form-label">Nombre:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="client.name" name="name" required #name="ngModel">
+                    <div class="alert" *ngIf="name.invalid && (name.dirty || name.touched)">
+                        <div *ngIf="name.errors.required">
+                            Este campo es obligatorio
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="surnames" class="col-form-label">Apellidos:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="client.surnames" name="surnames" required #surnames="ngModel">
+                    <div class="alert" *ngIf="surnames.invalid && (surnames.dirty || surnames.touched)">
+                        <div *ngIf="surnames.errors.required">
+                            Este campo es obligatorio
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label for="email" class="col-form-label">Email:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="client.email" name="email" required email #email="ngModel">
+                    <div class="alert" *ngIf="email.invalid && (email.dirty || email.touched)">
+                        <div *ngIf="email.errors.required">
+                            Este campo es obligatorio
+                        </div>
+                        <div *ngIf="email.errors.email">
+                            No tiene un formato correcto 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group row" *ngIf="!client.id">
+                <label for="password" class="col-form-label">Contraseña:</label>
+                <div class="col-sm-4">
+                    <input type="password" class="form-control" [(ngModel)]="client.password" name="password" required minlength="6" #password="ngModel">
+                    <div class="alert" *ngIf="password.invalid && (password.dirty || password.touched)">
+                        <div *ngIf="password.errors.required">
+                            Este campo es obligatorio
+                        </div>
+                        <div *ngIf="password.errors.minlength">
+                            Demasiado corta
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label for="phone" class="col-form-label">Teléfono :</label>
+                <div class="col-sm-4">
+                    <input type="phone" class="form-control" [(ngModel)]="client.phone" name="phone" >
+                    
+                </div>
+            </div>
+
+        
+            <div class="form-group row">
+                <div class="col-lg-6">
+                    <button class="btn btn-primary" role="button" (click)="create()" *ngIf="!client.id else elseBlock" [disabled]="!clientForm.form.valid">Crear cuenta</button>
+
+                    <ng-template #elseBlock>
+                            <button class="btn btn-primary" role="button" (click)="update()"  [disabled]="!clientForm.form.valid">Editar</button>
+                    </ng-template>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

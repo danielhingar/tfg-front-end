@@ -1,0 +1,203 @@
+<div class="container-xl">
+    <h1>Factura {{facture.id}} - {{facture.status}} </h1> 
+    <h4>{{facture.createDate}}</h4>
+    <br>
+    <div class="container" *ngIf="facture != null && authService.hasRole('ROLE_CLIENT') || authService.hasRole('ROLE_REPORTER') || authService.hasRole('ROLE_ADMIN')">
+        <div class="animated fadeInDown card bg-white text-dark">
+            <div class="card-header" style="font-weight: 500;">Datos de envío</div>
+            <div class="card-body">
+                <br>
+                <form #factureForm="ngForm">
+
+                    <div class="form-group row">
+
+                        <div class="col-sm-3">
+                            <label for="username" class="col-form-label">Nombre* :</label>
+                            <input type="text" class="form-control" [(ngModel)]="facture.name" name="name" required
+                                minlength="4" maxlength="20" #name="ngModel" disabled>
+                            <div class="alert" *ngIf="name.invalid && (name.dirty || name.touched)">
+                                <div *ngIf="name.errors.required">
+                                    Este campo es obligatorio
+                                </div>
+                                <div *ngIf="name.errors.minlength">
+                                    Debe ser mayor a 3 caracteres
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md">
+                            <label for="name" class="col-form-label">Apellidos* :</label>
+                            <input type="text" class="form-control" [(ngModel)]="facture.surnames" name="surnames"
+                                required #surnames="ngModel" disabled>
+                            <div class="alert" *ngIf="surnames.invalid && (surnames.dirty || surnames.touched)">
+                                <div *ngIf="surnames.errors.required">
+                                    Este campo es obligatorio
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm-3">
+                            <label for="name" class="col-form-label">Teléfono* :</label>
+                            <input type="text" class="form-control" [(ngModel)]="facture.phone" name="phone" required
+                                #phone="ngModel" disabled>
+                            <div class="alert" *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+                                <div *ngIf="phone.errors.required">
+                                    Este campo es obligatorio
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+
+                        <div class="col-md-8">
+                            <label for="address" class="col-form-label">Dirección* :</label>
+                            <input type="text" class="form-control" [(ngModel)]="facture.address" name="address"
+                                required #address="ngModel" disabled>
+                            <div class="alert" *ngIf="address.invalid && (address.dirty || address.touched)">
+                                <div *ngIf="address.errors.required">
+                                    Este campo es obligatorio
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-1">
+                            <label for="number" class="col-form-label">Número*</label>
+                            <input type="number" class="form-control" [(ngModel)]="facture.number" name="number"
+                                required #number="ngModel" disabled>
+                        </div>
+
+
+
+                        <div class="col-xs-3">
+                            <label for="postalCode" class="col-form-label">Código postal* :</label>
+                            <input type="number" class="form-control" [(ngModel)]="facture.postalCode" name="postalCode"
+                                required #postalCode="ngModel" disabled>
+                            <div class="alert" *ngIf="postalCode.invalid && (postalCode.dirty || postalCode.touched)">
+                                <div *ngIf="postalCode.errors.required">
+                                    Este campo es obligatorio
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+
+                        <div class="col-md-4">
+                            <label for="block" class="col-form-label">Bloque :</label>
+                            <input type="number" class="form-control" [(ngModel)]="facture.block" name="block" disabled>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="stairs" class="col-form-label">Escalera :</label>
+                            <input type="text" class="form-control" [(ngModel)]="facture.stairs" name="stairs" disabled>
+                        </div>
+
+
+
+                        <div class="col-md-4">
+                            <label for="floor" class="col-form-label">Piso :</label>
+                            <input type="number" class="form-control" [(ngModel)]="facture.floor" name="floor" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+
+                        <div class="col-md">
+                            <label for="province" class="col-form-label">Provincia* :</label>
+                            <input type="text" class="form-control" [(ngModel)]="facture.province" name="province"
+                                required #province="ngModel" disabled>
+                            <div class="alert" *ngIf="province.invalid && (province.dirty || province.touched)">
+                                <div *ngIf="province.errors.required">
+                                    Este campo es obligatorio
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md">
+                            <label for="locality" class="col-form-label">Localidad* :</label>
+                            <input type="text" class="form-control" [(ngModel)]="facture.locality" name="locality"
+                                required #locality="ngModel" disabled>
+                            <div class="alert" *ngIf="locality.invalid && (locality.dirty || locality.touched)">
+                                <div *ngIf="locality.errors.required">
+                                    Este campo es obligatorio
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="animated fadeInDown container-fluid" *ngIf="facture != null">
+        <br>
+        <div class="container1">
+            <div class="card" *ngFor="let item of facture.itemBaskets" style="margin-bottom: 1%;">
+                <div class="card-title"
+                    style="border-color: transparent !important;background-color: #f6f6f6;height: 60px;">
+                    <h5 style="text-align: center"> {{item.product.name}}</h5>
+                    <h5 style="text-align: right;margin-right: 4%;color: darkred;">{{calculatePrice(item).toFixed(2)}}€
+                    </h5>
+                </div>
+                <div class="card body" style="border-color: transparent !important;margin-bottom: 3%;">
+                    <div class="row">
+                        <div class="col-2" style="margin-left: 3%;">
+                            <img *ngIf="item.product?.photo" src="{{item.product.photo}}" alt="{{item.product.photo}}"
+                                class="img-thumbnail rounded" style="width: 100px;height: 100px;">
+                            <img *ngIf="!item.product?.photo"
+                                src="https://i1.wp.com/www.lagraderia.com/wp-content/uploads/2018/12/no-imagen.jpg?fit=300%2C300"
+                                alt="Sin foto" class="img-thumbnail rounded" style="width: 100px;height: 100px;">
+                        </div>
+                        <div class="col-md-3">
+                            <p style="margin-top: 1%;margin-left: -20%;">{{item.product.description}}</p>
+                        </div>
+                        <div class="col-6">
+                            <p style="font-weight: 500;color:darkslategrey;"> Precio Unidad:
+                                {{item.product.price.toFixed(2)}} €</p>
+                            <p style="font-weight: 500;color:darkslategrey;"> Cantidad: {{item.quantity}}</p>
+                            <p style="font-weight: 500;color:darkslategrey;" *ngIf="item?.size != 'null'"> Talla:
+                                {{item.size}}</p>
+                            <p style="font-weight: 500;color:darkslategrey;" *ngIf="item?.capacity != 'null'">
+                                Capacidad: {{item.capacity}}</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="animated fadeInDown container2" style="width: 900px;margin-left: 10%;" *ngIf="facture != null">
+        <div class="card">
+            <div class="card-header">Resumen pedido</div>
+            <br>
+            <div class="row">
+                <div class="col-md-10">
+                    <ul *ngFor="let item of facture.itemBaskets"> 
+                        {{item.quantity}}&nbsp; &nbsp; {{item.product.name}}
+                    </ul>
+                </div>
+                <div class="col-xs">
+                    <p *ngFor="let item of facture.itemBaskets"> 
+                       {{calculatePrice(item).toFixed(2)}}€
+                    </p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-10">
+                    <h3 style="font-weight: 600;">Total</h3>
+                </div>
+                <div class="col-xs">
+                   <h3 style="color: darkred;">{{caculateTotal().toFixed(2)}}€</h3> 
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+</div>

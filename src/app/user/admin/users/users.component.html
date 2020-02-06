@@ -1,0 +1,84 @@
+<div class="animated fadeInDown container">
+    <h2>Usuarios</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Email</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of clients">
+                <td>{{user.id}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>
+                    <button type="button" name="disable" (click)='disable(user)' class="btn btn-danger btn-sm" *ngIf="user.enabled">Deshabilitar</button>
+                                  <button type="button" name="enable" (click)='enable(user)' class="btn btn-success btn-sm" *ngIf="!user.enabled">Habilitar</button>
+                </td>
+                
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="animated fadeInDown container">
+    <h2>Compañías</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Email</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of companies">
+                <td>{{user.id}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>
+                    <button type="button" name="disable" (click)='disable(user)' class="btn btn-danger btn-sm" *ngIf="user.enabled">Deshabilitar</button>
+                                  <button type="button" name="enable" (click)='enable(user)' class="btn btn-success btn-sm" *ngIf="!user.enabled">Habilitar</button>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="animated fadeInDown container">
+    <h2>Intermediarios</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Usuario</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Email</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of reporters">
+                <td>{{user.id}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>
+                    <button type="button" name="disable" (click)='disable(user)' class="btn btn-danger btn-sm" *ngIf="user.enabled">Deshabilitar</button>
+                    <button type="button" name="enable" (click)='enable(user)' class="btn btn-success btn-sm" *ngIf="!user.enabled">Habilitar</button>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>

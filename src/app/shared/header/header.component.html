@@ -1,0 +1,95 @@
+<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" >Showcase<sup>tm</sup></a>&nbsp;&nbsp;
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" *ngIf="authService.isAuthenticated()">
+        <a class="btn" href="/home">
+        <img style="text-align: left;" src="assets\img\iconfinder_Streamline-18_185038.png" height="25" width="25">
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="authService.hasRole('ROLE_ADMIN')">
+        <a class="nav-link"  href="/home">Configuración</a>
+      </li>
+      <li class="nav-item" *ngIf="authService.hasRole('ROLE_ADMIN')">
+        <a class="nav-link"  href="/home">Métodos de envíos</a>
+      </li>
+      <li *ngIf="authService.hasRole('ROLE_ADMIN')" class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Usuarios
+        </a>
+        <div class="dropdown-menu bg-light" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/listUsers">Listado</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/registerReporter">Registro intermediarios</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/registerCompany">Registro compañías</a>
+        </div>
+      </li>
+      <li class="nav-item" *ngIf="authService.hasRole('ROLE_COMPANY')">
+        <a class="nav-link"  href="/myProducts">Mis productos</a>
+      </li>
+      <li class="nav-item" *ngIf="authService.hasRole('ROLE_COMPANY')">
+        <a class="nav-link"  href="/createProduct">Nuevo producto</a>
+      </li>
+      <li class="nav-item" *ngIf="authService.hasRole('ROLE_COMPANY')">
+        <a class="nav-link"  href="/Orders">Mis facturas</a>
+      </li>
+      <li class="nav-item" *ngIf="authService.hasRole('ROLE_COMPANY')">
+        <a class="nav-link"  href="/home">Acerca de mi</a>
+      </li>
+      <li class="nav-item" *ngIf="authService.hasRole('ROLE_REPORTER')">
+        <a class="nav-link"  href="/home">&nbsp;Mis reclamaciones &nbsp;</a> 
+      </li>
+      <li class="nav-item" *ngIf="authService.hasRole('ROLE_REPORTER')">
+        <a class="nav-link"  href="/home">Reclamaciones</a>
+      </li>
+      <li class="nav-item" *ngIf="authService.hasRole('ROLE_REPORTER')">
+        <a class="nav-link"  href="/factures">Facturas</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav navbar-right">
+      <li class="nav-item" *ngIf="authService.hasRole('ROLE_CLIENT')">
+        <a class="btn" href="/myBasket">
+        <img style="text-align: left;" src="assets\img\iconfinder_bag_1540167.png" height="25" width="25"><span *ngIf="authService.hasRole('ROLE_CLIENT')">{{count()}}</span>
+        &nbsp;
+        </a>
+       
+      </li>
+    </ul>
+
+    <ul class="navbar-nav navbar-right">
+      <li *ngIf="authService.isAuthenticated()" class="dropdown">
+        <img style="text-align: left;" src="assets\img\iconfinder_user_male4_172628.png" height="25" width="25"><a class="dropdown-toggle text-dark" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{authService.usuario.username}}
+        </a>
+        <div class="dropdown-menu dropdown-menu-right bg-light" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="edit" *ngIf="authService.hasRole('ROLE_CLIENT')">Editar perfil</a>
+          <div class="dropdown-divider" *ngIf="authService.hasRole('ROLE_CLIENT')"></div>
+          <a class="dropdown-item" href="editCompany" *ngIf="authService.hasRole('ROLE_COMPANY')">Editar compañía</a>
+          <div class="dropdown-divider" *ngIf="authService.hasRole('ROLE_COMPANY')"></div>
+          <a class="dropdown-item" href="editReporter" *ngIf="authService.hasRole('ROLE_REPORTER')">Editar perfil</a>
+          <div class="dropdown-divider" *ngIf="authService.hasRole('ROLE_REPORTER')"></div>
+          <a class="dropdown-item" href="myOrders" *ngIf="authService.hasRole('ROLE_CLIENT')"> Mis compras</a>
+          <div class="dropdown-divider" *ngIf="authService.hasRole('ROLE_CLIENT')"></div>
+          <a class="dropdown-item" href="# " *ngIf="authService.hasRole('ROLE_CLIENT')"> Mis Reclamaciones</a>
+          <div class="dropdown-divider" *ngIf="authService.hasRole('ROLE_CLIENT')"></div>
+        <!--  <a class="dropdown-item"  href="/myProducts" *ngIf="authService.hasRole('ROLE_COMPANY')">Mis productos</a>
+          <div class="dropdown-divider" *ngIf="authService.hasRole('ROLE_COMPANY')"></div>
+          <a class="dropdown-item"  href="/home" *ngIf="authService.hasRole('ROLE_COMPANY')">Mis facturas</a>
+          <div class="dropdown-divider" *ngIf="authService.hasRole('ROLE_COMPANY')"></div>-->
+          <button (click)="logout()" class="dropdown-item text-danger" type="submit">Cerrar sesión</button>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+
+</nav>
+

@@ -1,0 +1,151 @@
+<div class="animated fadeInDown card bg-white text-dark">
+    <div class="card-header">Crear producto</div>
+    <div class="card-body">
+        <br>
+        <form #productForm="ngForm">
+
+            <div class="form-group row">
+                <label for="name" class="col-form-label">Nombre:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="product.name" name="name" style="width: 300px;" required #name="ngModel">
+                    <div class="alert" *ngIf="name.invalid && (name.dirty || name.touched)">
+                        <div *ngIf="name.errors.required">
+                            Este campo es obligatorio
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="description" class="col-form-label">Descripción:</label>
+                <div class="col-sm-4">
+                    <textarea type="text" class="form-control" [(ngModel)]="product.description" name="description" required #description="ngModel"></textarea>
+                    <div class="alert" *ngIf="description.invalid && (description.dirty || description.touched)">
+                        <div *ngIf="description.errors.required">
+                            Este campo es obligatorio
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="photo" class="col-form-label">Foto:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="product.photo" name="photo">
+                </div>
+            </div>
+
+
+            <div class="form-group row" >
+                <label for="price" class="col-form-label">Precio:</label>
+                <div class="col-sm-4">
+                    <input type="number" class="form-control" [(ngModel)]="product.price" name="price" required  min="0.00" #price="ngModel">
+                    <div class="alert" *ngIf="price.invalid && (price.dirty || price.touched)">
+                        <div *ngIf="price.errors.required">
+                            Este campo es obligatorio
+                        </div>
+                        <div *ngIf="price.errors.min">
+                            El precio debe ser mayor a 0€ 
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="category" class="col-form-label">Categoría:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="product.category" name="category" required #category="ngModel">
+                    <div class="alert" *ngIf="category.invalid && (category.dirty || category.touched)">
+                        <div *ngIf="category.errors.required">
+                            Este campo es obligatorio
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label for="size" class="col-form-label">Tallas:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="product.size" name="size" placeholder="S,M,L... ó  37,38,39..." >
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label for="height" class="col-form-label">Alto:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="product.height" name="height" >
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="width" class="col-form-label">Ancho:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="product.width" name="width">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="weight" class="col-form-label">Peso:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="product.weight" name="weight">
+                    
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="inch" class="col-form-label">Pulgadas:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="product.inch" name="inch">
+                </div>
+            </div>
+
+            
+            <div class="form-group row">
+                <label for="capacity" class="col-form-label">Capacidad:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="product.capacity" name="capacity">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="memory" class="col-form-label">Memoria:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="product.memory" name="memory" placeholder="16GB,32GB...">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="brand" class="col-form-label">Marca:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="product.brand" name="brand" required #brand="ngModel">
+                    <div class="alert" *ngIf="brand.invalid && (brand.dirty || brand.touched)">
+                        <div *ngIf="brand.errors.required">
+                            Este campo es obligatorio
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="offert" class="col-form-label">Descuento:</label>
+                <div class="col-sm-4">
+                    <input type="number" class="form-control" [(ngModel)]="product.offert" min="5" max="90" name="offert">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-lg-6">
+                    <button class="btn btn-primary" role="button" (click)="create()" *ngIf="!product.id else elseBlock" [disabled]="!productForm.form.valid">Añadir producto</button>
+
+                    <ng-template #elseBlock>
+                            <button class="btn btn-primary" role="button" (click)="update()"  [disabled]="!productForm.form.valid">Editar producto</button>
+                    </ng-template>
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

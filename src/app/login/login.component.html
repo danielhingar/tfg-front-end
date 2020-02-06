@@ -1,0 +1,28 @@
+<div class="animated fadeInDown container">
+    <div class="card">
+        <div class="card-body">
+            <p class="brand text-center">Showcase<sup>TM</sup></p>
+            <hr />
+            <p class="title text-center">Inicio de sesión</p>
+            <form method="post">
+                <div class="form-group">
+                    <label for="Usuario" class="label">Usuario</label>
+                    <input [(ngModel)]="usuario.username" type="text" class="form-control" name="username" id="username"
+                        placeholder="Escribe tu usuario" autofocus required>
+                </div>
+
+                <div class="form-group">
+                    <label for="Contraseña" class="label">Contraseña</label>
+                    <input [(ngModel)]="usuario.password" type="password" class="form-control" name="password" id="password"
+                        placeholder="Escribe tu contraseña" required>
+                </div>
+
+                <div class="form-group">
+                    <input (click)="login()" type="submit" class="btn btn-block" value="Acceder">
+                </div>
+            </form>
+            <a href="/register" class="register">¿No tienes cuenta? Registrate</a>
+        </div>
+    </div>
+</div>
+

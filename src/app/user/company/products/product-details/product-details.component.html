@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <img *ngIf="!product?.photo" src="https://i1.wp.com/www.lagraderia.com/wp-content/uploads/2018/12/no-imagen.jpg?fit=300%2C300" class="card-img"> 
+            <img *ngIf="product?.photo" src={{product.photo}} class="card-img" width="540px" height="675px">
+        </div>
+    <div class="col-6">
+        <h3>{{product.name}} - {{product.category}}</h3>
+        <h4 class="offert" *ngIf="product?.offert">-{{product.offert}}%</h4>
+        <h4 class="priceO" *ngIf="product?.offert">{{rebaja(product).toFixed(2)}}€  &nbsp;&nbsp;<span class="price" *ngIf="product?.offert" style="text-decoration: line-through;color: grey;font-weight: 300;">{{product.price.toFixed(2)}}€  </span></h4>
+        <br>
+        <h4 class="priceOrigin" *ngIf="!product?.offert">{{product.price.toFixed(2)}}€</h4>
+        <br>
+        <br>
+        <h5>Descripción:</h5>
+        <p style="margin-left: 2%; font-size: 18px;">{{product.description}}</p>
+        <br>
+        <h6 *ngIf="product?.size && authSevice.hasRole('ROLE_CLIENT')">Tallas:&nbsp;</h6>
+        <select [(ngModel)]="opcionSeleccionada" *ngIf="product?.size">
+            
+            <option  *ngFor="let size of sizes(product)">
+                {{size}}
+            </option>
+        </select>
+        <h6 *ngIf="product?.memory && authSevice.hasRole('ROLE_CLIENT')">*Capacidad memorias:&nbsp;</h6>
+        <select [(ngModel)]="opcionSeleccionada1" *ngIf="product?.memory" required>
+            
+            <option  *ngFor="let memory of memories(product)">
+                {{memory}}
+            </option>
+        </select>
+        <div *ngIf="product?.memory && authSevice.hasRole('ROLE_CLIENT')">
+        <img  class="imagen2" style="text-align: left; margin-left: 63%;margin-top: -11%;" src="assets\img\iconfinder_Basket_2205960.png" height="25" width="25" ><button type="button" (click)='update()' name="basket" class="btn btn-warning btn-sm" style="margin-left: 70%;margin-top: -20%;border-color: black;">Añadir a la cesta</button>
+        </div>
+        <div *ngIf="product?.size && authSevice.hasRole('ROLE_CLIENT')">
+        <img *ngIf="product?.size" class="imagen1" style="text-align: left; margin-left: 53%;margin-top: -9%;" src="assets\img\iconfinder_Basket_2205960.png" height="25" width="25" ><button type="button"  (click)='update()'  name="basket" class="btn btn-warning btn-sm" style="margin-left: 60%;margin-top: -18%;border-color: black;">Añadir a la cesta</button>
+        </div>
+        <div  *ngIf="!product?.memory && !product?.size && authSevice.hasRole('ROLE_CLIENT')">
+        <img class="imagen" style="text-align: left;" src="assets\img\iconfinder_Basket_2205960.png" height="25" width="25" > <button type="button" (click)='update()' class="btn btn-danger btn-sm" >Añadir a la cesta</button>
+    </div>
+    </div>
+    </div>
+    <br>
+    <div class="container1">
+    <div class="row">
+        <div class="col-6">
+            <h3>Detalles del producto</h3>
+        </div>
+    </div>
+            <br>
+            
+            <h5 *ngIf="product?.height" style="margin-left: 4%;">Alto:</h5><h6 *ngIf="product?.height" style="margin-left: 12%;margin-top: -3.3%;">{{product.height}}</h6>
+            <h5 *ngIf="product?.width" style="margin-left: 4%;">Ancho:</h5><h6 *ngIf="product?.width" style="margin-left: 12%;margin-top: -3.3%;">{{product.width}} </h6>
+            <h5 *ngIf="product?.weight" style="margin-left: 4%;">Peso:</h5><h6 *ngIf="product?.weight" style="margin-left: 12%;margin-top: -3.3%;">{{product.weight}}</h6>
+            <h5 *ngIf="product?.inch" style="margin-left: 4%;">Pulgadas:</h5><h6 *ngIf="product?.inch" style="margin-left: 15%;margin-top: -3.3%;">{{product.inch}}"</h6>
+            <h5 *ngIf="product?.brand" style="margin-left: 4%;">Marca:</h5><h6 *ngIf="product?.brand" style="margin-left: 12%;margin-top: -3.3%;">{{product.brand}}</h6>
+            <h5 *ngIf="product?.capacity" style="margin-left: 4%;">Capacidad:</h5><h6 *ngIf="product?.capacity" style="margin-left: 12%;margin-top: -3.3%;margin-bottom: 3%;">{{product.capacity}}</h6>
+        </div>
+    
+</div>

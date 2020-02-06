@@ -1,0 +1,32 @@
+<div class="animated fadeInDown container">
+    <h2>Mis pedidos</h2>
+    <div *ngIf="factures?.length == 0" class="alert alert-info" style="width: 40%;">
+         No hay ningún pedido en su cuenta
+     </div>
+    <table class="table table-striped" *ngIf="factures?.length > 0">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Fecha de compra</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Nº productos</th> 
+                <th scope="col">Importe</th>
+                <th>Ver</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let facture of factures">
+                <td>{{facture.id}}</td>
+                <td>{{facture.createDate}}</td>
+                <td>{{facture.status}}</td>
+                <td>{{count(facture)}}</td>
+                <td>{{caculateTotal(facture).toFixed(2)}}€</td>
+                <td>
+                    <button type="button" name="details" [routerLink]="['/detailsFacture', facture.id]"  class="btn btn-sm">Ver detalles</button>
+                </td>
+                
+
+            </tr>
+        </tbody>
+    </table>
+</div>

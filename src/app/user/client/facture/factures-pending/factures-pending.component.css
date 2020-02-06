@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+.container-xl {
+    margin-top: 8%;
+    margin-bottom: 15%;
+  }
+  
+.container{
+    margin-bottom: 5%;
+}
+
+button {
+    font-weight: 500;
+    font-size: 19px;
+    color: white;
+    background-color: #ff6800;
+  }
+
+  input:valid{
+    border-color: green;
+  }
+  
+  input:optional{
+    border-color: grey;
+  }
+  
+  input:focus:invalid{
+    border-color: red;
+  }
+
+  .alert{
+   
+    color: red;
+    font-size: small;
+    font-family: 'Roboto', sans-serif;
+    
+  }
+
+
+  .card-header {
+    font-family: "Muli", sans-serif;
+    font-size: 25px;
+    text-align: left;
+    background-color: transparent !important;
+  }
+ 
