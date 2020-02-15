@@ -4,6 +4,7 @@ import { AuthService } from '../../../login/auth.service';
 import { Router } from '@angular/router';
 import { Facture } from '../../client/facture/facture';
 import { ItemBasket } from '../../client/basket/itemBasket';
+import swal from 'sweetalert2';
 
 
 @Component({
@@ -45,4 +46,5 @@ export class FactureCompanyComponent implements OnInit {
     }
     return total;
   }
+
 }

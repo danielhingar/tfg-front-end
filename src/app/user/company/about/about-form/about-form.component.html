@@ -1,0 +1,77 @@
+<div class="animated fadeInDown card bg-white text-dark">
+    <div class="card-header">Acerca de mí</div>
+    <div class="card-body">
+        <br>
+        
+        <form #shippingForm="ngForm">
+            <div class="form-group row">
+                <label for="address" class="col-form-label">Dirección:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="about.address" name="address" style="width: 300px;"  #address="ngModel">
+                    
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="facebook" class="col-form-label">Facebook:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="about.facebook" name="facebook" style="width: 300px;"  #facebook="ngModel">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="instagram" class="col-form-label">Intagram:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="about.instagram" name="instagram" style="width: 300px;"  #instagram="ngModel">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="twitter" class="col-form-label">Twitter:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="about.twitter" name="twitter" style="width: 300px;"  #twitter="ngModel">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="youtube" class="col-form-label">Youtube:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="about.youtube" name="youtube" style="width: 300px;"  #youtube="ngModel">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="description" class="col-form-label">Descripción:</label>
+                <div class="col-sm-4">
+                    <textarea type="text" class="form-control" [(ngModel)]="about.description" name="description" style="width: 300px;"  #description="ngModel"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="compromise" class="col-form-label">Compromisos:</label>
+                <div class="col-sm-4">
+                    <textarea type="text" class="form-control" [(ngModel)]="about.compromise" name="compromise" style="width: 300px;"  #compromise="ngModel"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="polity" class="col-form-label">Políticas:</label>
+                <div class="col-sm-4">
+                    <textarea type="text" class="form-control" [(ngModel)]="about.polity" name="polity" style="width: 300px;"  #polity="ngModel"></textarea>
+                </div>
+            </div>
+
+            
+            <br>
+            <div class="form-group row">
+                <div class="col-lg-6">
+                    <button class="btn btn-primary" role="button" (click)="update()">Editar</button>
+
+                    
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

@@ -17,6 +17,7 @@ export class FactureService {
 
   constructor(private http: HttpClient) { }
 
+
   getFacturesPending(username): Observable<Facture> {
     return this.http.get(`${this.urlEndPoint}/myFacturesPending/${username}`).pipe(
       map(response => response as Facture)
@@ -41,6 +42,12 @@ export class FactureService {
     );
   }
 
+  getFacturesAllCompany(): Observable<Facture[]> {
+    return this.http.get(`${this.urlEndPoint2}/allCompany`).pipe(
+      map(response => response as Facture[])
+    );
+  }
+
   getFacture(id): Observable<Facture> {
     return this.http.get<Facture>(`${this.urlEndPoint}/show/${id}`);
   }
@@ -59,6 +66,10 @@ export class FactureService {
 
   updateFactureReporter(facture: Facture): Observable<Facture> {
     return this.http.put<Facture>(`${this.urlEndPoint2}/update/${facture.id}`, facture, {headers: this.httpHeaders});
+  }
+
+  payCompany(id): Observable<Facture> {
+    return this.http.put<Facture>(`${this.urlEndPoint2}/payCompany/${id}`, {headers: this.httpHeaders});
   }
 
 

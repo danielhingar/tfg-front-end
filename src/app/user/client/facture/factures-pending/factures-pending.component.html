@@ -1,7 +1,7 @@
 <div class="container-xl">
     <h1>Factura </h1>
     <br>
-    <div *ngIf="facture == null" class="alert1 alert-info" style="width: 40%;">Usted no tiene facturas pendientes de pago
+    <div *ngIf="facture == null" class="alert1 alert-info" style="width: 40%;">Usted no puede facturar sino tiene productos en su cesta
     </div>
     <div class="container" *ngIf="facture != null">
         <div class="animated fadeInDown card bg-white text-dark">
@@ -128,7 +128,17 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="form-group row">
+                        <div class="col-lg">
+                            <label for="shipping" class="col-form-label">Método de envío* :</label>
+                            <select class="form-control" [(ngModel)]="facture.shipping" name="shipping" style="width: 500px;" required #shipping="ngModel">
+                                <option *ngFor="let shipping of shippings" [ngValue]="shipping">{{shipping.title}} - {{shipping.price}}€ &nbsp; &nbsp; &nbsp; &nbsp; {{shipping.dateMin}} días a {{shipping.dateMax}} días</option>
+                            </select>
+                        </div>
+                    </div>
 
+                    <button type="button" (click)='update()'  name="factura" class="btn" style="width: 300px;" [disabled]="!factureForm.form.valid">Comprar</button>
 
                 </form>
             </div>
@@ -187,6 +197,16 @@
                        {{calculatePrice(item).toFixed(2)}}€
                     </p>
                 </div>
+                <div class="col-md-10">
+                    <p style="margin-left: 5%;"> 
+                        Gastos de envío
+                    </p>
+                </div>
+                <div class="col-xs">
+                    <p> 
+                       {{(facture.shipping.price).toFixed(2)}}€
+                    </p>
+                </div>
             </div>
             <hr>
             <div class="row">
@@ -194,12 +214,12 @@
                     <h3 style="font-weight: 600;">Total</h3>
                 </div>
                 <div class="col-xs">
-                   <h3 style="color: darkred;">{{caculateTotal().toFixed(2)}}€</h3> 
+                   <h3 style="color: darkred;">{{(caculateTotal()+facture.shipping.price).toFixed(2)}}€</h3> 
                 </div>
             </div>
         </div>
         <br>
-        <button type="button" (click)='update()'  name="factura" class="btn" style="width: 300px;">Comprar</button>
+   
     </div>
 
 </div>

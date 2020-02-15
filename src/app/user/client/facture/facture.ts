@@ -1,6 +1,7 @@
 import { Client } from '../client';
 import { Company } from '../../company/company';
 import { ItemBasket } from '../basket/itemBasket';
+import { Shipping } from '../../admin/shipping/shipping';
 export class Facture {
     id: number;
     status: string;
@@ -19,4 +20,5 @@ export class Facture {
     client: Client;
     company: Company;
     itemBaskets: ItemBasket[] = [];
+    shipping: Shipping;
 }

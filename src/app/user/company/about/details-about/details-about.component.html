@@ -1,0 +1,64 @@
+<div class="container">
+    <h3>SOBRE NOSOTROS</h3>
+
+    <p class="title" style="text-align: center;font-size: 80px;color: black;">{{company.businessName}}</p>
+
+    <div class="imagen">
+        <img src="{{company.image}}" alt="" height="400px" width="100%">  
+    </div>
+
+    <div class="row">
+    <div class="col-md" *ngIf="about?.description">
+    <div class="container" style="background-color: rgb(236, 192, 152); text-align: center;">
+        <h3>Información</h3>
+       <p style="font-size: 22px; color: black;opacity: 80%;"> {{about.description}} </p>
+    </div>
+    </div>
+    <div class="col-md" *ngIf="about?.polity">
+        <div class="container" style="background-color: rgb(236, 192, 152); text-align: center;">
+            <h3>Política de empresa</h3>
+            <p style="font-size: 22px; color: black;opacity: 80%;"> {{about.polity}} </p>
+         </div>  
+    </div>
+    <div class="col-md" *ngIf="about?.compromise">
+        <div class="container" style="background-color: rgb(236, 192, 152); text-align: center;">
+            <h3>Comprometidos</h3>
+            <p style="font-size: 22px; color: black;opacity: 80%;"> {{about.compromise}} </p>
+         </div>  
+    </div>
+    </div>
+
+    <div class="container">
+        <div class="card" style="width: 500px;">
+            <div class="card-header" >
+                <h4 style="text-align: center;">Redes Sociales</h4>
+            </div>
+            <div class="card-body">
+                <a target="_blank" class="btn-floating btn-fb" href="{{about.facebook}}" style="color: black;" *ngIf="about?.facebook">
+                    <img style="text-align: left;" src="assets\img\iconfinder_facebook_2_183101.png" height="25" width="25" *ngIf="about?.facebook">{{about.facebook}}
+                </a>
+                <br>
+                <br>
+                <a target="_blank" class="btn-floating btn-tw" href="{{about.instagram}}" style="color: black;" *ngIf="about?.instagram">
+                    <img style="text-align: center" src="assets\img\iconfinder_SocialMedia_Instagram-Outline_2959748 (1).png" height="25" width="25" *ngIf="about?.instagram">{{about.instagram}}
+                </a>
+                <br>
+                <br>
+                <a target="_blank" class="btn-floating btn-tw" href="{{about.twitter}}" style="color: black;" *ngIf="about?.twitter">
+                    <img style="text-align: center" src="assets\img\iconfinder_twitter_3325160.png" height="25" width="25" *ngIf="about?.twitter">{{about.twitter}}
+                </a>
+                <br>
+                <br>
+                <a target="_blank" class="btn-floating btn-tw" href="{{about.youtube}}" style="color: black;" *ngIf="about?.youtube">
+                    <img style="text-align: center" src="assets\img\iconfinder_Youtube_853334.png" height="25" width="25" *ngIf="about?.youtube">{{about.youtube}}
+                </a>
+                <br>
+                <br>
+                
+                 
+            </div>
+        </div>
+    </div>
+
+
+</div>

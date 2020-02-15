@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+SC:700&display=swap');
+.card{
+    width: 300px;
+    height: 450px;
+    border-radius: 6px;
+    background-color: black;
+    overflow: hidden;
+    position: relative;
+    margin: 1.5rem;
+    border-color: transparent !important;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.container{
+    margin-top: 6%;
+    margin-bottom: 10%;
+}
+
+.title{
+    cursor: pointer;
+    font-family: 'Noto Serif SC', serif;
+}
+
+.price{
+    text-align: center;
+}
+
+.card-body{
+    margin-bottom: -20%;
+}
+
+.card-img{
+    width: 300px;
+    height: 300px;
+    background-color: white;
+}
+
+.name{
+    font-family: 'Noto Serif SC', serif;
+    font-size: 100px;
+    text-align: center;
+    color: black;
+}
+
+input{
+    border: 2px solid;
+    border-color: cadetblue;
+}
+
+input::placeholder{
+    font-family: 'Noto Serif SC', serif;
+}
+
+.alert{
+    margin-left: 33%;
+}
+

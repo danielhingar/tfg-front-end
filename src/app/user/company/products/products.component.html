@@ -1,6 +1,6 @@
 
 <div class="container">
-    <p class="name">{{company.businessName}}</p>
+    <p class="name">{{company.businessName}}</p>  <a [routerLink]="['/about', company.id]" role="button" style="background-color: darkorange;color: black; border-radius: 4px;width: 80px;">¿Quiénes somos?</a>
     <br>
     <div *ngIf="products?.length == 0" class="alert alert-info" style="width: 40%;">
        Lo sentimos, no hay productos todavía de esta empresa

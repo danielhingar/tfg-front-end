@@ -1,0 +1,47 @@
+<div class="animated fadeInDown card bg-white text-dark">
+    <div class="card-header">Crear queja</div>
+    <div class="card-body">
+        <br>
+        <form #claimForm="ngForm">
+
+            <div class="form-group row">
+                <label for="title" class="col-form-label">Título:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="claim.title" name="title" style="width: 300px;" required #title="ngModel">
+                    <div class="alert" *ngIf="title.invalid && (title.dirty || title.touched)">
+                        <div *ngIf="title.errors.required">
+                            Este campo es obligatorio
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="description" class="col-form-label">Descripción:</label>
+                <div class="col-sm-4">
+                    <textarea type="text" class="form-control" [(ngModel)]="claim.description" name="description" required #description="ngModel"></textarea>
+                    <div class="alert" *ngIf="description.invalid && (description.dirty || description.touched)">
+                        <div *ngIf="description.errors.required">
+                            Este campo es obligatorio
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="attachment" class="col-form-label">Adjuntos:</label>
+                <div class="col-sm-4">
+                    <input type="text" style="width: 400px;" class="form-control"  name="attachment">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-lg-6">
+                    <button class="btn btn-primary" role="button" (click)="create()" *ngIf="!claim.id" [disabled]="!claimForm.form.valid">Añadir queja</button>
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

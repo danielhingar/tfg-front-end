@@ -1,0 +1,84 @@
+<div class="animated fadeInDown card bg-white text-dark">
+    <div class="card-header">Queja de la factura {{claim.facture.id}}</div>
+    <div class="card-body">
+        
+        <form #claimForm="ngForm">
+            <button type="button" style="margin-bottom: 10%;" name="details" [routerLink]="['/detailsFacture', claim.facture.id]"  class="btn btn-sm" *ngIf="authService.hasRole('ROLE_REPORTER')">Ver factura</button>
+            
+            <div class="form-group row" *ngIf="claim?.answer &&  this.authService.hasRole('ROLE_CLIENT')">
+                <label for="status" class="col-form-label">Estado:</label>
+                <div class="col-sm-4">
+                    <h3 style="width: 300px;">{{claim.status}}</h3>
+                </div>
+            </div>
+
+            <div class="form-group row" *ngIf="claim?.answer && this.authService.hasRole('ROLE_CLIENT')">
+                <label for="answer" class="col-form-label">Respuesta del intermediario:</label>
+                <div class="col-sm-4">
+                    <textarea type="text" class="form-control" [(ngModel)]="claim.answer" name="answer" style="width: 300px;" disabled></textarea>
+                </div>
+            </div>
+
+            <div class="form-group row" *ngIf="this.authService.hasRole('ROLE_REPORTER') && claim.reporter !=null && (claim.reporter.username === this.authService.usuario.username)">
+                <label for="status" class="col-form-label">Estado:</label>
+                <select value="{{claim.status}"  name="status" class="form-control" style="width: 200px;margin-left: 4%;" [(ngModel)]="claim.status">
+                    <option  *ngFor="let statu of status" >
+                        {{statu}}
+                    </option>
+                </select>
+                </div>
+
+            <div class="form-group row" *ngIf="this.authService.hasRole('ROLE_REPORTER') && claim.reporter !=null && (claim.reporter.username === this.authService.usuario.username)">
+                <label for="answer" class="col-form-label">Escribir respuesta:</label>
+                <div class="col-sm-4">
+                    <textarea type="text" class="form-control" [(ngModel)]="claim.answer" name="answer" style="width: 300px;" required #answer="ngModel"></textarea>
+                    <div class="alert" *ngIf="answer.invalid && (answer.dirty || answer.touched)">
+                        <div *ngIf="answer.errors.required">
+                            Este campo es obligatorio
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <hr *ngIf="claim?.answer">
+            <div class="form-group row">
+                <label for="title" class="col-form-label">Título:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="claim.title" name="title" style="width: 300px;" required #title="ngModel" disabled>
+                    <div class="alert" *ngIf="title.invalid && (title.dirty || title.touched)">
+                        <div *ngIf="title.errors.required">
+                            Este campo es obligatorio
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="description" class="col-form-label">Descripción:</label>
+                <div class="col-sm-4">
+                    <textarea type="text" class="form-control" [(ngModel)]="claim.description" name="description" required #description="ngModel" disabled></textarea>
+                    <div class="alert" *ngIf="description.invalid && (description.dirty || description.touched)">
+                        <div *ngIf="description.errors.required">
+                            Este campo es obligatorio
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="attachment" class="col-form-label">Adjuntos:</label>
+                <div class="col-sm-4">
+                    <input type="text" style="width: 400px;" class="form-control"  name="attachment" disabled>
+                </div>
+            </div>
+
+            <div class="form-group row" *ngIf="this.authService.hasRole('ROLE_REPORTER')">
+                <div class="col-lg-6">
+                    <button class="btn btn-primary" role="button" (click)="update()"  [disabled]="!claimForm.form.valid">Editar queja</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

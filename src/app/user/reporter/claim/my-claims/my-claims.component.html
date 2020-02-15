@@ -1,0 +1,36 @@
+<div class="animated fadeInDown container">
+    <h2>Mis Quejas asignadas</h2>
+    <div *ngIf="claims?.length == 0" class="alert alert-info" style="width: 40%;">
+         No hay quejas en el sistema
+     </div>
+    <table class="table table-striped" *ngIf="claims?.length > 0">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Fecha</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Factura</th>
+                <th scope="col">Estado</th> 
+                <th></th>
+                
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let claim of claims">
+                <td>{{claim.id}}</td>
+                <td>{{claim.createDate}}</td>
+                <td>{{claim.facture.client.username}}</td>
+                <td>{{claim.facture.id}}</td>
+                <td>{{claim.status}}</td>
+                <td>
+                    <button type="button" style="color: white;background-color: #ff6800;" name="details" class="btn btn-sm" [routerLink]="['/showClaim', claim.id]" *ngIf="claim.status === 'Pendiente de respuesta' || claim.status === 'EN PROCESO'" >Resolver</button>
+                </td>
+                
+                
+                
+
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -6,6 +6,8 @@ import { Client } from '../../user/client/client';
 import { ClientService } from '../../user/client/client.service';
 import { BasketService } from '../../user/client/basket/basket.service';
 import { ItemBasket } from '../../user/client/basket/itemBasket';
+import { ConfigurationService } from '../../user/admin/configuration/configuration.service';
+import { Configuration } from '../../user/admin/configuration/configuration';
 
 @Component({
   selector: 'app-header',
@@ -15,28 +17,21 @@ import { ItemBasket } from '../../user/client/basket/itemBasket';
 export class HeaderComponent implements OnInit {
 
   itemBasket: ItemBasket[] = [];
-
-  constructor(public authService: AuthService, private router: Router, private basketService: BasketService) { }
+  configuration: Configuration;
+  constructor(public authService: AuthService, private router: Router, private basketService: BasketService,
+              private configurationSevice: ConfigurationService) { }
 
   ngOnInit() {
 
-    if (this.authService.hasRole('ROLE_CLIENT')) {
-      this.loadBasket();
-    }
+    this.loadConfiguration();
 
 
   }
 
-  loadBasket(): void {
-    this.basketService.getBasket(this.authService.usuario.username).subscribe( (basket) => this.itemBasket = basket);
-  }
-
-  count(): number {
-    let total = 0;
-    for ( const item of this.itemBasket) {
-      total = total + item.quantity;
-    }
-    return total;
+  loadConfiguration(): void {
+    this.configurationSevice.getConfiguration().subscribe(
+      response => this.configuration = response
+    );
   }
 
   logout(): void {

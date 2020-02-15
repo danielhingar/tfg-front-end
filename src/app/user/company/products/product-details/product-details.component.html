@@ -37,6 +37,11 @@
         </div>
         <div  *ngIf="!product?.memory && !product?.size && authSevice.hasRole('ROLE_CLIENT')">
         <img class="imagen" style="text-align: left;" src="assets\img\iconfinder_Basket_2205960.png" height="25" width="25" > <button type="button" (click)='update()' class="btn btn-danger btn-sm" >Añadir a la cesta</button>
+        
+    </div>
+    <div class="row" style="margin-top: 10%;margin-left: 70%;">
+        <h4>Compártelo</h4>
+        <ngx-qrcode qrc-element-type="url" [qrc-value]="url"></ngx-qrcode>
     </div>
     </div>
     </div>

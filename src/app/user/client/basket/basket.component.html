@@ -9,10 +9,10 @@
                     <tbody>
                         <tr *ngFor="let item of itemBasket">
                             <td>
-                                <img *ngIf="item.product?.photo" src="{{item.product.photo}}"
+                                <img *ngIf="item.product?.photo" src="{{item.product.photo}}" [routerLink]="['/detailsProduct', item.product.id]"
                                     alt="{{item.product.photo}}" class="img-thumbnail rounded"
                                     style="width: 64px;cursor: pointer;">
-                                <img *ngIf="!item.product?.photo"
+                                <img *ngIf="!item.product?.photo" [routerLink]="['/detailsProduct', item.product.id]"
                                     src="https://i1.wp.com/www.lagraderia.com/wp-content/uploads/2018/12/no-imagen.jpg?fit=300%2C300"
                                     alt="Sin foto" class="img-thumbnail rounded" style="width: 64px;cursor: pointer;">
                             </td>
@@ -78,7 +78,7 @@
                 </div>
             </div>
             <br>
-            <button type="button" (click)='createFactureUnify()' (click)='createFacturas()' name="facturar" class="btn" style="margin-left: 7%;width: 300px;margin-bottom: 5%;">Comenzar
+            <button type="button" (click)='createFactureUnify()' (click)='createFacturas()' name="facturar" class="btn" style="margin-left: 7%;width: 300px;margin-bottom: 5%;" [disabled]="itemBasket.length===0">Comenzar
                 pedido</button>
             
         </div>

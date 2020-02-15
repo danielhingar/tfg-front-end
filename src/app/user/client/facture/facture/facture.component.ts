@@ -4,6 +4,11 @@ import { FactureService } from '../facture.service';
 import { AuthService } from '../../../../login/auth.service';
 import { Router } from '@angular/router';
 import { ItemBasket } from '../../basket/itemBasket';
+import { ClaimService } from '../../../reporter/claim/claim.service';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { Claim } from '../../../reporter/claim/claim';
+
 
 @Component({
   selector: 'app-facture',
@@ -13,7 +18,8 @@ import { ItemBasket } from '../../basket/itemBasket';
 export class FactureComponent implements OnInit {
 
   factures: Facture[] = [];
-  constructor(private factureService: FactureService, private authService: AuthService, private router: Router) { }
+  constructor(private factureService: FactureService, private authService: AuthService, private router: Router,
+              private claimService: ClaimService) { }
 
   ngOnInit() {
     this.loadFactures(this.authService.usuario.username);

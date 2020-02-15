@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+.card {
+  
+  padding: 17px;
+  width: 400px;
+  position: relative;
+  left: 33%;
+  margin-top: 80px;
+  margin-bottom: 10%;
+  margin-right: 0%;
+  border-color:transparent !important;
+  
+}
+
+.alert{
+  width: 220px;
+  color: red;
+  font-size: small;
+  font-family: 'Roboto', sans-serif;
+  height: 30px;
+  left: -25%;
+  bottom: -20%;
+  margin-top: -15%;
+}
+
+label {
+  display: inline-block;
+  width: 100px;
+  font-family: "Muli", sans-serif;
+  font-size: small;
+}
+
+input {
+  width: 190px;
+  border-radius: 0px;
+  border-color: grey;
+}
+
+.card-header {
+  font-family: "Muli", sans-serif;
+  font-size: 33px;
+  text-align: left;
+  width: 500px;
+  background-color: transparent !important;
+}
+
+.btn {
+  color: #fff;
+  background: #000;
+  vertical-align: center;
+  text-align: center;
+  display: inline-block;
+  align-content: initial;
+  
+}
+
+.col-lg-6{
+  left: 40%;
+  
+}
+
+input:valid{
+  border-color: green;
+}
+
+input:optional{
+  border-color: grey;
+}
+
+input:focus:invalid{
+  border-color: red;
+}
+
+
+
+
+
+@media screen and (max-width:414px){
+  button{
+    margin-left: -40%;
+  }
+}
+
+@media screen and (max-width:360px){
+  
+    button{
+      margin-left: -40%;
+    }
+}

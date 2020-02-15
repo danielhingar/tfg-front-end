@@ -1,0 +1,122 @@
+<div class="animated fadeInDown card bg-white text-dark">
+    <div class="card-header">Configuración del sistema</div>
+    <div class="card-body">
+        <br>
+        
+        <form #shippingForm="ngForm">
+            <div class="form-group row">
+                <label for="title" class="col-form-label">Teléfono:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="configuration.phone" name="phone" style="width: 300px;" required #phone="ngModel">
+                    <div class="alert" *ngIf="phone.invalid && (phone.dirty || phone.touched)">
+                        <div *ngIf="phone.errors.required">
+                            Este campo es obligatorio
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="email" class="col-form-label">Email:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="configuration.email" name="email" style="width: 300px;" required email #email="ngModel">
+                    <div class="alert" *ngIf="email.invalid && (email.dirty || email.touched)">
+                        <div *ngIf="email.errors.required">
+                            Este campo es obligatorio
+                        </div>
+                        <div *ngIf="email.errors.email">
+                            No tiene un formato correcto
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="facebook" class="col-form-label">Facebook:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="configuration.facebook" name="facebook" style="width: 300px;" required #facebook="ngModel">
+                    <div class="alert" *ngIf="facebook.invalid && (facebook.dirty || facebook.touched)">
+                        <div *ngIf="facebook.errors.required">
+                            Este campo es obligatorio
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="instagram" class="col-form-label">Intagram:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="configuration.instagram" name="instagram" style="width: 300px;" required #instagram="ngModel">
+                    <div class="alert" *ngIf="instagram.invalid && (instagram.dirty || instagram.touched)">
+                        <div *ngIf="instagram.errors.required">
+                            Este campo es obligatorio
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="twitter" class="col-form-label">Twitter:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="configuration.twitter" name="twitter" style="width: 300px;" required #twitter="ngModel">
+                    <div class="alert" *ngIf="twitter.invalid && (twitter.dirty || twitter.touched)">
+                        <div *ngIf="twitter.errors.required">
+                            Este campo es obligatorio
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="address" class="col-form-label">Dirección:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="configuration.address" name="address" style="width: 300px;" required #address="ngModel">
+                    <div class="alert" *ngIf="address.invalid && (address.dirty || address.touched)">
+                        <div *ngIf="address.errors.required">
+                            Este campo es obligatorio
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="nameSystem" class="col-form-label">Nombre del sistema:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="configuration.nameSystem" name="nameSystem" style="width: 300px;" required #nameSystem="ngModel">
+                    <div class="alert" *ngIf="nameSystem.invalid && (nameSystem.dirty || nameSystem.touched)">
+                        <div *ngIf="nameSystem.errors.required">
+                            Este campo es obligatorio
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="failSystem" class="col-form-label">Mantenimiento sistema:</label>
+                <div class="col-sm-4">
+                    <input type="checkbox" class="form-control" [(ngModel)]="configuration.failSystem" name="failSystem" style="width: 50px;"  #failSystem="ngModel">
+                   
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="banner" class="col-form-label">Banner:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="configuration.banner" name="banner" style="width: 300px;"  #banner="ngModel">
+                    
+                </div>
+            </div>
+            
+            <br>
+            <div class="form-group row">
+                <div class="col-lg-6">
+                    <button class="btn btn-primary" role="button"  (click)="update()"  [disabled]="!shippingForm.form.valid">Editar</button>
+
+                    
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

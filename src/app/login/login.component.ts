@@ -3,6 +3,8 @@ import { Usuario } from '../user/usuario';
 import swal from 'sweetalert2';
 import { AuthService } from './auth.service';
 import {Router} from '@angular/router';
+import { ConfigurationService } from '../user/admin/configuration/configuration.service';
+import { Configuration } from '../user/admin/configuration/configuration';
 
 
 @Component({
@@ -13,11 +15,13 @@ import {Router} from '@angular/router';
 export class LoginComponent implements OnInit {
 
   usuario: Usuario;
-  constructor( private authService: AuthService, private router: Router) {
+  configuration: Configuration;
+  constructor( private authService: AuthService, private router: Router, private configurationSevice: ConfigurationService) {
     this.usuario = new Usuario();
    }
 
   ngOnInit() {
+    this.loadConfiguration();
     if (this.authService.isAuthenticated()) {
       swal.fire({
         position: 'center',
@@ -30,6 +34,12 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/home']);
     }
 
+  }
+
+  loadConfiguration(): void {
+    this.configurationSevice.getConfiguration().subscribe(
+      response => this.configuration = response
+    );
   }
 
   login(): void {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ProductService } from '../product.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient} from '@angular/common/http';
@@ -6,7 +6,7 @@ import { Product } from '../product';
 import { BasketService } from '../../../client/basket/basket.service';
 import { AuthService } from '../../../../login/auth.service';
 import { Basket } from 'src/app/user/client/basket/basket';
-
+import { DOCUMENT } from '@angular/common';
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
@@ -18,12 +18,18 @@ export class ProductDetailsComponent implements OnInit {
   opcionSeleccionada = 'null';
   opcionSeleccionada1 = 'null';
   urlEndPoint = 'http://localhost:8080/client/basket';
+  url: string;
   constructor(private productService: ProductService,  private router: Router, private activatedRouter: ActivatedRoute,
-              private basketService: BasketService, public authSevice: AuthService, private http: HttpClient) { }
+              private basketService: BasketService, public authSevice: AuthService, private http: HttpClient,
+              @Inject(DOCUMENT) document: any) { }
 
   ngOnInit() {
     this.loadProduct();
+    if (this.authSevice.hasRole('ROLE_CLIENT')) {
     this.loadBasket();
+    }
+    this.url = document.location.href;
+
   }
 
   loadProduct(): void {

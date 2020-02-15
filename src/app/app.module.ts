@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {NgxQRCodeModule} from 'ngx-qrcode2';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
@@ -24,6 +24,20 @@ import { FactureComponent } from './user/client/facture/facture/facture.componen
 import { FactureDetailsComponent } from './user/client/facture/facture-details/facture-details.component';
 import { FactureCompanyComponent } from './user/company/facture-company/facture-company.component';
 import { FactureReporterComponent } from './user/reporter/facture-reporter/facture-reporter.component';
+import { FacturesAllCompanyComponent } from './user/reporter/factures-all-company/factures-all-company.component';
+import { MyClaimsComponent } from './user/reporter/claim/my-claims/my-claims.component';
+import { ClaimsComponent } from './user/reporter/claim/claims/claims.component';
+import { ClaimDetailsComponent } from './user/client/claim/claim-details/claim-details.component';
+import { MyClaimsClientComponent } from './user/client/claim/my-claims-client/my-claims-client.component';
+import { CreateClaimComponent } from './user/client/claim/create-claim/create-claim.component';
+import { ListShippingComponent } from './user/admin/shipping/list-shipping/list-shipping.component';
+import { DetailShippingComponent } from './user/admin/shipping/detail-shipping/detail-shipping.component';
+import { ConfigurationListComponent } from './user/admin/configuration/configuration-list/configuration-list.component';
+import { AboutFormComponent } from './user/company/about/about-form/about-form.component';
+import { DetailsAboutComponent } from './user/company/about/details-about/details-about.component';
+import { from } from 'rxjs';
+
+
 
 
 
@@ -47,7 +61,19 @@ const routes: Routes = [
   {path: 'detailsFacture/:id', component: FactureDetailsComponent},
   {path: 'myOrders', component: FactureComponent},
   {path: 'Orders', component: FactureCompanyComponent},
-  {path: 'factures', component: FactureReporterComponent}
+  {path: 'factures', component: FactureReporterComponent},
+  {path: 'facturesCompany', component: FacturesAllCompanyComponent},
+  {path: 'claims', component: ClaimsComponent},
+  {path: 'myClaims', component: MyClaimsComponent},
+  {path: 'showClaim/:id', component: ClaimDetailsComponent},
+  {path: 'myClaim', component: MyClaimsClientComponent},
+  {path: 'createClaim/:id', component: CreateClaimComponent},
+  {path: 'shippings', component: ListShippingComponent},
+  {path: 'createShipping', component: DetailShippingComponent},
+  {path: 'updateShipping/:id', component: DetailShippingComponent},
+  {path: 'configuration', component: ConfigurationListComponent},
+  {path: 'about/:id', component: DetailsAboutComponent},
+  {path: 'about', component: AboutFormComponent}
 ];
 
 @NgModule({
@@ -71,12 +97,26 @@ const routes: Routes = [
     FactureComponent,
     FactureDetailsComponent,
     FactureCompanyComponent,
-    FactureReporterComponent
+    FactureReporterComponent,
+    FacturesAllCompanyComponent,
+    MyClaimsComponent,
+    ClaimsComponent,
+    ClaimDetailsComponent,
+    MyClaimsClientComponent,
+    CreateClaimComponent,
+    ListShippingComponent,
+    DetailShippingComponent,
+    ConfigurationListComponent,
+    AboutFormComponent,
+    DetailsAboutComponent,
+
+
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    NgxQRCodeModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],

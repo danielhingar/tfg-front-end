@@ -1,0 +1,77 @@
+<div class="animated fadeInDown card bg-white text-dark">
+    <div class="card-header">Crear método de envío</div>
+    <div class="card-body">
+        <br>
+        <form #shippingForm="ngForm">
+
+            <div class="form-group row">
+                <label for="title" class="col-form-label">Titulo:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="shipping.title" name="title" style="width: 300px;" required #title="ngModel">
+                    <div class="alert" *ngIf="title.invalid && (title.dirty || title.touched)">
+                        <div *ngIf="title.errors.required">
+                            Este campo es obligatorio
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="price" class="col-form-label">Precio:</label>
+                <div class="col-sm-4">
+                    <input type="number" class="form-control" [(ngModel)]="shipping.price" name="price" required min="0" #price="ngModel">
+                    <div class="alert" *ngIf="price.invalid && (price.dirty || price.touched)">
+                        <div *ngIf="price.errors.required">
+                            Este campo es obligatorio
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="dateMin" class="col-form-label">Días mínimos:</label>
+                <div class="col-sm-4">
+                    <input type="number" class="form-control" [(ngModel)]="shipping.dateMin" name="dateMin" required min="0" #dateMin="ngModel">
+                    <div class="alert" *ngIf="dateMin.invalid && (dateMin.dirty || dateMin.touched)">
+                        <div *ngIf="dateMin.errors.required">
+                            Este campo es obligatorio
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="dateMax" class="col-form-label">Días máximos:</label>
+                <div class="col-sm-4">
+                    <input type="number" class="form-control" [(ngModel)]="shipping.dateMax" name="dateMax" required min="0" #dateMax="ngModel">
+                    <div class="alert" *ngIf="dateMax.invalid && (dateMax.dirty || dateMax.touched)">
+                        <div *ngIf="dateMax.errors.required">
+                            Este campo es obligatorio
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="answer" class="col-form-label">Observaciones:</label>
+                <div class="col-sm-4">
+                    <textarea type="text" class="form-control" [(ngModel)]="shipping.observation" name="observation" style="width: 300px;"  #observation="ngModel"></textarea>
+                </div>
+            </div>
+ 
+
+            <div class="form-group row">
+                <div class="col-lg-6">
+                    <button class="btn btn-primary" role="button" (click)="create()" *ngIf="!shipping.id else elseBlock" [disabled]="!shippingForm.form.valid">Crear método</button>
+
+                    <ng-template #elseBlock>
+                            <button class="btn btn-primary" role="button" (click)="update()"  [disabled]="!shippingForm.form.valid">Editar método</button>
+                    </ng-template>
+
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+

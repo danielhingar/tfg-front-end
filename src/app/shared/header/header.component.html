@@ -1,5 +1,5 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" >Showcase<sup>tm</sup></a>&nbsp;&nbsp;
+  <a class="navbar-brand" >{{configuration.nameSystem}}<sup>tm</sup></a>&nbsp;&nbsp;
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -14,10 +14,10 @@
         </a>
       </li>
       <li class="nav-item" *ngIf="authService.hasRole('ROLE_ADMIN')">
-        <a class="nav-link"  href="/home">Configuración</a>
+        <a class="nav-link"  href="/configuration">Configuración</a>
       </li>
       <li class="nav-item" *ngIf="authService.hasRole('ROLE_ADMIN')">
-        <a class="nav-link"  href="/home">Métodos de envíos</a>
+        <a class="nav-link"  href="/shippings">Métodos de envíos</a>
       </li>
       <li *ngIf="authService.hasRole('ROLE_ADMIN')" class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -42,22 +42,25 @@
         <a class="nav-link"  href="/Orders">Mis facturas</a>
       </li>
       <li class="nav-item" *ngIf="authService.hasRole('ROLE_COMPANY')">
-        <a class="nav-link"  href="/home">Acerca de mi</a>
+        <a class="nav-link"  href="/about">Acerca de mi</a>
       </li>
       <li class="nav-item" *ngIf="authService.hasRole('ROLE_REPORTER')">
-        <a class="nav-link"  href="/home">&nbsp;Mis reclamaciones &nbsp;</a> 
+        <a class="nav-link"  href="/myClaims">&nbsp;Mis reclamaciones &nbsp;</a> 
       </li>
       <li class="nav-item" *ngIf="authService.hasRole('ROLE_REPORTER')">
-        <a class="nav-link"  href="/home">Reclamaciones</a>
+        <a class="nav-link"  href="/claims">Reclamaciones</a>
       </li>
       <li class="nav-item" *ngIf="authService.hasRole('ROLE_REPORTER')">
-        <a class="nav-link"  href="/factures">Facturas</a>
+        <a class="nav-link"  href="/factures">Facturas clientes</a>
+      </li>
+      <li class="nav-item" *ngIf="authService.hasRole('ROLE_REPORTER')">
+        <a class="nav-link"  href="/facturesCompany">Facturas companías</a>
       </li>
     </ul>
     <ul class="navbar-nav navbar-right">
       <li class="nav-item" *ngIf="authService.hasRole('ROLE_CLIENT')">
         <a class="btn" href="/myBasket">
-        <img style="text-align: left;" src="assets\img\iconfinder_bag_1540167.png" height="25" width="25"><span *ngIf="authService.hasRole('ROLE_CLIENT')">{{count()}}</span>
+        <img style="text-align: left;" src="assets\img\iconfinder_bag_1540167.png" height="25" width="25">
         &nbsp;
         </a>
        
@@ -78,7 +81,7 @@
           <div class="dropdown-divider" *ngIf="authService.hasRole('ROLE_REPORTER')"></div>
           <a class="dropdown-item" href="myOrders" *ngIf="authService.hasRole('ROLE_CLIENT')"> Mis compras</a>
           <div class="dropdown-divider" *ngIf="authService.hasRole('ROLE_CLIENT')"></div>
-          <a class="dropdown-item" href="# " *ngIf="authService.hasRole('ROLE_CLIENT')"> Mis Reclamaciones</a>
+          <a class="dropdown-item" href="myClaim" *ngIf="authService.hasRole('ROLE_CLIENT')"> Mis Reclamaciones</a>
           <div class="dropdown-divider" *ngIf="authService.hasRole('ROLE_CLIENT')"></div>
         <!--  <a class="dropdown-item"  href="/myProducts" *ngIf="authService.hasRole('ROLE_COMPANY')">Mis productos</a>
           <div class="dropdown-divider" *ngIf="authService.hasRole('ROLE_COMPANY')"></div>
@@ -93,3 +96,9 @@
 
 </nav>
 
+
+  <div class="container" *ngIf="configuration?.banner">
+    <div class="row align-items-center">
+      <img src="{{configuration.banner}}" width="100%" height="200px" style="margin-top: 40px;">
+    </div>
+  </div>

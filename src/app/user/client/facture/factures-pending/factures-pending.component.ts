@@ -5,6 +5,8 @@ import { AuthService } from '../../../../login/auth.service';
 import { ItemBasket } from '../../basket/itemBasket';
 import { Router } from '@angular/router';
 import swal from 'sweetalert2';
+import { ShippingService } from '../../../admin/shipping/shipping.service';
+import { Shipping } from 'src/app/user/admin/shipping/shipping';
 
 @Component({
   selector: 'app-factures-pending',
@@ -15,12 +17,13 @@ export class FacturesPendingComponent implements OnInit {
 
   facture: Facture;
   facture1: Facture = new Facture();
-
-  constructor(private factureService: FactureService, private authService: AuthService, private router: Router) { }
+  shippings: Shipping[];
+  constructor(private factureService: FactureService, private authService: AuthService, private router: Router,
+              private shippingService: ShippingService) { }
 
   ngOnInit() {
     this.loadFacturesPending(this.authService.usuario.username);
-
+    this.shippingService.getShippings().subscribe(shippings => this.shippings = shippings);
   }
 
 

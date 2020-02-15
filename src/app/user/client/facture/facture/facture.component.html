@@ -12,6 +12,7 @@
                 <th scope="col">Nº productos</th> 
                 <th scope="col">Importe</th>
                 <th>Ver</th>
+                <th>Quejas</th>
             </tr>
         </thead>
         <tbody>
@@ -24,7 +25,9 @@
                 <td>
                     <button type="button" name="details" [routerLink]="['/detailsFacture', facture.id]"  class="btn btn-sm">Ver detalles</button>
                 </td>
-                
+                <td>
+                    <button type="button" name="claim" [routerLink]="['/createClaim', facture.id]"  class="btn btn-sm">Crear queja</button>
+                </td>
 
             </tr>
         </tbody>
