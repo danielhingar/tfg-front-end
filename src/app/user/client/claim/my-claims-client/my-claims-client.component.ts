@@ -3,6 +3,7 @@ import { ClaimService } from '../../../reporter/claim/claim.service';
 import { Claim } from '../../../reporter/claim/claim';
 import { AuthService } from '../../../../login/auth.service';
 import Swal from 'sweetalert2';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-my-claims-client',
@@ -12,15 +13,26 @@ import Swal from 'sweetalert2';
 export class MyClaimsClientComponent implements OnInit {
 
   claims: Claim[] = [];
-  constructor(private claimService: ClaimService, private authService: AuthService) { }
+  paginador: any;
+  constructor(private claimService: ClaimService, private authService: AuthService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.loadClaims(this.authService.usuario.username);
+    this.loadClaims();
   }
 
-  loadClaims(username): void {
-    this.claimService.getClaimsClient(username).subscribe(
-      claims => this.claims = claims
+  loadClaims(): void {
+    this.activatedRoute.paramMap.subscribe( params => {
+      let page: number = +params.get('page');
+      if (!page) {
+        page = 0;
+      }
+      this.claimService.getClaimsClient(this.authService.usuario.username, page).subscribe(
+        claims => {
+          this.claims = claims.content as Claim[];
+          this.paginador = claims;
+        }
+      );
+    }
     );
   }
 

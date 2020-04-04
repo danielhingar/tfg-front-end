@@ -1,9 +1,9 @@
 <div class="container-xl">
-    <h1>Factura {{facture.id}} - {{facture.status}} </h1> 
+    <h1>Pedido {{facture.id}} - {{facture.status}} </h1> 
     <h4>{{facture.createDate}}</h4>
     <br>
-    <div class="container" *ngIf="facture != null && authService.hasRole('ROLE_CLIENT') || authService.hasRole('ROLE_REPORTER') || authService.hasRole('ROLE_ADMIN')">
-        <div class="animated fadeInDown card bg-white text-dark">
+    <div class="container" *ngIf="facture !== null  && authService.hasRole('ROLE_CLIENT') || authService.hasRole('ROLE_REPORTER') || authService.hasRole('ROLE_ADMIN')">
+        <div class="animated fadeInDown card bg-white text-dark" *ngIf="facture.province != null">
             <div class="card-header" style="font-weight: 500;">Datos de envío</div>
             <div class="card-body">
                 <br>
@@ -11,9 +11,9 @@
 
                     <div class="form-group row">
 
-                        <div class="col-sm-3">
-                            <label for="username" class="col-form-label">Nombre* :</label>
-                            <input type="text" class="form-control" [(ngModel)]="facture.name" name="name" required
+                        <div class="col-sm-3" *ngIf="facture.name != null">
+                            <label for="name" class="col-form-label">Nombre* :</label>
+                            <input type="text" class="form-control" [(ngModel)]="facture.name"  name="name" required
                                 minlength="4" maxlength="20" #name="ngModel" disabled>
                             <div class="alert" *ngIf="name.invalid && (name.dirty || name.touched)">
                                 <div *ngIf="name.errors.required">
@@ -26,7 +26,7 @@
                         </div>
 
 
-                        <div class="col-md">
+                        <div class="col-md" *ngIf="facture.surnames != null">
                             <label for="name" class="col-form-label">Apellidos* :</label>
                             <input type="text" class="form-control" [(ngModel)]="facture.surnames" name="surnames"
                                 required #surnames="ngModel" disabled>
@@ -38,7 +38,7 @@
                         </div>
 
 
-                        <div class="col-sm-3">
+                        <div class="col-sm-3" *ngIf="facture.phone != null">
                             <label for="name" class="col-form-label">Teléfono* :</label>
                             <input type="text" class="form-control" [(ngModel)]="facture.phone" name="phone" required
                                 #phone="ngModel" disabled>
@@ -52,7 +52,7 @@
 
                     <div class="form-group row">
 
-                        <div class="col-md-8">
+                        <div class="col-md-8" *ngIf="facture.address != null">
                             <label for="address" class="col-form-label">Dirección* :</label>
                             <input type="text" class="form-control" [(ngModel)]="facture.address" name="address"
                                 required #address="ngModel" disabled>
@@ -63,7 +63,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-1">
+                        <div class="col-md-1" *ngIf="facture.number != null">
                             <label for="number" class="col-form-label">Número*</label>
                             <input type="number" class="form-control" [(ngModel)]="facture.number" name="number"
                                 required #number="ngModel" disabled>
@@ -71,7 +71,7 @@
 
 
 
-                        <div class="col-xs-3">
+                        <div class="col-xs-3" *ngIf="facture.postalCode != null">
                             <label for="postalCode" class="col-form-label">Código postal* :</label>
                             <input type="number" class="form-control" [(ngModel)]="facture.postalCode" name="postalCode"
                                 required #postalCode="ngModel" disabled>
@@ -85,19 +85,19 @@
 
                     <div class="form-group row">
 
-                        <div class="col-md-4">
+                        <div class="col-md-4" *ngIf="facture.block != null">
                             <label for="block" class="col-form-label">Bloque :</label>
                             <input type="number" class="form-control" [(ngModel)]="facture.block" name="block" disabled>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-4" *ngIf="facture.stairs != null">
                             <label for="stairs" class="col-form-label">Escalera :</label>
                             <input type="text" class="form-control" [(ngModel)]="facture.stairs" name="stairs" disabled>
                         </div>
 
 
 
-                        <div class="col-md-4">
+                        <div class="col-md-4" *ngIf="facture.floor != null">
                             <label for="floor" class="col-form-label">Piso :</label>
                             <input type="number" class="form-control" [(ngModel)]="facture.floor" name="floor" disabled>
                         </div>
@@ -105,7 +105,7 @@
 
                     <div class="form-group row">
 
-                        <div class="col-md">
+                        <div class="col-md" *ngIf="facture.province != null">
                             <label for="province" class="col-form-label">Provincia* :</label>
                             <input type="text" class="form-control" [(ngModel)]="facture.province" name="province"
                                 required #province="ngModel" disabled>
@@ -116,7 +116,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md">
+                        <div class="col-md" *ngIf="facture.locality != null">
                             <label for="locality" class="col-form-label">Localidad* :</label>
                             <input type="text" class="form-control" [(ngModel)]="facture.locality" name="locality"
                                 required #locality="ngModel" disabled>
@@ -128,7 +128,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
+                    <div class="form-group row" *ngIf="facture.shipping != null">
                         <div class="col-lg">
                             <label for="shipping" class="col-form-label">Método de envío* :</label>
                             <input type="text" class="form-control" [(ngModel)]="facture.shipping.title" name="shipping"
@@ -155,7 +155,7 @@
                 <div class="card body" style="border-color: transparent !important;margin-bottom: 3%;">
                     <div class="row">
                         <div class="col-2" style="margin-left: 3%;">
-                            <img *ngIf="item.product?.photo" src="{{item.product.photo}}" alt="{{item.product.photo}}"
+                            <img *ngIf="item.product?.photo" src="http://localhost:8080/company/product/uploads/img/{{item.product.photo}}" alt="{{item.product.photo}}"
                                 class="img-thumbnail rounded" style="width: 100px;height: 100px;">
                             <img *ngIf="!item.product?.photo"
                                 src="https://i1.wp.com/www.lagraderia.com/wp-content/uploads/2018/12/no-imagen.jpg?fit=300%2C300"
@@ -195,24 +195,30 @@
                        {{calculatePrice(item).toFixed(2)}}€
                     </p>
                 </div>
-                <div class="col-md-10">
+                
+                <div class="col-md-10" *ngIf="facture.shipping != null">
                     <ul> 
                         Gastos de envío
                     </ul>
                 </div>
-                <div class="col-xs">
+                <div class="col-xs" *ngIf="facture.shipping != null">
                     <p> 
                        {{(facture.shipping.price).toFixed(2)}}€
                     </p>
                 </div>
+
+                
             </div>
             <hr>
             <div class="row">
                 <div class="col-md-10">
                     <h3 style="font-weight: 600;">Total</h3>
                 </div>
-                <div class="col-xs">
+                <div class="col-xs" *ngIf="facture.shipping != null">
                     <h3 style="color: darkred;">{{(caculateTotal()+facture.shipping.price).toFixed(2)}}€</h3> 
+                 </div>
+                 <div class="col-xs" *ngIf="facture.shipping == null">
+                    <h3 style="color: darkred;">{{(caculateTotal()).toFixed(2)}}€</h3> 
                  </div>
             </div>
         </div>

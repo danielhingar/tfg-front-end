@@ -51,7 +51,7 @@ export class FormComponent implements OnInit {
 
   update(): void {
     this.clientService.update(this.client).subscribe( client => {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/home/page/0']);
       swal.fire({
         position: 'center',
         icon: 'info',

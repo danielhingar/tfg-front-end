@@ -57,3 +57,16 @@ input::placeholder{
     margin-left: 33%;
 }
 
+@media screen and (max-width:414px){
+    .container{
+        margin-top: 20%;
+        
+    }
+  }
+  
+  @media screen and (max-width:360px){
+    .container{
+        margin-top: 20%;
+        
+    }
+  }

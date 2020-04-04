@@ -1,0 +1,30 @@
+.card {
+    margin-left: 2%;
+    width: 15%;
+    height: 420px;
+}
+
+.container {
+    margin-top: -8%;
+}
+
+.card-img{
+    width: 100%;
+    height: 50%;
+}
+
+@media screen and (max-width:414px){
+    .card {
+        margin-left: 2%;
+        width: 40%;
+        height: 50%;
+    }
+  }
+  
+  @media screen and (max-width:360px){
+    .card {
+        margin-left: 2%;
+        width: 40%;
+        height: 50%;
+    }
+  }

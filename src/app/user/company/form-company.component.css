@@ -1,19 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 .card {
- 
-  padding: 17px;
-  width: 400px;
+  width: 30%;
   position: relative;
-  left: 37%;
+  left: 33%;
   margin-top: 80px;
   margin-bottom: 10%;
-  margin-right: 0%;
   border-color:transparent !important;
   
 }
 
 .alert{
-  width: 220px;
+  width: 200%;
   color: red;
   font-size: small;
   font-family: 'Roboto', sans-serif;
@@ -25,21 +22,22 @@
 
 label {
   display: inline-block;
-  width: 100px;
+  width: 30%;
   font-family: "Muli", sans-serif;
   font-size: small;
 }
 
 input {
-  width: 190px;
+  width: 200%;
   border-radius: 0px;
   border-color: grey;
 }
 
 .card-header {
   font-family: "Muli", sans-serif;
-  font-size: 35px;
+  
   text-align: left;
+  font-size: 200%;
   background-color: transparent !important;
 }
 
@@ -70,16 +68,57 @@ input:focus:invalid{
   border-color: red;
 }
 
+textarea{
+    width: 250%;
+    height: 200px;
+}
+
+textarea:valid{
+    border-color: green;
+}
+
+textarea:focus:invalid{
+    border-color: red;
+}
 
 @media screen and (max-width:414px){
-  button{
-    margin-left: -40%;
+  .card{
+    left: 0%;
+    right: 0%;
+    width: 100%;
+    
+  }
+  input {
+    width: 100%;
+  }
+  .alert {
+    width: 100%;
+  }
+  .card-header {
+    width: 100%;
+  }
+  label {
+    width: 40%;
   }
 }
 
 @media screen and (max-width:360px){
   
-    button{
-      margin-left: -40%;
+    .card{
+      left:0%;
+      right: 0%;
+      width: 100%;
+    }
+    input {
+      width: 100%;
+    }
+    .alert {
+      width: 100%;
+    }
+    .card-header {
+      width: 100%;
+    }
+    label {
+      width: 40%;
     }
 }

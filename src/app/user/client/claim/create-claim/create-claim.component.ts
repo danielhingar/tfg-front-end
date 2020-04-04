@@ -3,6 +3,7 @@ import { Claim } from '../../../reporter/claim/claim';
 import { ClaimService } from '../../../reporter/claim/claim.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
+import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-create-claim',
@@ -23,7 +24,7 @@ export class CreateClaimComponent implements OnInit {
       if (id) {
         this.claimService.createClaim(this.claim, id).subscribe(
         response => {
-        this.router.navigate(['/myClaim']);
+        this.router.navigate(['/myClaim/page/0']);
         swal.fire({
           position: 'center',
           icon: 'success',
@@ -38,5 +39,7 @@ export class CreateClaimComponent implements OnInit {
   }
   });
 }
+
+
 
 }

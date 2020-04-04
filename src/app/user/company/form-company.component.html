@@ -4,6 +4,26 @@
         <br>
         <form #companyForm="ngForm">
 
+            <div class="col-sm" style="margin-left: 80px;margin-bottom: 10px;" *ngIf="company.id != null">
+                <img *ngIf="company?.image" src="http://localhost:8080/company/uploads/img/{{company.image}}" alt="{{company.image}}" class="img-thumbnail rounded">
+            </div>
+            <div class="input-group row" style="margin-bottom: 20px;" *ngIf="company.id != null">
+                <label for="name" class="col-form-label">Foto:</label>
+                <div class="custom-file" style="width: 600px;">
+                  <input (change)="seleccionarFoto($event)" type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+                  <label class="custom-file-label" for="inputGroupFile04" style="width: 300px;margin-left: 13px;">Choose file</label>
+                </div>
+                <div class="input-group">
+                  <button (click)="subirFoto()" [disabled]="!fotoSeleccionada" class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04" style="margin-left: 430px;margin-top: -40px;height: 36px;">Subir</button>
+                </div>
+
+                <div *ngIf="progreso > 0" class="progress" style="margin-left: 120px;height: 25px;width: 600px;">
+                    <div class="progress-bar progress-bar-striped" role="progressbar" [ngStyle]="{width: progreso+'%'}" attr.aria-valuenow="{{progreso}}" aria-valuemin="0" aria-valuemax="100">
+                        {{progreso}}%
+                    </div>
+                  </div>
+              </div>
+
             <div class="form-group row" *ngIf="!company.id">
                 <label for="username" class="col-form-label">Usuario:</label>
                 <div class="col-sm-4">
@@ -79,7 +99,7 @@
             <div class="form-group row">
                 <label for="phone" class="col-form-label">Teléfono :</label>
                 <div class="col-sm-4">
-                    <input type="phone" class="form-control" [(ngModel)]="company.phone" name="phone" >
+                    <input type="number" class="form-control" [(ngModel)]="company.phone" name="phone" >
                     
                 </div>
             </div>

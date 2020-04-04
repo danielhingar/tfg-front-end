@@ -28,14 +28,3 @@ p{
     size: 28px; 
 }
 
-@media screen and (max-width:360px){
-    footer{
-      width: 653px;
-    }
-  }
-
-  @media screen and (max-width:414px){
-    footer{
-        width: 673px;
-      }
-  }

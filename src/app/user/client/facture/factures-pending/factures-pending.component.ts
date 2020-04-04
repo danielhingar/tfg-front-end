@@ -46,8 +46,8 @@ public caculateTotal(): number {
 }
 
 update(): void {
-  this.factureService.updateFacture(this.facture).subscribe( facture => {
-    this.router.navigate(['/home']);
+  this.factureService.updateFacture(this.facture, this.authService.usuario.username).subscribe( facture => {
+    this.router.navigate(['/home/page/0']);
     swal.fire({
       position: 'center',
       icon: 'info',
@@ -57,6 +57,12 @@ update(): void {
       width: 350,
       timer: 2200,
     });
+  });
+}
+
+createFacturas(): void {
+  this.factureService.createFacture(this.facture, this.authService.usuario.username).subscribe(response => {
+
   });
 }
 }

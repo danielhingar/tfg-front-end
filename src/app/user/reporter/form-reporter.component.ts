@@ -34,7 +34,7 @@ export class FormReporterComponent implements OnInit {
   public create(): void {
     this.reporterService.create(this.reporter).subscribe(
       response => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/home/page/0']);
         swal.fire({
           position: 'center',
           icon: 'success',
@@ -50,7 +50,7 @@ export class FormReporterComponent implements OnInit {
 
   update(): void {
     this.reporterService.update(this.reporter).subscribe( reporter => {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/home/page/0']);
       swal.fire({
         position: 'center',
         icon: 'info',

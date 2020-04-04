@@ -1,0 +1,18 @@
+<div class="container" *ngIf="products.lenght > 0">
+<h3>Articulos relacionados</h3>
+<div class="row">
+<div class="card" *ngFor="let product of products">
+    <img *ngIf="product?.photo" src="http://localhost:8080/company/product/uploads/img/{{product.photo}}" class="card-img" alt="photo of product">
+    <img *ngIf="!product?.photo" src="https://i1.wp.com/www.lagraderia.com/wp-content/uploads/2018/12/no-imagen.jpg?fit=300%2C300" class="card-img"> 
+    <div class="card-body">
+      <a class="card-title"  href="/detailsProduct/{{product.id}}">{{product.name}}</a>
+      <p class="card-text">{{product.description.substring(0,40)}} ...</p>
+    </div>
+    <div class="card-footer">
+        <h5 class="price" *ngIf="!product?.offert">{{product.price}}€</h5>
+      
+    <h5 class="offert" *ngIf="product?.offert">{{rebaja(product).toFixed(2)}}€</h5>
+    </div>
+  </div>
+</div>
+</div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FactureService } from '../../client/facture/facture.service';
 import { AuthService } from '../../../login/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Facture } from '../../client/facture/facture';
 import { ItemBasket } from '../../client/basket/itemBasket';
 import swal from 'sweetalert2';
@@ -15,15 +15,27 @@ import swal from 'sweetalert2';
 export class FactureCompanyComponent implements OnInit {
 
   factures: Facture[] = [];
-  constructor(private factureService: FactureService, private authService: AuthService, private router: Router) { }
+  paginador: any;
+  constructor(private factureService: FactureService, private authService: AuthService, private router: Router,
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.loadFactures(this.authService.usuario.username);
   }
 
-  loadFactures(username): void {
-    this.factureService.getFacturesCompany(username).subscribe(
-      facture => this.factures = facture
+  loadFactures(username): void  {
+    this.activatedRoute.paramMap.subscribe( params => {
+      let page: number = +params.get('page');
+      if (!page) {
+        page = 0;
+      }
+      this.factureService.getFacturesCompany(page, this.authService.usuario.username).subscribe(
+        factures => {
+          this.factures = factures.content as Facture[];
+          this.paginador = factures;
+        }
+      );
+    }
     );
   }
 

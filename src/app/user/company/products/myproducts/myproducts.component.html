@@ -10,24 +10,24 @@
                 <th scope="col">Nombre</th>
                 <th scope="col">Categoría</th>
                 <th scope="col">Precio</th> 
-                <th>Eliminar</th>
+              
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let product of products">
                 <td>
-                    <img *ngIf="product?.photo" src="{{product.photo}}" alt="{{product.photo}}" class="img-thumbnail rounded" style="width: 64px;cursor: pointer;" [routerLink]="['/edit/product', product.id]">
+                    <img *ngIf="product?.photo" src="http://localhost:8080/company/product/uploads/img/{{product.photo}}" alt="{{product.photo}}" class="img-thumbnail rounded" style="width: 64px;cursor: pointer;" [routerLink]="['/edit/product', product.id]">
                     <img *ngIf="!product?.photo" src="https://i1.wp.com/www.lagraderia.com/wp-content/uploads/2018/12/no-imagen.jpg?fit=300%2C300" alt="Sin foto" class="img-thumbnail rounded" style="width: 64px;cursor: pointer;" [routerLink]="['/edit/product', product.id]">
                 </td>
                 <td>{{product.name}}</td>
                 <td>{{product.category}}</td>
                 <td>{{product.price}}€</td>
-                <td>
-                    <button type="button" name="eliminar" (click)="delete(product)" class="btn btn-danger btn-sm">Eliminar</button>
-                </td>
+                
                 
 
             </tr>
         </tbody>
     </table>
+
+    <app-paginator-products *ngIf="paginador"  [paginador] ="paginador"></app-paginator-products>
 </div>

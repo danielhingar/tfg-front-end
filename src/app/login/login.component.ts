@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
         showConfirmButton: true,
         width: 350,
       });
-      this.router.navigate(['/home']);
+      this.router.navigate(['/home/page/0']);
     }
 
   }
@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
       this.authService.guardarUsuario(response.access_token);
       this.authService.guardarToken(response.access_token);
       const usuario = this.authService.usuario;
-      this.router.navigate(['/home']);
+      this.router.navigate(['/home/page/0']);
       const Toast = swal.mixin({
         toast: true,
         position: 'top-end',

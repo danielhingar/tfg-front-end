@@ -7,10 +7,11 @@ import { Configuration } from 'src/app/user/admin/configuration/configuration';
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.css']
 })
-export class FooterComponent implements OnInit{
+export class FooterComponent implements OnInit {
 
   anio: number = new Date().getFullYear();
   configuration: Configuration;
+  address = null;
   constructor(private configurationService: ConfigurationService) { }
 
   ngOnInit() {

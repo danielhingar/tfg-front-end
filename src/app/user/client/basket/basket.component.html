@@ -9,7 +9,7 @@
                     <tbody>
                         <tr *ngFor="let item of itemBasket">
                             <td>
-                                <img *ngIf="item.product?.photo" src="{{item.product.photo}}" [routerLink]="['/detailsProduct', item.product.id]"
+                                <img *ngIf="item.product?.photo" src="http://localhost:8080/company/product/uploads/img/{{item.product.photo}}" [routerLink]="['/detailsProduct', item.product.id]"
                                     alt="{{item.product.photo}}" class="img-thumbnail rounded"
                                     style="width: 64px;cursor: pointer;">
                                 <img *ngIf="!item.product?.photo" [routerLink]="['/detailsProduct', item.product.id]"
@@ -78,12 +78,12 @@
                 </div>
             </div>
             <br>
-            <button type="button" (click)='createFactureUnify()' (click)='createFacturas()' name="facturar" class="btn" style="margin-left: 7%;width: 300px;margin-bottom: 5%;" [disabled]="itemBasket.length===0">Comenzar
+            <button type="button" (click)='createFactureUnify()'  name="facturar" class="btn" style="margin-left: 7%;width: 300px;margin-bottom: 5%;" [disabled]="itemBasket.length===0">Comenzar
                 pedido</button>
             
         </div>
     </div>
 </div>
 <div class="container3">
-<img  style="margin-left: -4%;margin-bottom: -4%;" src="assets\img\iconfinder_Arrow_Back_1063891.png" height="35" width="35"><a href="/home" style="color:black;"><h3>Seguir comprando</h3></a>
+<img  style="margin-left: -4%;margin-bottom: -4%;" src="assets\img\iconfinder_Arrow_Back_1063891.png" height="35" width="35"><a href="/home/page/0" style="color:black;"><h3>Seguir comprando</h3></a>
 </div>

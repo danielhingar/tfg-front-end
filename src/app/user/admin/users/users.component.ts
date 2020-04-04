@@ -35,7 +35,7 @@ export class UsersComponent implements OnInit {
   disable(usuario: Usuario): void {
     this.adminService.disable(usuario.id).subscribe(
       response => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/home/page/0']);
         swal.fire({
           position: 'center',
           icon: 'info',
@@ -52,7 +52,7 @@ export class UsersComponent implements OnInit {
   enable(usuario: Usuario): void {
     this.adminService.enable(usuario.id).subscribe(
       response => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/home/page/0']);
         swal.fire({
           position: 'center',
           icon: 'info',

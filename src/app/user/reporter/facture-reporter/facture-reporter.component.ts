@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FactureService } from '../../client/facture/facture.service';
 import { Facture } from '../../client/facture/facture';
 import { ItemBasket } from '../../client/basket/itemBasket';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
 
 @Component({
@@ -15,15 +15,26 @@ export class FactureReporterComponent implements OnInit {
   opcionSeleccionada1 = '';
   status: string[] = ['PAGADO', 'EN PROCESO', 'ENVÍADO A SHOWCASE', 'DE CAMINO', 'RECIBIDO'];
   factures: Facture[] = [];
-  constructor(private factureService: FactureService, private router: Router) { }
+  paginador: any;
+  constructor(private factureService: FactureService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.loadFactures();
   }
 
   loadFactures(): void {
-    this.factureService.getFacturesAll().subscribe(
-      facture => this.factures = facture
+    this.activatedRoute.paramMap.subscribe( params => {
+      let page: number = +params.get('page');
+      if (!page) {
+        page = 0;
+      }
+      this.factureService.getFacturesAll(page).subscribe(
+        factures => {
+          this.factures = factures.content as Facture[];
+          this.paginador = factures;
+        }
+      );
+    }
     );
   }
 
@@ -54,7 +65,7 @@ export class FactureReporterComponent implements OnInit {
       if (id1 === facture.id) {
       facture.status = status;
       this.factureService.updateFactureReporter(facture).subscribe( response => {
-        this.router.navigate(['/factures']);
+        this.router.navigate(['/factures/page/0']);
         swal.fire({
           position: 'center',
           icon: 'info',

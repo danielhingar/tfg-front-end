@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {NgxQRCodeModule} from 'ngx-qrcode2';
+import { ChartModule } from 'angular2-chartjs';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
@@ -35,45 +36,73 @@ import { DetailShippingComponent } from './user/admin/shipping/detail-shipping/d
 import { ConfigurationListComponent } from './user/admin/configuration/configuration-list/configuration-list.component';
 import { AboutFormComponent } from './user/company/about/about-form/about-form.component';
 import { DetailsAboutComponent } from './user/company/about/details-about/details-about.component';
-import { from } from 'rxjs';
+import { PaginatorComponent } from './paginators/paginatorCompany/paginator.component';
+import { PaginatorProductsComponent } from './paginators/paginator-products/paginator-products.component';
+import { PaginatorProductsListComponent } from './paginators/paginator-products-list/paginator-products-list.component';
+// tslint:disable-next-line: max-line-length
+import { PaginatorFacturesCompanyComponent } from './paginators/paginator-factures/paginator-factures-company/paginator-factures-company.component';
+// tslint:disable-next-line: max-line-length
+import { PaginatorFacturesClientComponent } from './paginators/paginator-factures/paginator-factures-client/paginator-factures-client.component';
+// tslint:disable-next-line: max-line-length
+import { PaginatorFacturesClientReporterComponent } from './paginators/paginator-factures/paginator-factures-client-reporter/paginator-factures-client-reporter.component';
+// tslint:disable-next-line: max-line-length
+import { PaginatorFacturesCompanyReporterComponent } from './paginators/paginator-factures/paginator-factures-company-reporter/paginator-factures-company-reporter.component';
+import { PaginatorClaimsClientComponent } from './paginators/paginator-claims/paginator-claims-client/paginator-claims-client.component';
+// tslint:disable-next-line: max-line-length
+import { PaginatorClaimsReporterAllComponent } from './paginators/paginator-claims/paginator-claims-reporter-all/paginator-claims-reporter-all.component';
+// tslint:disable-next-line: max-line-length
+import { PaginatorClaimsReporterMeComponent } from './paginators/paginator-claims/paginator-claims-reporter-me/paginator-claims-reporter-me.component';
+import { AuthGuard } from './user/guards/auth.guard';
+import { RoleGuard } from './user/guards/role.guard';
+import { CommentComponent } from './user/client/comment/comment/comment.component';
+import { RecommendationComponent } from './user/company/products/recommendation/recommendation.component';
+import { StatisticsComponent } from './user/admin/statistics/statisticsProductCompany/statistics.component';
+import {StatisticsProductClientComponent} from './user/admin/statistics/statistics-product-client/statistics-product-client.component';
+// tslint:disable-next-line: max-line-length
+import { StatisticsProductSoldCompanyComponent } from './user/admin/statistics/statistics-product-sold-company/statistics-product-sold-company.component';
+
 
 
 
 
 
 const routes: Routes = [
-  {path: 'register', component: FormComponent},
-  {path: 'edit', component: FormComponent},
+  {path: 'register', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_CLIENT'}},
+  {path: 'edit', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_CLIENT'}},
   {path: '', component: LoginComponent},
-  {path: 'home', component: HomeComponent},
-  {path: 'registerCompany', component: FormCompanyComponent},
-  {path: 'editCompany', component: FormCompanyComponent},
-  {path: 'registerReporter', component: FormReporterComponent},
-  {path: 'editReporter', component: FormReporterComponent},
-  {path: 'listUsers', component: UsersComponent},
-  {path: 'products/:id', component: ProductsComponent},
-  {path: 'myProducts', component: MyproductsComponent},
-  {path: 'createProduct', component: FormProductsComponent},
-  {path: 'edit/product/:id', component: FormProductsComponent},
+  {path: 'home/page/:page', component: HomeComponent},
+  {path: 'registerCompany', component: FormCompanyComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
+  {path: 'editCompany', component: FormCompanyComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_COMPANY'}},
+  {path: 'registerReporter', component: FormReporterComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
+  {path: 'editReporter', component: FormReporterComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_REPORTER'}},
+  {path: 'listUsers', component: UsersComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
+  {path: 'products/page/:page/:username', component: ProductsComponent},
+  {path: 'myProducts/page/:page', component: MyproductsComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_COMPANY'}},
+  {path: 'createProduct', component: FormProductsComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_COMPANY'}},
+  {path: 'edit/product/:id', component: FormProductsComponent,  canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_COMPANY'}},
   {path: 'detailsProduct/:id', component: ProductDetailsComponent},
-  {path: 'myBasket', component: BasketComponent},
-  {path: 'myFacture', component: FacturesPendingComponent},
+  {path: 'myBasket', component: BasketComponent,  canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_CLIENT'}},
+  {path: 'myFacture', component: FacturesPendingComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_CLIENT'}},
   {path: 'detailsFacture/:id', component: FactureDetailsComponent},
-  {path: 'myOrders', component: FactureComponent},
-  {path: 'Orders', component: FactureCompanyComponent},
-  {path: 'factures', component: FactureReporterComponent},
-  {path: 'facturesCompany', component: FacturesAllCompanyComponent},
-  {path: 'claims', component: ClaimsComponent},
-  {path: 'myClaims', component: MyClaimsComponent},
+  {path: 'myOrders/page/:page', component: FactureComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_CLIENT'}},
+  {path: 'Orders/page/:page', component: FactureCompanyComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_COMPANY'}},
+  {path: 'factures/page/:page', component: FactureReporterComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_REPORTER'}},
+  {path: 'facturesCompany/page/:page', component: FacturesAllCompanyComponent,
+   canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_REPORTER'}},
+  {path: 'claims/page/:page', component: ClaimsComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_REPORTER'}},
+  {path: 'myClaims/page/:page', component: MyClaimsComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_REPORTER'}},
   {path: 'showClaim/:id', component: ClaimDetailsComponent},
-  {path: 'myClaim', component: MyClaimsClientComponent},
-  {path: 'createClaim/:id', component: CreateClaimComponent},
+  {path: 'myClaim/page/:page', component: MyClaimsClientComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_CLIENT'}},
+  {path: 'createClaim/:id', component: CreateClaimComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_CLIENT'}},
   {path: 'shippings', component: ListShippingComponent},
-  {path: 'createShipping', component: DetailShippingComponent},
-  {path: 'updateShipping/:id', component: DetailShippingComponent},
+  {path: 'createShipping', component: DetailShippingComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
+  {path: 'updateShipping/:id', component: DetailShippingComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'configuration', component: ConfigurationListComponent},
   {path: 'about/:id', component: DetailsAboutComponent},
-  {path: 'about', component: AboutFormComponent}
+  {path: 'about', component: AboutFormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_COMPANY'}},
+  {path: 'statistics', component: StatisticsComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
+  {path: 'statistics1', component: StatisticsProductClientComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
+  {path: 'statistics2', component: StatisticsProductSoldCompanyComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}}
 ];
 
 @NgModule({
@@ -109,6 +138,24 @@ const routes: Routes = [
     ConfigurationListComponent,
     AboutFormComponent,
     DetailsAboutComponent,
+    PaginatorComponent,
+    PaginatorProductsComponent,
+    PaginatorProductsListComponent,
+    PaginatorFacturesCompanyComponent,
+    PaginatorFacturesClientComponent,
+    PaginatorFacturesClientReporterComponent,
+    PaginatorFacturesCompanyReporterComponent,
+    PaginatorClaimsClientComponent,
+    PaginatorClaimsReporterAllComponent,
+    PaginatorClaimsReporterMeComponent,
+    CommentComponent,
+    RecommendationComponent,
+    StatisticsComponent,
+    StatisticsProductClientComponent,
+    StatisticsProductSoldCompanyComponent,
+
+
+
 
 
   ],
@@ -117,6 +164,7 @@ const routes: Routes = [
     HttpClientModule,
     FormsModule,
     NgxQRCodeModule,
+    ChartModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],

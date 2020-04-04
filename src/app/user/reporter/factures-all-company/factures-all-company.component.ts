@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FactureService } from '../../client/facture/facture.service';
 import { Facture } from '../../client/facture/facture';
 import { ItemBasket } from '../../client/basket/itemBasket';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
 
 @Component({
@@ -15,34 +15,45 @@ export class FacturesAllCompanyComponent implements OnInit {
   opcionSeleccionada1 = '';
   status: string[] = ['PAGADO', 'EN PROCESO', 'ENVÍADO A SHOWCASE', 'DE CAMINO', 'RECIBIDO'];
   factures: Facture[] = [];
-  constructor(private factureService: FactureService, private router: Router) { }
+  paginador: any;
+  constructor(private factureService: FactureService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.loadFactures();
   }
 
   loadFactures(): void {
-    this.factureService.getFacturesAllCompany().subscribe(
-      facture => this.factures = facture
+    this.activatedRoute.paramMap.subscribe( params => {
+      let page: number = +params.get('page');
+      if (!page) {
+        page = 0;
+      }
+      this.factureService.getFacturesAllCompany(page).subscribe(
+        factures => {
+          this.factures = factures.content as Facture[];
+          this.paginador = factures;
+        }
+      );
+    }
     );
   }
 
   count(facture: Facture): number {
-    let total = 0;
-    for ( const item of facture.itemBaskets) {
+      let total = 0;
+      for ( const item of facture.itemBaskets) {
       total = total + item.quantity;
     }
-    return total;
+      return total;
   }
 
   public calculatePrice(itemBasket: ItemBasket): number {
     return (itemBasket.quantity * itemBasket.product.price);
-}
+  }
 
   public caculateTotal(facture: Facture): number {
     let total = 0.00;
     for (const item of facture.itemBaskets) {
-       total = total + this.calculatePrice(item);
+      total = total + this.calculatePrice(item);
     }
     return total;
   }
@@ -50,7 +61,7 @@ export class FacturesAllCompanyComponent implements OnInit {
   payCompany(facture: Facture): void {
     this.factureService.payCompany(facture.id).subscribe(
       response => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/home/page/0']);
         swal.fire({
           position: 'center',
           icon: 'info',

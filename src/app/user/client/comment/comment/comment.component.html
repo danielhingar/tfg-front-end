@@ -1,0 +1,126 @@
+<div class="container">
+  <h3>Comentarios</h3>
+  <br />
+  <div *ngIf="authService.hasRole('ROLE_CLIENT')">
+    <div class="animated fadeInDown card bg-white text-dark">
+      <div class="card-header"><h4>Añadir comentario</h4></div>
+      <div class="card-body">
+        <br />
+        <form #commentForm="ngForm">
+          <div class="form-group row">
+            <div class="col-sm-3">
+              <label for="title" class="col-form-label">Titulo* :</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="comentario.title"
+                name="title"
+                required
+                minlength="4"
+                maxlength="30"
+                #title="ngModel"
+              />
+              <div
+                class="alert"
+                *ngIf="title.invalid && (title.dirty || title.touched)"
+              >
+                <div *ngIf="title.errors.required">
+                  Este campo es obligatorio
+                </div>
+                <div *ngIf="title.errors.minlength">
+                  Debe ser mayor a 3 caracteres
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-md">
+              <label for="description" class="col-form-label">Opinión* :</label>
+              <textarea
+                type="text"
+                class="form-control"
+                [(ngModel)]="comentario.description"
+                name="description"
+                
+                required
+                #description="ngModel"
+              ></textarea>
+              <div
+                class="alert"
+                *ngIf="
+                  description.invalid &&
+                  (description.dirty || description.touched)
+                "
+              >
+                <div *ngIf="description.errors.required">
+                  Este campo es obligatorio
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-sm-3">
+              <label for="valoration" class="col-form-label"
+                >Valoración* :</label
+              >
+              <input
+                type="number"
+                class="form-control"
+                [(ngModel)]="comentario.valoration"
+                name="valoration"
+                required
+                min="0"
+                max="5"
+                #valoration="ngModel"
+              />
+              <div
+                class="alert"
+                *ngIf="
+                  valoration.invalid && (valoration.dirty || valoration.touched)
+                "
+              >
+                <div *ngIf="valoration.errors.required">
+                  Este campo es obligatorio
+                </div>
+              </div>
+            </div>
+            <div class="col-lg">
+              <button
+                type="button"
+                (click)="create()"
+                name="factura"
+                class="btn"
+                [disabled]="!commentForm.form.valid"
+              >
+                Agregar
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <br />
+  <div class="row-cols-lg-1" *ngFor="let comment of comments">
+    <div class="card">
+      <div class="card-header">
+        <h5>{{ comment.client.username.toLocaleUpperCase() }}</h5>
+      </div>
+      <div class="card-body">
+        <blockquote class="blockquote mb-0">
+          <h6>{{ comment.title }}</h6>
+          <p>{{ comment.description }}</p>
+          
+        </blockquote>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <span class="fa fa-star checked" *ngFor="let element of arrayStarts(comment)"></span> <span class="fa fa-star" *ngFor="let element of arrayStartsEmpty(comment)"></span>
+        
+      </div>
+      <div class="card-footer text-muted">{{ comment.createDate }} <button type="button" name="eliminar" (click)="delete(comment)" class="btn1 btn-sm" style="color: darkred;background-color: white;font-weight: 600;" *ngIf="condition(comment) === true">Eliminar</button></div>
+
+    </div>
+    <br />
+  </div>
+</div>
+

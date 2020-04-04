@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Facture } from '../facture';
 import { FactureService } from '../facture.service';
 import { AuthService } from '../../../../login/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ItemBasket } from '../../basket/itemBasket';
 import { ClaimService } from '../../../reporter/claim/claim.service';
 import { map } from 'rxjs/operators';
@@ -18,16 +18,27 @@ import { Claim } from '../../../reporter/claim/claim';
 export class FactureComponent implements OnInit {
 
   factures: Facture[] = [];
+  paginador: any;
   constructor(private factureService: FactureService, private authService: AuthService, private router: Router,
-              private claimService: ClaimService) { }
+              private claimService: ClaimService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.loadFactures(this.authService.usuario.username);
   }
 
   loadFactures(username): void {
-    this.factureService.getFactures(username).subscribe(
-      facture => this.factures = facture
+    this.activatedRoute.paramMap.subscribe( params => {
+      let page: number = +params.get('page');
+      if (!page) {
+        page = 0;
+      }
+      this.factureService.getFactures(page, this.authService.usuario.username).subscribe(
+        factures => {
+          this.factures = factures.content as Facture[];
+          this.paginador = factures;
+        }
+      );
+    }
     );
   }
 

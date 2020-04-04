@@ -12,7 +12,7 @@ export class ListShippingComponent implements OnInit {
 
   shippings: Shipping[] = [];
   constructor(private shippingService: ShippingService) { }
- 
+
   ngOnInit() {
     this.loadClaims();
   }

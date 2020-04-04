@@ -1,4 +1,4 @@
-
+<div *ngIf="configuration">
 <div class="container" style="width: 550px;height:250px;border-radius: 6px;background-color: red;margin-top: 10%;" *ngIf="(configuration.failSystem === true && !authService.hasRole(('ROLE_ADMIN'))) || (configuration.failSystem===true  && authService.hasRole(('ROLE_CLIENT'))===true && authService.hasRole(('ROLE_COMPANY'))===true && authService.hasRole(('ROLE_REPORTER'))===true)">
     <p style=" width: 500px;height:200px;color:white;font-size: 40px;">EL SISTEMA SE ENCUENTRA EN MANTENIMIENTO, DISCULPEN LAS MOLESTIAS</p>
     <span style="margin-left: 40%;color: white;font-weight: 400;">Showcase</span>
@@ -10,3 +10,4 @@
 <router-outlet *ngIf="(configuration.failSystem==false) || (configuration.failSystem===true  && authService.hasRole(('ROLE_ADMIN'))) || (configuration.failSystem===true  && authService.hasRole(('ROLE_ADMIN'))===false && authService.hasRole(('ROLE_CLIENT'))===false && authService.hasRole(('ROLE_COMPANY'))===false && authService.hasRole('ROLE_REPORTER')===false)"></router-outlet>
 
 <app-footer *ngIf="configuration.failSystem===false" ></app-footer>
+</div>

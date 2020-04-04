@@ -31,7 +31,7 @@ export class AboutFormComponent implements OnInit {
 
   update(): void {
     this.aboutService.update(this.about).subscribe( product => {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/home/page/0']);
       swal.fire({
         position: 'center',
         icon: 'info',

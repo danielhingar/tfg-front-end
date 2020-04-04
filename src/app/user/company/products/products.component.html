@@ -2,18 +2,18 @@
 <div class="container">
     <p class="name">{{company.businessName}}</p>  <a [routerLink]="['/about', company.id]" role="button" style="background-color: darkorange;color: black; border-radius: 4px;width: 80px;">¿Quiénes somos?</a>
     <br>
-    <div *ngIf="products?.length == 0" class="alert alert-info" style="width: 40%;">
-       Lo sentimos, no hay productos todavía de esta empresa
-    </div>
-    <input  *ngIf="products?.length > 0" class="form-control" [(ngModel)]="name" type="text" placeholder="Buscar..." aria-label="Buscar" #myInput (input)="Search()" style="width: 30%;margin-left: 67%;margin-top:-3%;">
+    <input  class="form-control" [(ngModel)]="name" type="text" placeholder="Buscar..." aria-label="Buscar" #myInput (input)="Search()" style="width: 30%;margin-left: 67%;margin-top:-3%;">
+    <div *ngIf="products?.length == 0" class="alert alert-info" style="width: 70%;">
+        Lo sentimos, no hay productos todavía de esta empresa
+     </div>
     <div class="row" *ngIf="products?.length > 0">
         <div class="col-sm" *ngFor="let product of products">
             <div class="animated zoomIn card">
                 
                 <img *ngIf="!product?.photo" src="https://i1.wp.com/www.lagraderia.com/wp-content/uploads/2018/12/no-imagen.jpg?fit=300%2C300" class="card-img"> 
-                <img *ngIf="product?.photo" src={{product.photo}} class="card-img" ><h5 class="offert" *ngIf="product?.offert">-{{product.offert}}%</h5>
+                <img *ngIf="product?.photo" src="http://localhost:8080/company/product/uploads/img/{{product.photo}}" class="card-img" ><h5 class="offert" *ngIf="product?.offert">-{{product.offert}}%</h5>
                 <div class="card-body">
-                    <p class="title" [routerLink]="['/detailsProduct', product.id]">{{product.name.toUpperCase()}}</p>
+                    <a class="title" href="/detailsProduct/{{product.id}}">{{product.name.toUpperCase()}}</a>
                     <h4 class="price" *ngIf="!product?.offert">{{product.price}}€</h4>
                     <span class="price" *ngIf="product?.offert">Antes: {{product.price}}€</span>
                     <h4 class="offert" *ngIf="product?.offert">Ahora:{{rebaja(product).toFixed(2)}}€</h4>
@@ -23,4 +23,5 @@
         </div>
     </div>
     <br>
+    <app-paginator-products-list *ngIf="paginador"  [paginador] ="paginador"></app-paginator-products-list>
 </div>

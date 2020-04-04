@@ -7,6 +7,9 @@ import { BasketService } from '../../../client/basket/basket.service';
 import { AuthService } from '../../../../login/auth.service';
 import { Basket } from 'src/app/user/client/basket/basket';
 import { DOCUMENT } from '@angular/common';
+import { CommentService } from '../../../client/comment/comment.service';
+import { Comentario } from '../../../client/comment/comentario';
+
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
@@ -19,9 +22,12 @@ export class ProductDetailsComponent implements OnInit {
   opcionSeleccionada1 = 'null';
   urlEndPoint = 'http://localhost:8080/client/basket';
   url: string;
+  comments: Comentario[] = [];
+  paginador: any;
+  avgValoration = 0;
   constructor(private productService: ProductService,  private router: Router, private activatedRouter: ActivatedRoute,
               private basketService: BasketService, public authSevice: AuthService, private http: HttpClient,
-              @Inject(DOCUMENT) document: any) { }
+              @Inject(DOCUMENT) document: any, private commentService: CommentService) { }
 
   ngOnInit() {
     this.loadProduct();
@@ -37,7 +43,10 @@ export class ProductDetailsComponent implements OnInit {
       const id = params.id;
       if (id) {
         this.productService.getProduct(id).subscribe( (product) => this.product = product);
+        console.log(this.product);
+        this.puntuacion(id);
       }
+
     });
   }
   rebaja(product: Product): number {
@@ -67,5 +76,20 @@ export class ProductDetailsComponent implements OnInit {
          this.router.navigate(['/myBasket']);
        });
     }
+  puntuacion(id: number): void {
+    this.productService.avgValoration(id).subscribe( response => {
+       this.avgValoration = response;
+    });
+  }
+
+  public arrayStarts(): Array<number> {
+    const starts = new Array(this.avgValoration);
+    return starts;
+  }
+
+  public arrayStartsEmpty(): Array<number> {
+    const starts1 = new Array(5 - this.avgValoration);
+    return starts1;
+  }
 
 }

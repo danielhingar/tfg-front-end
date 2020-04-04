@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Claim } from 'src/app/user/reporter/claim/claim';
 import swal from 'sweetalert2';
 import { AuthService } from '../../../../login/auth.service';
+import { HttpEvent, HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-claim-details',
@@ -13,6 +14,8 @@ import { AuthService } from '../../../../login/auth.service';
 export class ClaimDetailsComponent implements OnInit {
   status: string[] = ['EN PROCESO', 'DENEGADA',  'ACEPTADA'];
   claim: Claim = new Claim();
+  public fotoSeleccionada: File;
+  progreso = 0;
   constructor(private claimService: ClaimService, private router: Router, private activatedRouter: ActivatedRoute,
               public authService: AuthService) { }
 
@@ -34,7 +37,7 @@ export class ClaimDetailsComponent implements OnInit {
 
   update(): void {
     this.claimService.updateReporte(this.claim).subscribe( claim => {
-      this.router.navigate(['/myClaims']);
+      this.router.navigate(['/myClaims/page/0']);
       swal.fire({
         position: 'center',
         icon: 'info',
@@ -47,4 +50,46 @@ export class ClaimDetailsComponent implements OnInit {
     });
   }
 
+
+seleccionarFoto(event) {
+  this.fotoSeleccionada = event.target.files[0];
+  this.progreso = 0;
+
+}
+
+  subirFoto() {
+    if (!this.fotoSeleccionada) {
+      swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Producto',
+        text: `Debe seleccionar una foto`,
+        showConfirmButton: false,
+        width: 350,
+        timer: 1400,
+      });
+    } else {
+    this.claimService.uploadFile(this.fotoSeleccionada, this.claim.id).subscribe(
+      event => {
+
+        if (event.type === HttpEventType.UploadProgress) {
+          this.progreso = Math.round((event.loaded / event.total) * 100);
+        } else if (event.type === HttpEventType.Response) {
+          const response: any = event.body;
+          this.claim = response.claim as Claim;
+          swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Queja',
+            text: `Se ha subido correctamente el archivo`,
+            showConfirmButton: false,
+            width: 350,
+            timer: 1400,
+          });
+        }
+
+      }
+    );
+  }
+  }
 }

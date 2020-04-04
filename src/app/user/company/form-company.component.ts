@@ -4,6 +4,7 @@ import swal from 'sweetalert2';
 import { Company } from './company';
 import { CompanyService } from './company.service';
 import { AuthService } from '../../login/auth.service';
+import { HttpEventType } from '@angular/common/http';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class FormCompanyComponent implements OnInit {
 
   public company: Company = new Company();
   public errores: string[];
-
+  public fotoSeleccionada: File;
+  progreso = 0;
   constructor(private companyService: CompanyService, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
@@ -35,7 +37,7 @@ export class FormCompanyComponent implements OnInit {
   public create(): void {
     this.companyService.create(this.company).subscribe(
       response => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/home/page/0']);
         swal.fire({
           position: 'center',
           icon: 'success',
@@ -51,7 +53,7 @@ export class FormCompanyComponent implements OnInit {
 
   update(): void {
     this.companyService.update(this.company).subscribe( company => {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/home/page/0']);
       swal.fire({
         position: 'center',
         icon: 'info',
@@ -62,5 +64,58 @@ export class FormCompanyComponent implements OnInit {
         timer: 2200,
       });
     });
+  }
+
+  seleccionarFoto(event) {
+    this.fotoSeleccionada = event.target.files[0];
+    this.progreso = 0;
+    if (this.fotoSeleccionada.type.indexOf('image') < 0) {
+      swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Compañía',
+        text: `El archivo seleccionado no es una imagen`,
+        showConfirmButton: false,
+        width: 350,
+        timer: 1400,
+      });
+      this.fotoSeleccionada = null;
+    }
+  }
+
+  subirFoto() {
+    if (!this.fotoSeleccionada) {
+      swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Producto',
+        text: `Debe seleccionar una foto`,
+        showConfirmButton: false,
+        width: 350,
+        timer: 1400,
+      });
+    } else {
+    this.companyService.uploadPhoto(this.fotoSeleccionada, this.company.id).subscribe(
+      event => {
+
+        if (event.type === HttpEventType.UploadProgress) {
+          this.progreso = Math.round((event.loaded / event.total) * 100);
+        } else if (event.type === HttpEventType.Response) {
+          const response: any = event.body;
+          this.company = response.company as Company;
+          swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Compañía',
+            text: `Se ha subido correctamente la imagen`,
+            showConfirmButton: false,
+            width: 350,
+            timer: 1400,
+          });
+        }
+
+      }
+    );
+  }
   }
 }

@@ -3,6 +3,7 @@ import { ProductService } from '../product.service';
 import { Product } from '../product';
 import { AuthService } from '../../../../login/auth.service';
 import Swal from 'sweetalert2';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-myproducts',
   templateUrl: './myproducts.component.html',
@@ -11,16 +12,26 @@ import Swal from 'sweetalert2';
 export class MyproductsComponent implements OnInit {
 
   products: Product[];
-
-  constructor(private productService: ProductService, private authService: AuthService) { }
+  paginador: any;
+  constructor(private productService: ProductService, private authService: AuthService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.loadProducts();
   }
 
   loadProducts(): void {
-    this.productService.getProductsCompany(this.authService.usuario.username).subscribe(
-      products => this.products = products
+    this.activatedRoute.paramMap.subscribe( params => {
+      let page: number = +params.get('page');
+      if (!page) {
+        page = 0;
+      }
+      this.productService.getProductsCompany(page, this.authService.usuario.username).subscribe(
+        products => {
+          this.products = products.content as Product[];
+          this.paginador = products;
+        }
+      );
+    }
     );
   }
 
@@ -56,5 +67,6 @@ export class MyproductsComponent implements OnInit {
       }
     });
   }
+
 }
 

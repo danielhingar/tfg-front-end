@@ -43,3 +43,29 @@ button {
     background-color: transparent !important;
   }
  
+  @media screen and (max-width: 414px) {
+
+    .container-xl {
+      margin-top: 20%;
+      margin-bottom: 15%;
+    }
+
+    .container{
+      width: 500px;
+  }
+  .container1{
+    width: 600px;
+}
+.container2{
+  width: 500px;
+}
+  select{
+    width: 300px;
+  }
+  }
+    @media screen and (max-width: 850px) {
+      .container-xl {
+        margin-top: 20%;
+        margin-bottom: 15%;
+      }
+    }

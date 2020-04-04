@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Claim } from '../claim';
 import { ClaimService } from '../claim.service';
 import { AuthService } from '../../../../login/auth.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
 
 @Component({
@@ -14,22 +14,34 @@ import swal from 'sweetalert2';
 export class ClaimsComponent implements OnInit {
 
   claims: Claim[] = [];
-  constructor(private claimService: ClaimService, private authService: AuthService, private router: Router) { }
+  paginador: any;
+  constructor(private claimService: ClaimService, private authService: AuthService, private router: Router,
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.loadClaims();
   }
 
   loadClaims(): void {
-    this.claimService.getClaims().subscribe(
-      claims => this.claims = claims
+    this.activatedRoute.paramMap.subscribe( params => {
+      let page: number = +params.get('page');
+      if (!page) {
+        page = 0;
+      }
+      this.claimService.getClaims(page).subscribe(
+        claims => {
+          this.claims = claims.content as Claim[];
+          this.paginador = claims;
+        }
+      );
+    }
     );
   }
 
   assign(claim: Claim): void {
     this.claimService.assign(claim, claim.id, this.authService.usuario.username).subscribe(
       response => {
-        this.router.navigate(['/myClaims']);
+        this.router.navigate(['/myClaims/page/0']);
         swal.fire({
           position: 'center',
           icon: 'info',
