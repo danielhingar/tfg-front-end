@@ -3,6 +3,11 @@
     <p class="name">{{company.businessName}}</p>  <a [routerLink]="['/about', company.id]" role="button" style="background-color: darkorange;color: black; border-radius: 4px;width: 80px;">¿Quiénes somos?</a>
     <br>
     <input  class="form-control" [(ngModel)]="name" type="text" placeholder="Buscar..." aria-label="Buscar" #myInput (input)="Search()" style="width: 30%;margin-left: 67%;margin-top:-3%;">
+    <div *ngFor="let category1 of loadCategories()">
+        <div class="row">
+        <button (click)='SearchCategory(category1)'>{{category1}}</button>
+    </div>
+    </div>
     <div *ngIf="products?.length == 0" class="alert alert-info" style="width: 70%;">
         Lo sentimos, no hay productos todavía de esta empresa
      </div>

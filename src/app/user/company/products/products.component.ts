@@ -17,6 +17,7 @@ import { AuthService } from '../../../login/auth.service';
 export class ProductsComponent implements OnInit {
   public company: Company = new Company();
   name: string;
+  category: string;
   products: Product[] = [];
   products1: Product[] = [];
   paginador: any;
@@ -36,7 +37,8 @@ export class ProductsComponent implements OnInit {
       if (username) {
         this.companyService.getCompany(username).subscribe( (company) => this.products1 = company.products);
       }
-      this.loadCategories();
+
+      console.log(this.categories);
     });
   }
 
@@ -82,10 +84,24 @@ export class ProductsComponent implements OnInit {
   }
 
   loadCategories() {
-    for (const product of this.products1) {
+    for (const product of this.products) {
+      if (!this.categories.includes(product.category)) {
       this.categories.push(product.category);
+      }
     }
     return this.categories;
   }
+
+  SearchCategory(category1) {
+    this.category = category1;
+    if (this.category !== '') {
+     this.products = this.products1.filter( res => {
+       return res.category.toLocaleLowerCase().match(this.category.toLocaleLowerCase());
+     });
+    } else if (this.name === '') {
+       this.ngOnInit();
+     }
+
+   }
 
 }

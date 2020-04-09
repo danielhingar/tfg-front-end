@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class RecommendationComponent implements OnInit {
 
-  products: Product[] = [];
+  public products: Product[] = [];
   constructor(private productService: ProductService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
