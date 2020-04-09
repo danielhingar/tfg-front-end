@@ -172,12 +172,7 @@ export class FactureService {
   }
 
   payCompany(id): Observable<Facture> {
-    return this.http.put<Facture>(`${this.urlEndPoint2}/payCompany/${id}`, {headers: this.agregarAuthorizationHeader()}).pipe(
-      catchError( e => {
-        this.isNoAutorizado(e);
-        return throwError(e);
-      })
-    );
+    return this.http.put<Facture>(`${this.urlEndPoint2}/payCompany/${id}`,  {headers: this.agregarAuthorizationHeader()});
   }
 
 

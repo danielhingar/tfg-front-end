@@ -4,6 +4,7 @@ import { Product } from '../product';
 import { AuthService } from '../../../../login/auth.service';
 import Swal from 'sweetalert2';
 import { ActivatedRoute } from '@angular/router';
+import { CompanyService } from '../../company.service';
 @Component({
   selector: 'app-myproducts',
   templateUrl: './myproducts.component.html',
@@ -12,11 +13,15 @@ import { ActivatedRoute } from '@angular/router';
 export class MyproductsComponent implements OnInit {
 
   products: Product[];
+  products1: Product[];
   paginador: any;
-  constructor(private productService: ProductService, private authService: AuthService, private activatedRoute: ActivatedRoute) { }
+  name: string;
+  constructor(private productService: ProductService, private authService: AuthService, private activatedRoute: ActivatedRoute,
+              private companyService: CompanyService) { }
 
   ngOnInit() {
     this.loadProducts();
+    this.loadProducts1();
   }
 
   loadProducts(): void {
@@ -33,6 +38,11 @@ export class MyproductsComponent implements OnInit {
       );
     }
     );
+  }
+  loadProducts1(): void {
+  if (this.authService.usuario.username) {
+        this.companyService.getCompany(this.authService.usuario.username).subscribe((company) => this.products1 = company.products);
+    }
   }
 
   delete(product: Product): void {
@@ -66,6 +76,15 @@ export class MyproductsComponent implements OnInit {
         );
       }
     });
+  }
+  Search() {
+    if (this.name !== '') {
+      this.products = this.products1.filter(res => {
+        return res.name.toLocaleLowerCase().match(this.name.toLocaleLowerCase());
+      });
+    } else if (this.name === '') {
+      this.ngOnInit();
+    }
   }
 
 }

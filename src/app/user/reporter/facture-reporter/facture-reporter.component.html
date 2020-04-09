@@ -1,8 +1,16 @@
 <div class="animated fadeInDown container">
-    <h2>Facturas Showcase</h2>
-    <div *ngIf="factures?.length == 0" class="alert alert-info" style="width: 40%;">
-         No hay facturas en el sistema
+    <h2>Pedidos Showcase</h2>
+    <div *ngIf="factures1?.length == 0" class="alert alert-info" style="width: 40%;">
+         No hay pedidos en el sistema
      </div>
+     <div class="row">
+    <button class="btn btn-outline-dark" style="margin-right: 3%;margin-bottom: 2%;" *ngFor="let state1 of status" (click)='SearchStatus(state1)' [disabled]="igual(state1)">{{state1}}</button>
+    <select value="{{opcionSeleccionada1}}" [(ngModel)]="opcionSeleccionada1" class="form-control" style="width: 200px;" (change)="searchClient($event)">
+        <option  *ngFor="let client of loadClients()" >
+            {{client}}
+        </option>
+    </select>
+    </div>
     <table class="table table-striped" *ngIf="factures?.length > 0">
         <thead>
             <tr>
@@ -21,7 +29,7 @@
                 <td>{{facture.createDate}}</td>
                 <td>{{facture.client.username}}</td>
                 <td>
-                <select value="{{facture.status}" class="form-control" style="width: 200px;" (change)="updateStatus(facture.id,$event)">
+                <select value="{{facture.status}}" class="form-control" style="width: 200px;" (change)="updateStatus(facture.id,$event)">
                     <option  *ngFor="let statu of status" >
                         {{statu}}
                     </option>
@@ -30,7 +38,7 @@
                 <td>{{count(facture)}}</td>
                 <td>{{caculateTotal(facture).toFixed(2)}}€</td>
                 <td>
-                    <button type="button" name="details" [routerLink]="['/detailsFacture', facture.id]"  class="btn btn-sm">Ver detalles</button>
+                    <button type="button" name="details" style="color: white;background-color: #ff6800;" [routerLink]="['/detailsFacture', facture.id]"  class="btn btn-sm">Ver detalles</button>
                 </td>
                 
 

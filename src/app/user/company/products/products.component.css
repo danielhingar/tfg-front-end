@@ -69,3 +69,10 @@ span{
     margin-top: 5%;
 }
 
+button{
+    margin-right: 3%;
+}
+
+button:focus{
+    background-color: grey;
+}

@@ -15,7 +15,11 @@ export class FactureReporterComponent implements OnInit {
   opcionSeleccionada1 = '';
   status: string[] = ['PAGADO', 'EN PROCESO', 'ENVÍADO A SHOWCASE', 'DE CAMINO', 'RECIBIDO'];
   factures: Facture[] = [];
+  factures1: Facture[] = [];
   paginador: any;
+  state: string;
+  clients: string[] = [];
+
   constructor(private factureService: FactureService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
@@ -31,6 +35,7 @@ export class FactureReporterComponent implements OnInit {
       this.factureService.getFacturesAll(page).subscribe(
         factures => {
           this.factures = factures.content as Facture[];
+          this.factures1 = factures.content as Facture[];
           this.paginador = factures;
         }
       );
@@ -81,4 +86,49 @@ export class FactureReporterComponent implements OnInit {
     });
   }
 
+  SearchStatus(state1) {
+    this.opcionSeleccionada1 = '';
+    this.state = state1;
+    if (this.state !== '') {
+      this.factures = this.factures1.filter(res => {
+        return res.status.toLocaleLowerCase().match(this.state.toLocaleLowerCase());
+      });
+      } else if (this.state === '') {
+        this.ngOnInit();
+      }
+
+    }
+
+    cleanFilter() {
+      this.state = '';
+      this.loadFactures();
+    }
+
+  igual(state1): boolean {
+      if (this.state === state1) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    loadClients() {
+      for (const facture of this.factures1) {
+        if (!this.clients.includes(facture.client.username)) {
+          this.clients.push(facture.client.username);
+        }
+      }
+      return this.clients;
+    }
+
+    searchClient( event: any): void {
+      const client: string = event.target.value as string;
+      if (client !== '') {
+        this.factures = this.factures1.filter(res => {
+          return res.client.username.toLocaleLowerCase().match(client.toLocaleLowerCase());
+        });
+        } else if (client === '') {
+          this.ngOnInit();
+        }
+      }
 }
+

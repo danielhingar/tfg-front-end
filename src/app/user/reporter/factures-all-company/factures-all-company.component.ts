@@ -13,9 +13,12 @@ import swal from 'sweetalert2';
 export class FacturesAllCompanyComponent implements OnInit {
 
   opcionSeleccionada1 = '';
-  status: string[] = ['PAGADO', 'EN PROCESO', 'ENVÍADO A SHOWCASE', 'DE CAMINO', 'RECIBIDO'];
+  status: string[] = ['PAGADA', 'PENDIENTE DE PAGO'];
   factures: Facture[] = [];
+  factures1: Facture[] = [];
   paginador: any;
+  state: string;
+  companies: string[] = [];
   constructor(private factureService: FactureService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
@@ -31,6 +34,7 @@ export class FacturesAllCompanyComponent implements OnInit {
       this.factureService.getFacturesAllCompany(page).subscribe(
         factures => {
           this.factures = factures.content as Facture[];
+          this.factures1 = factures.content as Facture[];
           this.paginador = factures;
         }
       );
@@ -74,4 +78,46 @@ export class FacturesAllCompanyComponent implements OnInit {
       }
     );
   }
+
+  SearchStatus(state1) {
+    this.opcionSeleccionada1 = '';
+    this.state = state1;
+    if (this.state !== '') {
+      this.factures = this.factures1.filter(res => {
+        return res.status.toLocaleLowerCase().match(this.state.toLocaleLowerCase());
+      });
+      } else if (this.state === '') {
+        this.ngOnInit();
+      }
+
+    }
+
+
+  igual(state1): boolean {
+    if (this.state === state1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  loadCompanies() {
+    for (const facture of this.factures1) {
+      if (!this.companies.includes(facture.company.businessName)) {
+        this.companies.push(facture.company.businessName);
+      }
+    }
+    return this.companies;
+  }
+
+  searchCompany( event: any): void {
+    const company: string = event.target.value as string;
+    if (company !== '') {
+      this.factures = this.factures1.filter(res => {
+        return res.company.businessName.toLocaleLowerCase().match(company.toLocaleLowerCase());
+      });
+      } else if (company === '') {
+        this.ngOnInit();
+      }
+    }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Company } from '../company';
 import { CompanyService } from '../company.service';
 import { Product } from './product';
@@ -22,7 +22,7 @@ export class ProductsComponent implements OnInit {
   products1: Product[] = [];
   paginador: any;
   categories: string[] = [];
-  constructor(private companyService: CompanyService, private router: Router,  private activatedRoute: ActivatedRoute,
+  constructor(private companyService: CompanyService, private router: Router, private activatedRoute: ActivatedRoute,
               private productService: ProductService, private authService: AuthService) { }
 
   ngOnInit() {
@@ -35,15 +35,13 @@ export class ProductsComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       const username = params.username;
       if (username) {
-        this.companyService.getCompany(username).subscribe( (company) => this.products1 = company.products);
+        this.companyService.getCompany(username).subscribe((company) => this.products1 = company.products);
       }
-
-      console.log(this.categories);
     });
   }
 
   cargarProducts(): void {
-    this.activatedRoute.paramMap.subscribe( params => {
+    this.activatedRoute.paramMap.subscribe(params => {
       let page: number = +params.get('page');
       const username = params.get('username');
       if (!page) {
@@ -63,20 +61,26 @@ export class ProductsComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       const username = params.username;
       if (username) {
-        this.companyService.getCompany(username).subscribe( (company) => this.company = company);
+        this.companyService.getCompany(username).subscribe((company) => this.company = company);
       }
     });
   }
 
- Search() {
-   if (this.name !== '') {
-    this.products = this.products1.filter( res => {
-      return res.name.toLocaleLowerCase().match(this.name.toLocaleLowerCase());
-    });
-   } else if (this.name === '') {
+  Search() {
+    if (this.name !== '') {
+      this.products = this.products1.filter(res => {
+        return res.name.toLocaleLowerCase().match(this.name.toLocaleLowerCase());
+      });
+    }
+    if (this.name !== '' && this.category !== '' && this.category !== undefined) {
+      this.products = this.products1.filter(res1 => {
+        if (res1.category === this.category && res1.name.toLocaleUpperCase() === this.name) {
+          this.products.push(res1);
+        }
+      });
+    } else if (this.name === '') {
       this.ngOnInit();
     }
-
   }
 
   rebaja(product: Product): number {
@@ -86,7 +90,7 @@ export class ProductsComponent implements OnInit {
   loadCategories() {
     for (const product of this.products) {
       if (!this.categories.includes(product.category)) {
-      this.categories.push(product.category);
+        this.categories.push(product.category);
       }
     }
     return this.categories;
@@ -95,13 +99,27 @@ export class ProductsComponent implements OnInit {
   SearchCategory(category1) {
     this.category = category1;
     if (this.category !== '') {
-     this.products = this.products1.filter( res => {
-       return res.category.toLocaleLowerCase().match(this.category.toLocaleLowerCase());
-     });
-    } else if (this.name === '') {
-       this.ngOnInit();
-     }
+      this.products = this.products1.filter(res => {
+        return res.category.toLocaleLowerCase().match(this.category.toLocaleLowerCase());
+      });
+      } else if (this.category === '') {
+        this.ngOnInit();
+      }
 
-   }
+    }
 
-}
+  cleanFilter() {
+      this.name = '';
+      this.category = '';
+      this.cargarProducts();
+    }
+
+  igual(category1): boolean {
+      if (this.category === category1) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
