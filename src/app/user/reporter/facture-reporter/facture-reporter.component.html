@@ -3,13 +3,18 @@
     <div *ngIf="factures1?.length == 0" class="alert alert-info" style="width: 40%;">
          No hay pedidos en el sistema
      </div>
-     <div class="row">
-    <button class="btn btn-outline-dark" style="margin-right: 3%;margin-bottom: 2%;" *ngFor="let state1 of status" (click)='SearchStatus(state1)' [disabled]="igual(state1)">{{state1}}</button>
-    <select value="{{opcionSeleccionada1}}" [(ngModel)]="opcionSeleccionada1" class="form-control" style="width: 200px;" (change)="searchClient($event)">
+     <div class="row" style="margin-bottom: 2%;margin-top: 1%;">
+        <select value="{{opcionSeleccionada1}}" [(ngModel)]="opcionSeleccionada1" class="form-control" style="width: 200px;" (change)="searchClient($event)">
+        <option disabled selected value>---------</option>
         <option  *ngFor="let client of loadClients()" >
             {{client}}
         </option>
-    </select>
+    </select> 
+    <button class="btn btn-outline-info" style="margin-left: 3%" (click)='cleanFilter()'>Borrar filtros</button>
+    </div>
+    <br>
+    <div *ngIf="factures?.length == 0" class="alert alert-info" style="width: 40%;">
+        No hay facturas con ese filtro
     </div>
     <table class="table table-striped" *ngIf="factures?.length > 0">
         <thead>

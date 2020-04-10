@@ -2,3 +2,18 @@
     margin-top: 8%;
     margin-bottom: 15%;
 }
+
+@media screen and (max-width:414px){
+    .container{
+        margin-top: 20%;
+        margin-bottom: 15%;
+    }
+  }
+  
+  @media screen and (max-width:360px){
+    
+    .container{
+        margin-top: 20%;
+        margin-bottom: 15%;
+    }
+  }

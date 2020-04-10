@@ -112,12 +112,26 @@ export class FacturesAllCompanyComponent implements OnInit {
 
   searchCompany( event: any): void {
     const company: string = event.target.value as string;
-    if (company !== '') {
+    if (this.state !== '' && company !== '' && this.state !== undefined) {
+      this.factures = [];
+      this.factures = this.factures1.filter(res1 => {
+        if (res1.status.toLocaleUpperCase() === this.state.toLocaleUpperCase()
+         && res1.company.businessName.toLocaleUpperCase() === company.toLocaleUpperCase()) {
+          return this.factures.push(res1);
+        }
+      });
+    }
+    if (company !== '' && (this.state  === '' || this.state === undefined)) {
       this.factures = this.factures1.filter(res => {
         return res.company.businessName.toLocaleLowerCase().match(company.toLocaleLowerCase());
       });
-      } else if (company === '') {
+    } else if (company === '') {
         this.ngOnInit();
       }
+    }
+
+    cleanFilter() {
+      this.state = '';
+      this.loadFactures();
     }
 }

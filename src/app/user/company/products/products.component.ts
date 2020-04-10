@@ -67,17 +67,20 @@ export class ProductsComponent implements OnInit {
   }
 
   Search() {
-    if (this.name !== '') {
+    if (this.category !== '' && this.name !== '' && this.category !== undefined) {
+      this.products = [];
+      this.products = this.products1.filter(res1 => {
+        if (res1.category.toLocaleUpperCase() === this.category.toLocaleUpperCase()
+         && res1.name.toLocaleLowerCase().match(this.name.toLocaleLowerCase())) {
+          return this.products.push(res1);
+        }
+      });
+    }
+    if (this.name !== '' && (this.category === '' || this.category === undefined)) {
       this.products = this.products1.filter(res => {
         return res.name.toLocaleLowerCase().match(this.name.toLocaleLowerCase());
       });
-    }
-    if (this.name !== '' && this.category !== '' && this.category !== undefined) {
-      this.products = this.products1.filter(res1 => {
-        if (res1.category === this.category && res1.name.toLocaleUpperCase() === this.name) {
-          this.products.push(res1);
-        }
-      });
+
     } else if (this.name === '') {
       this.ngOnInit();
     }

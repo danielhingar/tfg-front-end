@@ -17,7 +17,6 @@ export class FactureReporterComponent implements OnInit {
   factures: Facture[] = [];
   factures1: Facture[] = [];
   paginador: any;
-  state: string;
   clients: string[] = [];
 
   constructor(private factureService: FactureService, private router: Router, private activatedRoute: ActivatedRoute) { }
@@ -86,31 +85,6 @@ export class FactureReporterComponent implements OnInit {
     });
   }
 
-  SearchStatus(state1) {
-    this.opcionSeleccionada1 = '';
-    this.state = state1;
-    if (this.state !== '') {
-      this.factures = this.factures1.filter(res => {
-        return res.status.toLocaleLowerCase().match(this.state.toLocaleLowerCase());
-      });
-      } else if (this.state === '') {
-        this.ngOnInit();
-      }
-
-    }
-
-    cleanFilter() {
-      this.state = '';
-      this.loadFactures();
-    }
-
-  igual(state1): boolean {
-      if (this.state === state1) {
-        return true;
-      } else {
-        return false;
-      }
-    }
     loadClients() {
       for (const facture of this.factures1) {
         if (!this.clients.includes(facture.client.username)) {
@@ -129,6 +103,10 @@ export class FactureReporterComponent implements OnInit {
         } else if (client === '') {
           this.ngOnInit();
         }
+      }
+
+      cleanFilter() {
+        this.loadFactures();
       }
 }
 

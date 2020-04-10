@@ -1,8 +1,17 @@
 <div class="animated fadeInDown container">
     <h2>Quejas Showcase</h2>
-    <div *ngIf="claims?.length == 0" class="alert alert-info" style="width: 40%;">
+    <div *ngIf="claims1?.length == 0" class="alert alert-info" style="width: 40%;">
          No hay quejas en el sistema
      </div>
+    <div class="row"  style="margin-top: 2%;">
+        <button class="btn btn-outline-dark" style="margin-right: 3%;margin-bottom: 2%;" *ngFor="let state1 of status" (click)='SearchStatus(state1)' [disabled]="igual(state1)">{{state1}}</button>
+        <button class="btn btn-outline-info" style="margin-left: 3%;margin-bottom: 2%;" (click)='cleanFilter()'>Borrar filtros</button>
+    </div>
+
+    <br>
+    <div *ngIf="claims?.length == 0" class="alert alert-info" style="width: 40%;">
+        No hay quejas con ese filtro
+    </div>
     <table class="table table-striped" *ngIf="claims?.length > 0" >
         <thead>
             <tr >
@@ -27,7 +36,7 @@
                     <button type="button" style="color: white;background-color: #ff6800;" name="details" *ngIf="claim.reporter === null" class="btn btn-sm" [routerLink]="['/showClaim', claim.id]" >Detalles</button>
                 </td>
                 <td>
-                    <button type="button" name="assign" (click)="assign(claim)"  class="btn btn-sm" *ngIf="claim.reporter === null">Asignar</button>
+                    <button type="button" style="  color: white;background-color: #ff6800;" name="assign" (click)="assign(claim)"  class="btn btn-sm" *ngIf="claim.reporter === null">Asignar</button>
                 </td>
                 
                 

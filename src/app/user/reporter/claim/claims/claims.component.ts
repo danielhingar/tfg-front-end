@@ -13,8 +13,13 @@ import swal from 'sweetalert2';
 })
 export class ClaimsComponent implements OnInit {
 
+  status: string[] = ['EN PROCESO', 'DENEGADA',  'ACEPTADA', 'PENDIENTE DE RESPUESTA'];
   claims: Claim[] = [];
+  claims1: Claim[] = [];
   paginador: any;
+  state: string;
+  opcionSeleccionada1 = '';
+  ids: number[] = [];
   constructor(private claimService: ClaimService, private authService: AuthService, private router: Router,
               private activatedRoute: ActivatedRoute) { }
 
@@ -31,6 +36,7 @@ export class ClaimsComponent implements OnInit {
       this.claimService.getClaims(page).subscribe(
         claims => {
           this.claims = claims.content as Claim[];
+          this.claims1 = claims.content as Claim[];
           this.paginador = claims;
         }
       );
@@ -55,4 +61,28 @@ export class ClaimsComponent implements OnInit {
     );
   }
 
+  SearchStatus(state1) {
+    this.opcionSeleccionada1 = '';
+    this.state = state1;
+    if (this.state !== '') {
+      this.claims = this.claims1.filter(res => {
+        return res.status.toLocaleLowerCase().match(this.state.toLocaleLowerCase());
+      });
+      } else if (this.state === '') {
+        this.ngOnInit();
+      }
+
+    }
+
+    igual(state1): boolean {
+      if (this.state === state1) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    cleanFilter() {
+      this.loadClaims();
+    }
 }

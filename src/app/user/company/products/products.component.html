@@ -6,8 +6,11 @@
     <br>
     <button class="btn btn-outline-dark" *ngFor="let category1 of loadCategories()" (click)='SearchCategory(category1)' [disabled]="igual(category1)">{{category1}}</button>
     <button class="btn btn-outline-info"  (click)='cleanFilter()'>Borrar filtros</button>
-    <div *ngIf="products?.length == 0" class="alert alert-info" style="width: 70%;">
+    <div *ngIf="products1?.length == 0" class="alert alert-info" style="width: 70%;">
         Lo sentimos, no hay productos todavía de esta empresa
+     </div>
+     <div *ngIf="products?.length == 0" class="alert alert-info" style="width: 70%;">
+        Lo sentimos, no hay productos que cumplan esos requisitos
      </div>
     <div class="row" *ngIf="products?.length > 0">
         <div class="col-sm" *ngFor="let product of products">
