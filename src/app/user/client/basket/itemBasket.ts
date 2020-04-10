@@ -6,4 +6,5 @@ export class ItemBasket {
     size: string;
     capacity: string;
     product: Product;
+    status: string;
 }

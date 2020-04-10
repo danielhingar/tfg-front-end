@@ -1,5 +1,5 @@
 <div class="container-xl">
-    <h1>Pedido {{facture.id}} - {{facture.status}} </h1> 
+    <h1>Pedido {{facture.id}} </h1> 
     <h4>{{facture.createDate}}</h4>
     <br>
     <div class="container" *ngIf="facture !== null  && authService.hasRole('ROLE_CLIENT') || authService.hasRole('ROLE_REPORTER') || authService.hasRole('ROLE_ADMIN')">
@@ -148,8 +148,14 @@
             <div class="card" *ngFor="let item of facture.itemBaskets" style="margin-bottom: 1%;">
                 <div class="card-title"
                     style="border-color: transparent !important;background-color: #f6f6f6;height: 60px;">
-                    <h5 style="text-align: center"> {{item.product.name}}</h5>
-                    <h5 style="text-align: right;margin-right: 4%;color: darkred;">{{calculatePrice(item).toFixed(2)}}€
+                    <h5 style="float: left;margin-left: 3%;"> {{item.product.name}}</h5>
+                    <h5 style="text-align: center"  *ngIf="authService.hasRole('ROLE_CLIENT') && item.status !== null"> {{item.status}}</h5>
+                    <select    *ngIf="authService.hasRole('ROLE_REPORTER') && facture.client !== null" value="{{item.status}}" class="form-control" style="width: 200px;margin-left: 40%;" (change)="updateStatus(item.id,$event)">
+                        <option  *ngFor="let statu of status" >
+                            {{statu}}
+                        </option>
+                    </select>
+                    <h5 style="float: right;color: darkred;margin-top: -3%;margin-right: 2%;">{{calculatePrice(item).toFixed(2)}}€
                     </h5>
                 </div>
                 <div class="card body" style="border-color: transparent !important;margin-bottom: 3%;">

@@ -22,6 +22,7 @@ export class ProductsComponent implements OnInit {
   products1: Product[] = [];
   paginador: any;
   categories: string[] = [];
+  pass: boolean;
   constructor(private companyService: CompanyService, private router: Router, private activatedRoute: ActivatedRoute,
               private productService: ProductService, private authService: AuthService) { }
 
@@ -29,6 +30,7 @@ export class ProductsComponent implements OnInit {
     this.cargarProducts1();
     this.cargarProducts();
     this.cargarCompany();
+    this.pass = false;
 
   }
   cargarProducts1(): void {
@@ -68,6 +70,7 @@ export class ProductsComponent implements OnInit {
 
   Search() {
     if (this.category !== '' && this.name !== '' && this.category !== undefined) {
+      this.pass = true;
       this.products = [];
       this.products = this.products1.filter(res1 => {
         if (res1.category.toLocaleUpperCase() === this.category.toLocaleUpperCase()
@@ -77,6 +80,7 @@ export class ProductsComponent implements OnInit {
       });
     }
     if (this.name !== '' && (this.category === '' || this.category === undefined)) {
+      this.pass = true;
       this.products = this.products1.filter(res => {
         return res.name.toLocaleLowerCase().match(this.name.toLocaleLowerCase());
       });
@@ -102,6 +106,7 @@ export class ProductsComponent implements OnInit {
   SearchCategory(category1) {
     this.category = category1;
     if (this.category !== '') {
+      this.pass = true;
       this.products = this.products1.filter(res => {
         return res.category.toLocaleLowerCase().match(this.category.toLocaleLowerCase());
       });
@@ -114,6 +119,7 @@ export class ProductsComponent implements OnInit {
   cleanFilter() {
       this.name = '';
       this.category = '';
+      this.pass = false;
       this.cargarProducts();
     }
 

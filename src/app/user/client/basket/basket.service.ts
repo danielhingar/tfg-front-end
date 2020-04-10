@@ -92,4 +92,15 @@ export class BasketService {
       })
     );
   }
+
+  updateStatusItem(itemBasket: ItemBasket): Observable<ItemBasket> {
+    return this.http.put<ItemBasket>(`${this.urlEndPoint1}/updateStatus/${itemBasket.id}`, itemBasket,
+     {headers: this.agregarAuthorizationHeader()})
+    .pipe(
+      catchError( e => {
+        this.isNoAutorizado(e);
+        return throwError(e);
+      })
+    );
+  }
 }

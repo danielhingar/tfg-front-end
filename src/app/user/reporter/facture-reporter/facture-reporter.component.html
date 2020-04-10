@@ -22,7 +22,6 @@
                 <th scope="col">#</th>
                 <th scope="col">Fecha de compra</th>
                 <th scope="col">Cliente</th>
-                <th scope="col">Estado</th>
                 <th scope="col">Nº productos</th> 
                 <th scope="col">Importe</th>
                 <th>Ver</th>
@@ -33,13 +32,6 @@
                 <td>{{facture.id}}</td>
                 <td>{{facture.createDate}}</td>
                 <td>{{facture.client.username}}</td>
-                <td>
-                <select value="{{facture.status}}" class="form-control" style="width: 200px;" (change)="updateStatus(facture.id,$event)">
-                    <option  *ngFor="let statu of status" >
-                        {{statu}}
-                    </option>
-                </select>
-                </td>
                 <td>{{count(facture)}}</td>
                 <td>{{caculateTotal(facture).toFixed(2)}}€</td>
                 <td>

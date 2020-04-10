@@ -9,7 +9,7 @@
     </div>
 
     <br>
-    <div *ngIf="claims?.length == 0" class="alert alert-info" style="width: 40%;">
+    <div *ngIf="claims?.length == 0 && pass=== true" class="alert alert-info" style="width: 40%;">
         No hay quejas con ese filtro
     </div>
     <table class="table table-striped" *ngIf="claims?.length > 0" >

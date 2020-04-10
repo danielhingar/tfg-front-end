@@ -19,10 +19,12 @@ export class FacturesAllCompanyComponent implements OnInit {
   paginador: any;
   state: string;
   companies: string[] = [];
+  pass: boolean;
   constructor(private factureService: FactureService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.loadFactures();
+    this.pass = false;
   }
 
   loadFactures(): void {
@@ -83,6 +85,7 @@ export class FacturesAllCompanyComponent implements OnInit {
     this.opcionSeleccionada1 = '';
     this.state = state1;
     if (this.state !== '') {
+      this.pass = true;
       this.factures = this.factures1.filter(res => {
         return res.status.toLocaleLowerCase().match(this.state.toLocaleLowerCase());
       });
@@ -113,6 +116,7 @@ export class FacturesAllCompanyComponent implements OnInit {
   searchCompany( event: any): void {
     const company: string = event.target.value as string;
     if (this.state !== '' && company !== '' && this.state !== undefined) {
+      this.pass = true;
       this.factures = [];
       this.factures = this.factures1.filter(res1 => {
         if (res1.status.toLocaleUpperCase() === this.state.toLocaleUpperCase()
@@ -122,6 +126,7 @@ export class FacturesAllCompanyComponent implements OnInit {
       });
     }
     if (company !== '' && (this.state  === '' || this.state === undefined)) {
+      this.pass = true;
       this.factures = this.factures1.filter(res => {
         return res.company.businessName.toLocaleLowerCase().match(company.toLocaleLowerCase());
       });
@@ -132,6 +137,7 @@ export class FacturesAllCompanyComponent implements OnInit {
 
     cleanFilter() {
       this.state = '';
+      this.pass = false;
       this.loadFactures();
     }
 }

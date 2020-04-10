@@ -4,6 +4,8 @@ import { FactureService } from '../facture.service';
 import { Facture } from '../facture';
 import { ItemBasket } from '../../basket/itemBasket';
 import { AuthService } from '../../../../login/auth.service';
+import swal from 'sweetalert2';
+import { BasketService } from '../../basket/basket.service';
 
 @Component({
   selector: 'app-facture-details',
@@ -13,8 +15,9 @@ import { AuthService } from '../../../../login/auth.service';
 export class FactureDetailsComponent implements OnInit {
 
   facture: Facture = new Facture();
-
-  constructor(private activatedRouter: ActivatedRoute, private factureService: FactureService, public authService: AuthService) { }
+  status: string[] = ['PAGADO', 'EN PROCESO', 'ENVÍADO A SHOWCASE', 'DE CAMINO', 'RECIBIDO'];
+  constructor(private activatedRouter: ActivatedRoute, private factureService: FactureService, public authService: AuthService,
+              private router: Router, private basketService: BasketService) { }
 
   ngOnInit() {
     this.loadFacture();
@@ -24,21 +27,44 @@ export class FactureDetailsComponent implements OnInit {
     this.activatedRouter.params.subscribe(params => {
       const id = params.id;
       if (id) {
-        this.factureService.getFacture(id).subscribe( (facture) => this.facture = facture);
+        this.factureService.getFacture(id).subscribe((facture) => this.facture = facture);
       }
     });
   }
 
-public calculatePrice(itemBasket: ItemBasket): number {
+  public calculatePrice(itemBasket: ItemBasket): number {
     return (itemBasket.quantity * itemBasket.product.price);
-}
-
-public caculateTotal(): number {
-  let total = 0.00;
-  for (const item of this.facture.itemBaskets) {
-     total = total + this.calculatePrice(item);
   }
-  return total;
+
+  public caculateTotal(): number {
+    let total = 0.00;
+    for (const item of this.facture.itemBaskets) {
+      total = total + this.calculatePrice(item);
+    }
+    return total;
+  }
+
+  updateStatus(id1: number, event: any): void {
+    const status: string = event.target.value as string;
+
+    this.facture.itemBaskets.map((itemBasket: ItemBasket) => {
+      if (id1 === itemBasket.id) {
+      itemBasket.status = status;
+      this.basketService.updateStatusItem(itemBasket).subscribe( response => {
+        this.router.navigate([`/detailsFacture/`, this.facture.id]);
+        swal.fire({
+          position: 'center',
+          icon: 'info',
+          title: 'Intermediario',
+          text: `El estado se ha modificado correctamente`,
+          showConfirmButton: false,
+          width: 350,
+          timer: 2200,
+        });
+      });
+      }
+      return this.facture.itemBaskets;
+    });
+  }
 }
 
-}

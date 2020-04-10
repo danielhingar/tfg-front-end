@@ -18,11 +18,12 @@ export class FactureReporterComponent implements OnInit {
   factures1: Facture[] = [];
   paginador: any;
   clients: string[] = [];
-
+  pass: boolean;
   constructor(private factureService: FactureService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.loadFactures();
+    this.pass = false;
   }
 
   loadFactures(): void {
@@ -97,6 +98,7 @@ export class FactureReporterComponent implements OnInit {
     searchClient( event: any): void {
       const client: string = event.target.value as string;
       if (client !== '') {
+        this.pass = true;
         this.factures = this.factures1.filter(res => {
           return res.client.username.toLocaleLowerCase().match(client.toLocaleLowerCase());
         });
@@ -107,6 +109,7 @@ export class FactureReporterComponent implements OnInit {
 
       cleanFilter() {
         this.loadFactures();
+        this.pass = false;
       }
 }
 

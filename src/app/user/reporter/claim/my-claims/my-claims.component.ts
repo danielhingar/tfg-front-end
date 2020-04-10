@@ -16,11 +16,13 @@ export class MyClaimsComponent implements OnInit {
   claims1: Claim[] = [];
   paginador: any;
   state: string;
+  pass: boolean;
   opcionSeleccionada1 = '';
   constructor(private claimService: ClaimService, private authService: AuthService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.loadClaims();
+    this.pass = false;
   }
 
   loadClaims(): void {
@@ -44,6 +46,7 @@ export class MyClaimsComponent implements OnInit {
     this.opcionSeleccionada1 = '';
     this.state = state1;
     if (this.state !== '') {
+      this.pass = true;
       this.claims = this.claims1.filter(res => {
         return res.status.toLocaleLowerCase().match(this.state.toLocaleLowerCase());
       });
@@ -63,6 +66,7 @@ export class MyClaimsComponent implements OnInit {
 
     cleanFilter() {
       this.loadClaims();
+      this.pass = false;
     }
 
 }
