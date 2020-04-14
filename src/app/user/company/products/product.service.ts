@@ -49,8 +49,22 @@ export class ProductService {
   }
 
 
-  getProductsCompany(page: number, username): Observable<any> {
+  getProductsClient(page: number, username): Observable<any> {
     return this.http.get(this.urlEndPoint + '/list' + '/page/' + page + '/' + username, {headers: this.agregarAuthorizationHeader()}).pipe(
+      map((response: any) => {
+        (response.content as Product[]).map(product => {
+          product.name = product.name.toUpperCase();
+          return product;
+        });
+        return response;
+      }
+      )
+    );
+
+  }
+
+  getProductsCompany(page: number, username): Observable<any> {
+    return this.http.get(this.urlEndPoint1 + '/list' + '/page/' + page + '/' + username, {headers: this.agregarAuthorizationHeader()}).pipe(
       map((response: any) => {
         (response.content as Product[]).map(product => {
           product.name = product.name.toUpperCase();

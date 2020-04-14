@@ -24,6 +24,7 @@
                     <br>
                     <span class="price" *ngIf="product?.offert">Antes: {{product.price}}€</span>
                     <h4 class="offert" *ngIf="product?.offert">Ahora:{{rebaja(product).toFixed(2)}}€</h4>
+                    <h4 class="offert" *ngIf="product?.status === 'SINSTOCK'">SIN STOCK</h4>
                 </div>
                 
             </div>

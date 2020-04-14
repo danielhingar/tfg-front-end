@@ -5,6 +5,8 @@ import swal from 'sweetalert2';
 import { AuthService } from '../../../../login/auth.service';
 import { Comentario } from '../comentario';
 import { formatDate } from '@angular/common';
+import { Product } from '../../../company/products/product';
+import { ProductService } from '../../../company/products/product.service';
 
 @Component({
   selector: 'app-comment',
@@ -16,13 +18,14 @@ export class CommentComponent implements OnInit {
   public comentario: Comentario = new Comentario();
   comments: Comentario[] = [];
   paginador: any;
-
+  public product: Product = new Product();
   constructor(private commentService: CommentService, private router: Router, private activatedRouter: ActivatedRoute,
-              public authService: AuthService) {
+              public authService: AuthService, private productService: ProductService) {
               }
 
   ngOnInit() {
     this.loadComments();
+    this.loadProduct();
   }
 
   public create(): void {
@@ -111,6 +114,17 @@ export class CommentComponent implements OnInit {
   public arrayStartsEmpty(comment: Comentario): Array<number> {
     const starts1 = new Array(5 - comment.valoration);
     return starts1;
+  }
+
+  loadProduct(): void {
+    this.activatedRouter.params.subscribe(params => {
+      const id = params.id;
+      if (id) {
+        this.productService.getProduct(id).subscribe( (product) => this.product = product);
+
+      }
+
+    });
   }
 
 }

@@ -15,4 +15,5 @@ memory: string;
 brand: string;
 offert: number;
 createDate: string;
+status: string;
 }

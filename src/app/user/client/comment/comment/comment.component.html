@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="product.status != 'ELIMINADO'">
   <h3>Comentarios</h3>
   <br />
   <div *ngIf="authService.hasRole('ROLE_CLIENT')">

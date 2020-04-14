@@ -1,4 +1,6 @@
-<div class="container">
+<h2 *ngIf="product.status === 'ELIMINADO'" style="margin-top: 20%;color: darkred;">El producto ya no existe </h2>
+<div class="container" *ngIf="product.status != 'ELIMINADO'">
+   
     <div class="row">
         <div class="col-6">
             <img *ngIf="!product?.photo" src="https://i1.wp.com/www.lagraderia.com/wp-content/uploads/2018/12/no-imagen.jpg?fit=300%2C300" class="card-img"> 
@@ -16,27 +18,28 @@
         <h5>Descripción:</h5>
         <p style="margin-left: 2%; font-size: 18px;">{{product.description}}</p>
         <br>
-        <h6 *ngIf="product?.size && authSevice.hasRole('ROLE_CLIENT')">Tallas:&nbsp;</h6>
-        <select [(ngModel)]="opcionSeleccionada" *ngIf="product?.size">
+        <h6 *ngIf="product?.size && product.status != 'SINSTOCK' && authSevice.hasRole('ROLE_CLIENT')">Tallas:&nbsp;</h6>
+        <select [(ngModel)]="opcionSeleccionada" *ngIf="product?.size && product.status != 'SINSTOCK'">
             
             <option  *ngFor="let size of sizes(product)">
                 {{size}}
             </option>
         </select>
-        <h6 *ngIf="product?.memory && authSevice.hasRole('ROLE_CLIENT')">*Capacidad memorias:&nbsp;</h6>
-        <select [(ngModel)]="opcionSeleccionada1" *ngIf="product?.memory" required>
+        <h6 *ngIf="product?.memory && product.status != 'SINSTOCK' && authSevice.hasRole('ROLE_CLIENT')">*Capacidad memorias:&nbsp;</h6>
+        <select [(ngModel)]="opcionSeleccionada1" *ngIf="product?.memory && product.status != 'SINSTOCK'" required>
             
             <option  *ngFor="let memory of memories(product)">
                 {{memory}}
             </option>
         </select>
-        <div *ngIf="product?.memory && authSevice.hasRole('ROLE_CLIENT')">
+        <h4 style="color: darkred;" *ngIf="product.status === 'SINSTOCK' && authSevice.hasRole('ROLE_CLIENT')">SIN STOCK</h4>
+        <div *ngIf="product?.memory && product.status != 'SINSTOCK' && authSevice.hasRole('ROLE_CLIENT')">
         <img  class="imagen2" style="text-align: left; margin-left: 63%;margin-top: -11%;" src="assets\img\iconfinder_Basket_2205960.png" height="25" width="25" ><button type="button" (click)='update()' name="basket" class="btn btn-warning btn-sm" style="margin-left: 70%;margin-top: -20%;border-color: black;">Añadir a la cesta</button>
         </div>
-        <div *ngIf="product?.size && authSevice.hasRole('ROLE_CLIENT')">
+        <div *ngIf="product?.size && product.status != 'SINSTOCK' && authSevice.hasRole('ROLE_CLIENT')">
         <img *ngIf="product?.size" class="imagen1" style="text-align: left; margin-left: 53%;margin-top: -9%;" src="assets\img\iconfinder_Basket_2205960.png" height="25" width="25" ><button type="button"  (click)='update()'  name="basket" class="btn btn-warning btn-sm" style="margin-left: 60%;margin-top: -18%;border-color: black;">Añadir a la cesta</button>
         </div>
-        <div  *ngIf="!product?.memory && !product?.size && authSevice.hasRole('ROLE_CLIENT')">
+        <div  *ngIf="!product?.memory && product.status != 'SINSTOCK' && !product?.size && authSevice.hasRole('ROLE_CLIENT')">
         <img class="imagen" style="text-align: left;" src="assets\img\iconfinder_Basket_2205960.png" height="25" width="25" > <button type="button" (click)='update()' class="btn btn-danger btn-sm" >Añadir a la cesta</button>
         
     </div>
@@ -46,7 +49,7 @@
     </div>
     </div>
     <br>
-    <div class="container1">
+    <div class="container1" *ngIf="product.status != 'ELIMINADO'">
     <div class="row">
         <div class="col-12">
             <h3>Detalles del producto</h3>

@@ -49,7 +49,7 @@ export class ProductsComponent implements OnInit {
       if (!page) {
         page = 0;
       }
-      this.productService.getProductsCompany(page, username).subscribe(
+      this.productService.getProductsClient(page, username).subscribe(
         products => {
           this.products = products.content as Product[];
           this.paginador = products;

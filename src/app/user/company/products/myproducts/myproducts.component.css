@@ -8,6 +8,12 @@
 .alert{
     margin-top: 3%;
 }
+button {
+    font-weight: 500;
+    font-size: 19px;
+    color: white;
+    background-color: #ff6800;
+  }
 
 @media screen and (max-width:414px){
     .container{
