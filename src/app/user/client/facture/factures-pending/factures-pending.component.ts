@@ -47,7 +47,7 @@ public caculateTotal(): number {
 
 update(): void {
   this.factureService.updateFacture(this.facture, this.authService.usuario.username).subscribe( facture => {
-    this.router.navigate(['/home/page/0']);
+    this.router.navigate(['/myOrders/page/0']);
     swal.fire({
       position: 'center',
       icon: 'info',

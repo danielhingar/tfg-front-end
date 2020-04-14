@@ -65,18 +65,9 @@ export class FacturesAllCompanyComponent implements OnInit {
   }
 
   payCompany(facture: Facture): void {
-    this.factureService.payCompany(facture.id).subscribe(
+    this.factureService.payCompany(facture).subscribe(
       response => {
-        this.router.navigate(['/home/page/0']);
-        swal.fire({
-          position: 'center',
-          icon: 'info',
-          title: 'Intermediario',
-          text: `Factura pagada a la compañía`,
-          showConfirmButton: false,
-          width: 350,
-          timer: 1800,
-        });
+        facture.status = 'PAGADA';
       }
     );
   }

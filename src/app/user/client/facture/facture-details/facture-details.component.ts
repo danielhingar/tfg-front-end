@@ -55,8 +55,8 @@ export class FactureDetailsComponent implements OnInit {
         swal.fire({
           position: 'center',
           icon: 'info',
-          title: 'Intermediario',
-          text: `El estado se ha modificado correctamente`,
+          title: 'Actualiación',
+          text: `El estado de producto se ha modificado correctamente`,
           showConfirmButton: false,
           width: 350,
           timer: 2200,

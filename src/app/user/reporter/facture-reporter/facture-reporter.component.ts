@@ -74,7 +74,7 @@ export class FactureReporterComponent implements OnInit {
         swal.fire({
           position: 'center',
           icon: 'info',
-          title: 'Intermediario',
+          title: 'Actualización',
           text: `El estado se ha modificado correctamente`,
           showConfirmButton: false,
           width: 350,

@@ -146,21 +146,22 @@
         <br>
         <div class="container1">
             <div class="card" *ngFor="let item of facture.itemBaskets" style="margin-bottom: 1%;">
+                <div class="card body" style="border-color: transparent !important;margin-bottom: 3%;">
                 <div class="card-title"
                     style="border-color: transparent !important;background-color: #f6f6f6;height: 60px;">
                     <h5 style="float: left;margin-left: 3%;"> {{item.product.name}}</h5>
-                    <h5 style="text-align: center"  *ngIf="authService.hasRole('ROLE_CLIENT') && item.status !== null"> {{item.status}}</h5>
+                    <h5 style="text-align: center; text-decoration: underline;"  *ngIf="authService.hasRole('ROLE_CLIENT') && item.status !== null"> Estado: {{item.status}}</h5>
                     <select    *ngIf="authService.hasRole('ROLE_REPORTER') && facture.client !== null" value="{{item.status}}" class="form-control" style="width: 200px;margin-left: 40%;" (change)="updateStatus(item.id,$event)">
                         <option  *ngFor="let statu of status" >
                             {{statu}}
                         </option>
                     </select>
-                    <h5 style="float: right;color: darkred;margin-top: -3%;margin-right: 2%;">{{calculatePrice(item).toFixed(2)}}€
+                    <h5 style="float: right;color: darkred;margin-right: 2%;">{{calculatePrice(item).toFixed(2)}}€
                     </h5>
                 </div>
-                <div class="card body" style="border-color: transparent !important;margin-bottom: 3%;">
+                
                     <div class="row">
-                        <div class="col-2" style="margin-left: 3%;">
+                        <div class="col-md-1" style="margin-left: 3%;">
                             <img *ngIf="item.product?.photo" src="http://localhost:8080/company/product/uploads/img/{{item.product.photo}}" alt="{{item.product.photo}}"
                                 class="img-thumbnail rounded" style="width: 100px;height: 100px;">
                             <img *ngIf="!item.product?.photo"
@@ -168,7 +169,7 @@
                                 alt="Sin foto" class="img-thumbnail rounded" style="width: 100px;height: 100px;">
                         </div>
                         <div class="col-md-3">
-                            <p style="margin-top: 1%;margin-left: -20%;">{{item.product.description}}</p>
+                            <p style="margin-top: 1%;">{{item.product.description}}</p>
                         </div>
                         <div class="col-6">
                             <p style="font-weight: 500;color:darkslategrey;"> Precio Unidad:
@@ -183,11 +184,13 @@
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
 
-    <div class="animated fadeInDown container2" style="width: 900px;margin-left: 10%;" *ngIf="facture != null">
+    <div class="animated fadeInDown container2" style="width: 90%;margin-left: 5%;" *ngIf="facture != null">
         <div class="card">
+            <div class="card-body">
             <div class="card-header">Resumen pedido</div>
             <br>
             <div class="row">
@@ -212,11 +215,11 @@
                        {{(facture.shipping.price).toFixed(2)}}€
                     </p>
                 </div>
-
+            
                 
             </div>
             <hr>
-            <div class="row">
+            <div class="row" >
                 <div class="col-md-10">
                     <h3 style="font-weight: 600;">Total</h3>
                 </div>
@@ -227,6 +230,7 @@
                     <h3 style="color: darkred;">{{(caculateTotal()).toFixed(2)}}€</h3> 
                  </div>
             </div>
+        </div>
         </div>
         
     </div>
