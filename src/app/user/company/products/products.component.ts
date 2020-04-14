@@ -23,6 +23,7 @@ export class ProductsComponent implements OnInit {
   paginador: any;
   categories: string[] = [];
   pass: boolean;
+  loading = true;
   constructor(private companyService: CompanyService, private router: Router, private activatedRoute: ActivatedRoute,
               private productService: ProductService, private authService: AuthService) { }
 
@@ -53,6 +54,9 @@ export class ProductsComponent implements OnInit {
         products => {
           this.products = products.content as Product[];
           this.paginador = products;
+          setTimeout(() => {
+            this.loading = false;
+          }, 500);
         }
       );
     }

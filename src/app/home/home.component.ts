@@ -9,7 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  loading = true;
   companies: Company[];
   businessName: string;
   paginador: any;
@@ -27,6 +27,9 @@ export class HomeComponent implements OnInit {
         companies => {
           this.companies = companies.content as Company[];
           this.paginador = companies;
+          setTimeout(() => {
+            this.loading = false;
+          }, 500);
         }
       );
     }

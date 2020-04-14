@@ -1,11 +1,11 @@
 
 <div class="container">
-    <p class="name">{{company.businessName}}</p>  <a [routerLink]="['/about', company.id]" role="button" style="background-color: darkorange;color: black; border-radius: 4px;width: 80px;">¿Quiénes somos?</a>
+    <p class="animated zoomIn name">{{company.businessName}}</p>  <a [routerLink]="['/about', company.id]" role="button" style="background-color: darkorange;color: black; border-radius: 4px;width: 80px;">¿Quiénes somos?</a>
     <br>
-    <input  class="form-control" [(ngModel)]="name" type="text" placeholder="Buscar..." aria-label="Buscar" #myInput (input)="Search()" style="width: 30%;float: right;margin-top:-3%;">
+    <input  class="animated zoomIn form-control" [(ngModel)]="name" type="text" placeholder="Buscar..." aria-label="Buscar" #myInput (input)="Search()" style="width: 30%;float: right;margin-top:-3%;">
     <br>
-    <button class="btn btn-outline-dark" *ngFor="let category1 of loadCategories()" (click)='SearchCategory(category1)' [disabled]="igual(category1)">{{category1}}</button>
-    <button class="btn btn-outline-info"  (click)='cleanFilter()'>Borrar filtros</button>
+    <button class="animated zoomIn btn btn-outline-dark" *ngFor="let category1 of loadCategories()" (click)='SearchCategory(category1)' [disabled]="igual(category1)">{{category1}}</button>
+    <button class="animated zoomIn btn btn-outline-info"  (click)='cleanFilter()'>Borrar filtros</button>
     <div *ngIf="products1?.length == 0" class="alert alert-info" style="width: 70%;">
         Lo sentimos, no hay productos todavía de esta empresa
      </div>
@@ -13,8 +13,9 @@
         Lo sentimos, no hay productos que cumplan esos requisitos
      </div>
     <div class="row" *ngIf="products?.length > 0">
+        <mat-spinner class="spinner" diameter="50" strokeWidth="3" *ngIf="loading===true"></mat-spinner>
         <div class="col-sm" *ngFor="let product of products">
-            <div class="animated zoomIn card">
+            <div class="animated zoomIn card" *ngIf="loading===false">
                 
                 <img *ngIf="!product?.photo" src="https://i1.wp.com/www.lagraderia.com/wp-content/uploads/2018/12/no-imagen.jpg?fit=300%2C300" class="card-img"> 
                 <img *ngIf="product?.photo" src="http://localhost:8080/company/product/uploads/img/{{product.photo}}" class="card-img" ><h5 class="offert" *ngIf="product?.offert">-{{product.offert}}%</h5>

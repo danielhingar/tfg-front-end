@@ -79,6 +79,17 @@ p{
     font-family: 'Lora', serif;
 }
 
+.spinner{
+    position: relative;
+    margin-left: 50%;
+    margin-bottom: 60%;
+    margin-top: 20%;
+}
+
+:host ::ng-deep .spinner circle{   
+    stroke: lightseagreen;
+}
+
 @media screen and (max-width:414px){
     input{
       margin-top: 25%;

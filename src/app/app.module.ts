@@ -60,7 +60,9 @@ import { StatisticsComponent } from './user/admin/statistics/statisticsProductCo
 import {StatisticsProductClientComponent} from './user/admin/statistics/statistics-product-client/statistics-product-client.component';
 // tslint:disable-next-line: max-line-length
 import { StatisticsProductSoldCompanyComponent } from './user/admin/statistics/statistics-product-sold-company/statistics-product-sold-company.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatProgressSpinnerModule} from '@angular/material';
+import {MatIconModule} from '@angular/material/icon';
 
 
 
@@ -165,7 +167,10 @@ const routes: Routes = [
     FormsModule,
     NgxQRCodeModule,
     ChartModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    BrowserAnimationsModule,
+    MatProgressSpinnerModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

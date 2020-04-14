@@ -10,22 +10,22 @@
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" *ngIf="authService.isAuthenticated()">
         <a class="btn" href="/home/page/0">
-        <img style="text-align: left;" src="assets\img\iconfinder_Streamline-18_185038.png" height="25" width="25">
+        <mat-icon href="/home/page/0">home</mat-icon>
         </a>
       </li>
       <li class="nav-item" *ngIf="authService.hasRole('ROLE_ADMIN')">
-        <a class="nav-link"  href="/configuration">Configuración</a>
+        <a class="nav-link"  href="/configuration"><mat-icon>settings</mat-icon></a>
       </li>
       <li class="nav-item" *ngIf="authService.hasRole('ROLE_ADMIN')">
-        <a class="nav-link"  href="/shippings">Métodos de envíos</a>
+        <a class="nav-link"  href="/shippings">  <mat-icon> local_shipping</mat-icon></a>
       </li>
       <li class="nav-item" *ngIf="authService.hasRole('ROLE_ADMIN')">
-        <a class="nav-link"  href="/statistics">Estadística</a>
+        <a class="nav-link" aria-label="Estadistics" href="/statistics"> <mat-icon>equalizer</mat-icon> </a>
       </li>
       <li *ngIf="authService.hasRole('ROLE_ADMIN')" class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false">
-          Usuarios
+          <mat-icon>supervised_user_circle</mat-icon>
         </a>
         <div class="dropdown-menu bg-light" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="/listUsers">Listado</a>
@@ -63,8 +63,7 @@
     <ul class="navbar-nav navbar-right">
       <li class="nav-item" *ngIf="authService.hasRole('ROLE_CLIENT')">
         <a class="btn" href="/myBasket">
-        <img style="text-align: left;" src="assets\img\iconfinder_bag_1540167.png" height="25" width="25">
-        &nbsp;
+          <mat-icon>shopping_cart</mat-icon>
         </a>
        
       </li>

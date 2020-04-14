@@ -13,6 +13,17 @@
     justify-content: center;
 }
 
+.spinner{
+    position: relative;
+    margin-left: 50%;
+    margin-bottom: 60%;
+    margin-top: 10%;
+}
+
+:host ::ng-deep .spinner circle{   
+    stroke: lightseagreen;
+}
+
 .card:hover{
     box-shadow: 0 8px 16px -8px rgba(0, 0, 0, 0.4);
 }

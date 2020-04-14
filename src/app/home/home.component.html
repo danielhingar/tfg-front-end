@@ -4,9 +4,9 @@
     <input class="form-control" [(ngModel)]="businessName" type="text" placeholder="Buscar..." aria-label="Buscar" #myInput (input)="Search()">
      </div>
     <div class="row">
-       
+        <mat-spinner class="spinner" diameter="50" strokeWidth="3" *ngIf="loading===true"></mat-spinner>
         <div class="col-md-6" *ngFor="let company of companies">
-            <div class="animated zoomIn card">
+            <div class="animated zoomIn card"  *ngIf="loading===false">
                 
                 <img *ngIf="!company?.image" src="https://images.unsplash.com/photo-1551814360-3c38192c5688?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" class="card-img"> 
                 <img *ngIf="company?.image" src="http://localhost:8080/company/uploads/img/{{company.image}}" class="card-img">
