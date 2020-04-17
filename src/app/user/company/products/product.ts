@@ -16,4 +16,5 @@ brand: string;
 offert: number;
 createDate: string;
 status: string;
+stock: string;
 }

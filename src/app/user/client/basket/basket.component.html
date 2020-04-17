@@ -30,7 +30,7 @@
                             
                             <td>{{item.product.price.toFixed(2)}}€</td>
                             <td>
-                                <input type="number" min="1" max="10" autocomplete="off" value="{{item.quantity}}"
+                                <input type="number" min="1" max="{{item.product.stock}}" autocomplete="off" value="{{item.quantity}}"
                                     class="form-control" (change)="updateQuantity(item.id,item.product.id,$event)">
                             </td>
                             <td style="font-weight: 700;color: darkred;">{{calculatePrice(item).toFixed(2)}}€</td>

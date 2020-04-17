@@ -61,6 +61,7 @@ export class ProductDetailsComponent implements OnInit {
     return product.memory.split(',');
    }
 
+
   loadBasket(): void {
     const client1 =  this.authSevice.usuario.username;
 

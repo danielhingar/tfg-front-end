@@ -83,7 +83,18 @@
                     <input type="text" class="form-control" [(ngModel)]="product.size" name="size" placeholder="S,M,L... ó  37,38,39..." >
                 </div>
             </div>
-
+            
+            <div class="form-group row">
+                <label for="capacity" class="col-form-label">Stock:</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" [(ngModel)]="product.stock" name="stock" required placeholder="1,2,3" #stock="ngModel">
+                    <div class="alert" *ngIf="stock.invalid && (stock.dirty || stock.touched)">
+                        <div *ngIf="stock.errors.required">
+                            Este campo es obligatorio
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="form-group row">
                 <label for="height" class="col-form-label">Alto:</label>
