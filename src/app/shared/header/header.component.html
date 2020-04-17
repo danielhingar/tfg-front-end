@@ -19,8 +19,8 @@
       <li class="nav-item" *ngIf="authService.hasRole('ROLE_ADMIN')">
         <a class="nav-link"  href="/shippings">  <mat-icon> local_shipping</mat-icon></a>
       </li>
-      <li class="nav-item" *ngIf="authService.hasRole('ROLE_ADMIN')">
-        <a class="nav-link" aria-label="Estadistics" href="/statistics"> <mat-icon>equalizer</mat-icon> </a>
+      <li class="nav-item" *ngIf="authService.hasRole('ROLE_ADMIN')" title="nav2">
+        <a class="nav-link"  href="/statistics"> <mat-icon>equalizer</mat-icon> </a>
       </li>
       <li *ngIf="authService.hasRole('ROLE_ADMIN')" class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -35,30 +35,8 @@
           <a class="dropdown-item" href="/registerCompany">Registro compañías</a>
         </div>
       </li>
-      <li class="nav-item" *ngIf="authService.hasRole('ROLE_COMPANY')">
-        <a class="nav-link"  href="/myProducts/page/0">Mis productos</a>
-      </li>
-      <li class="nav-item" *ngIf="authService.hasRole('ROLE_COMPANY')">
-        <a class="nav-link"  href="/createProduct">Nuevo producto</a>
-      </li>
-      <li class="nav-item" *ngIf="authService.hasRole('ROLE_COMPANY')">
-        <a class="nav-link"  href="/Orders/page/0">Mis facturas</a>
-      </li>
-      <li class="nav-item" *ngIf="authService.hasRole('ROLE_COMPANY')">
-        <a class="nav-link"  href="/about">Acerca de mi</a>
-      </li>
-      <li class="nav-item" *ngIf="authService.hasRole('ROLE_REPORTER')">
-        <a class="nav-link"  href="/myClaims/page/0">&nbsp;Mis reclamaciones &nbsp;</a> 
-      </li>
-      <li class="nav-item" *ngIf="authService.hasRole('ROLE_REPORTER')">
-        <a class="nav-link"  href="/claims/page/0">Reclamaciones</a>
-      </li>
-      <li class="nav-item" *ngIf="authService.hasRole('ROLE_REPORTER')">
-        <a class="nav-link" [routerLink]="['/factures/page/0']">Facturas clientes</a>
-      </li>
-      <li class="nav-item" *ngIf="authService.hasRole('ROLE_REPORTER')">
-        <a class="nav-link"  href="/facturesCompany/page/0">Facturas companías</a>
-      </li>
+     
+
     </ul>
     <ul class="navbar-nav navbar-right">
       <li class="nav-item" *ngIf="authService.hasRole('ROLE_CLIENT')">

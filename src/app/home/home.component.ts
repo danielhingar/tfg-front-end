@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Company } from '../user/company/company';
 import { CompanyService } from '../user/company/company.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from '../login/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,7 @@ export class HomeComponent implements OnInit {
   paginador: any;
   companies1: Company[];
   constructor(private companyService: CompanyService, private router: Router, private activatedRoute: ActivatedRoute,
-  ) { }
+              public authService: AuthService ) { }
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe( params => {

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="authService.hasRole('ROLE_ADMIN') || authService.hasRole('ROLE_CLIENT')">
    
     <div class="md-form active-pink active-pink-2 mb-3 mt-0" >
     <input class="form-control" [(ngModel)]="businessName" type="text" placeholder="Buscar..." aria-label="Buscar" #myInput (input)="Search()">
@@ -19,4 +19,114 @@
     <br>
     <app-paginator *ngIf="paginador"  [paginador] ="paginador"></app-paginator>
 
+</div>
+
+<div class="container1" *ngIf="authService.hasRole('ROLE_COMPANY')">
+    <div class="row">
+    <div class="col">
+    <div class="card1 text-center" style="background-color: white;border-radius: 5px;margin-left: 5%;">
+        
+        <div class="card-body">
+        <mat-icon style="width: 50%;"> list_alt</mat-icon>
+        </div>
+        <div class="card-text">  
+        <a href="/myProducts/page/0" style="color: black;margin-top: -10%;" class="h4"> MIS PRODUCTOS</a>
+        </div>
+         
+        
+      </div>
+    </div>
+    <div class="col">
+      <div class="card1 text-center" style="background-color: white;border-radius: 5px;margin-left: 10%;">
+        
+        <div class="card-body">
+        <mat-icon style="width: 50%;"> receipt</mat-icon>
+      
+        </div>
+        <div class="card-text">  
+        <a href="/Orders/page/0" style="color: black;" class="h4"> MIS FACTURAS</a>
+        </div>
+         
+        
+      </div>
+    </div>
+    <div class="col">
+      <div class="card1 text-center" style="background-color: white;border-radius: 5px;margin-left: 10%;">
+        
+        <div class="card-body">
+        <mat-icon style="width: 50%;"> info</mat-icon>
+      
+        </div>
+        <div class="card-text">  
+        <a href="/about" style="color: black;margin-top: -10%;" class="h4"> ACERCA DE MI</a>
+        </div>
+         
+        
+      </div>
+    </div>
+    </div>
+    <a class="nav-link" href="/createProduct"><mat-icon class="iconAdd" style="padding: 0;">add_circle</mat-icon></a>
+</div>
+
+
+<div class="container1" *ngIf="authService.hasRole('ROLE_REPORTER')">
+    <div class="row">
+    <div class="col">
+    <div class="card1 text-center" style="background-color: white;border-radius: 5px;">
+        
+        <div class="card-body">
+        <mat-icon style="width: 50%;"> report_problem</mat-icon>
+        </div>
+        <div class="card-text">  
+        <a href="/myClaims/page/0" style="color: black;margin-top: -10%;" class="h4"> MIS RECLAMACIONES</a>
+        </div>
+         
+        
+      </div>
+    </div>
+    <div class="col">
+      <div class="card1 text-center" style="background-color: white;border-radius: 5px;margin-left: 7%;">
+        
+        <div class="card-body">
+        <mat-icon style="width: 50%;"> report</mat-icon>
+    
+      
+        </div>
+        <div class="card-text">  
+        <a href="/claims/page/0" style="color: black;" class="h4">RECLAMACIONES</a>
+        </div>
+         
+        
+      </div>
+    </div>
+    <div class="col">
+      <div class="card1 text-center" style="background-color: white;border-radius: 5px;margin-left: 7%;">
+        
+        <div class="card-body">
+        <mat-icon style="width: 50%;"> people_outline</mat-icon>
+      
+        </div>
+        <div class="card-text">  
+        <a href="/factures/page/0" style="color: black;margin-top: -10%;" class="h4">FACTURAS CLIENTES</a>
+        </div>
+         
+        
+      </div>
+    </div>
+    <div class="col">
+        <div class="card1 text-center" style="background-color: white;border-radius: 5px;margin-left: 7%;">
+          
+          <div class="card-body">
+          <mat-icon style="width: 50%;"> business</mat-icon>
+        
+          </div>
+          <div class="card-text">  
+          <a href="/facturesCompany/page/0" style="color: black;margin-top: -10%;" class="h4">FACTURAS COMPAÑÍAS</a>
+          </div>
+           
+          
+        </div>
+      </div>
+    </div>
+   
 </div>

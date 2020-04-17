@@ -90,11 +90,35 @@ p{
     stroke: lightseagreen;
 }
 
+.mat-icon {
+    font-size: 900%;
+  }
+
+.container1{
+    margin-top: 15%;
+    margin-bottom: 15%;
+}
+
+.col{
+    padding-right: 0;
+}
+
+.iconAdd{
+    font-size: 50px;
+    margin-left: 97%;
+    margin-top: 8%;
+}
+
 @media screen and (max-width:414px){
     input{
       margin-top: 25%;
       width: 30%;
       margin-right: 20%;
+    }
+    .iconAdd{
+       
+        margin-left: 87%;
+      
     }
   }
   
@@ -105,4 +129,9 @@ p{
         width: 30%;
         margin-right: 20%;
       }
+      .iconAdd{
+       
+        margin-left: 87%;
+      
+    }
   }
