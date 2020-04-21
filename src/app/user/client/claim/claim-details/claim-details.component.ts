@@ -4,7 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Claim } from 'src/app/user/reporter/claim/claim';
 import swal from 'sweetalert2';
 import { AuthService } from '../../../../login/auth.service';
-import { HttpEvent, HttpEventType } from '@angular/common/http';
+import { HttpEventType } from '@angular/common/http';
+import { URL_BACKEND } from '../../../../config/config';
 
 @Component({
   selector: 'app-claim-details',
@@ -16,6 +17,7 @@ export class ClaimDetailsComponent implements OnInit {
   claim: Claim = new Claim();
   public fotoSeleccionada: File;
   progreso = 0;
+  urlBackend: string =  URL_BACKEND;
   constructor(private claimService: ClaimService, private router: Router, private activatedRouter: ActivatedRoute,
               public authService: AuthService) { }
 

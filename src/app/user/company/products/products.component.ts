@@ -6,6 +6,7 @@ import { Product } from './product';
 import { Observable } from 'rxjs';
 import { ProductService } from './product.service';
 import { AuthService } from '../../../login/auth.service';
+import { URL_BACKEND } from '../../../config/config';
 
 
 
@@ -24,24 +25,18 @@ export class ProductsComponent implements OnInit {
   categories: string[] = [];
   pass: boolean;
   loading = true;
+  urlBackend: string = URL_BACKEND;
   constructor(private companyService: CompanyService, private router: Router, private activatedRoute: ActivatedRoute,
               private productService: ProductService, private authService: AuthService) { }
 
   ngOnInit() {
-    this.cargarProducts1();
+    this.pass = false;
     this.cargarProducts();
     this.cargarCompany();
-    this.pass = false;
+    console.log(this.category, this.name);
 
   }
-  cargarProducts1(): void {
-    this.activatedRoute.params.subscribe(params => {
-      const username = params.username;
-      if (username) {
-        this.companyService.getCompany(username).subscribe((company) => this.products1 = company.products);
-      }
-    });
-  }
+
 
   cargarProducts(): void {
     this.activatedRoute.paramMap.subscribe(params => {
@@ -53,6 +48,7 @@ export class ProductsComponent implements OnInit {
       this.productService.getProductsClient(page, username).subscribe(
         products => {
           this.products = products.content as Product[];
+          this.products1 = products.content as Product[];
           this.paginador = products;
           setTimeout(() => {
             this.loading = false;

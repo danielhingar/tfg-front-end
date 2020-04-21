@@ -4,6 +4,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { About } from '../about';
 import { Company } from '../../company';
 import { DOCUMENT } from '@angular/common';
+import { URL_BACKEND } from '../../../../config/config';
+
+
 @Component({
   selector: 'app-details-about',
   templateUrl: './details-about.component.html',
@@ -13,6 +16,7 @@ export class DetailsAboutComponent implements OnInit {
 
   about: About = new About();
   company: Company;
+  urlBackend: string = URL_BACKEND;
   constructor(@Inject(DOCUMENT) document: any, private companyService: CompanyService, private router: Router,
               private activatedRoute: ActivatedRoute) { }
 

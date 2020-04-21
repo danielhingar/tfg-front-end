@@ -6,13 +6,14 @@ import { Company } from './company';
 import { Router } from '@angular/router';
 import { AuthService } from '../../login/auth.service';
 import swal from 'sweetalert2';
+import { URL_BACKEND } from '../../config/config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CompanyService {
 
-  private urlEndPoint = 'http://localhost:8080/company/';
+  private urlEndPoint = URL_BACKEND + '/company/';
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
 

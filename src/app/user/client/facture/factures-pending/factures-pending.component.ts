@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import swal from 'sweetalert2';
 import { ShippingService } from '../../../admin/shipping/shipping.service';
 import { Shipping } from 'src/app/user/admin/shipping/shipping';
+import { URL_BACKEND } from '../../../../config/config';
 
 @Component({
   selector: 'app-factures-pending',
@@ -18,6 +19,7 @@ export class FacturesPendingComponent implements OnInit {
   facture: Facture;
   facture1: Facture = new Facture();
   shippings: Shipping[];
+  urlBackend: string = URL_BACKEND;
   constructor(private factureService: FactureService, private authService: AuthService, private router: Router,
               private shippingService: ShippingService) { }
 

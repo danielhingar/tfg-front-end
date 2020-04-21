@@ -6,6 +6,7 @@ import { ItemBasket } from '../../basket/itemBasket';
 import { AuthService } from '../../../../login/auth.service';
 import swal from 'sweetalert2';
 import { BasketService } from '../../basket/basket.service';
+import { URL_BACKEND } from '../../../../config/config';
 
 @Component({
   selector: 'app-facture-details',
@@ -16,6 +17,7 @@ export class FactureDetailsComponent implements OnInit {
 
   facture: Facture = new Facture();
   status: string[] = ['PAGADO', 'EN PROCESO', 'ENVÍADO A SHOWCASE', 'DE CAMINO', 'RECIBIDO'];
+  urlBackend: string = URL_BACKEND;
   constructor(private activatedRouter: ActivatedRoute, private factureService: FactureService, public authService: AuthService,
               private router: Router, private basketService: BasketService) { }
 

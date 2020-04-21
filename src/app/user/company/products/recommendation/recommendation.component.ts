@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { Product } from '../product';
 import { ActivatedRoute } from '@angular/router';
+import { URL_BACKEND } from '../../../../config/config';
 
 @Component({
   selector: 'app-recommendation',
@@ -11,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 export class RecommendationComponent implements OnInit {
 
   public products: Product[] = [];
+  urlBackend: string = URL_BACKEND;
   constructor(private productService: ProductService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {

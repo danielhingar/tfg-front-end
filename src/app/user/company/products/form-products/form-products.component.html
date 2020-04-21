@@ -6,7 +6,7 @@
         <form #productForm="ngForm">
             
             <div class="col-sm" style="margin-left: 80px;margin-bottom: 10px;" *ngIf="product.id != null">
-                <img *ngIf="product?.photo" src="http://localhost:8080/company/product/uploads/img/{{product.photo}}" alt="{{product.photo}}" class="img-thumbnail rounded">
+                <img *ngIf="product?.photo" src="{{urlBackend}}/company/product/uploads/img/{{product.photo}}" alt="{{product.photo}}" class="img-thumbnail rounded">
             </div>
             <div class="input-group row" style="margin-bottom: 20px;" *ngIf="product.id != null">
                 <label for="name" class="col-form-label">Foto:</label>

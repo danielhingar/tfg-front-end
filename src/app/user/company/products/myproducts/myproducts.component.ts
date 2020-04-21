@@ -5,6 +5,8 @@ import { AuthService } from '../../../../login/auth.service';
 import Swal from 'sweetalert2';
 import { ActivatedRoute } from '@angular/router';
 import { CompanyService } from '../../company.service';
+import { URL_BACKEND } from '../../../../config/config';
+
 @Component({
   selector: 'app-myproducts',
   templateUrl: './myproducts.component.html',
@@ -16,6 +18,7 @@ export class MyproductsComponent implements OnInit {
   products1: Product[];
   paginador: any;
   name: string;
+  urlBackend: string = URL_BACKEND;
   constructor(private productService: ProductService, private authService: AuthService, private activatedRoute: ActivatedRoute,
               private companyService: CompanyService) { }
 

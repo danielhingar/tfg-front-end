@@ -5,6 +5,7 @@ import { AuthService } from '../../../../login/auth.service';
 import { Product } from '../product';
 import swal from 'sweetalert2';
 import { HttpEventType } from '@angular/common/http';
+import { URL_BACKEND } from '../../../../config/config';
 
 @Component({
   selector: 'app-form-products',
@@ -16,6 +17,7 @@ export class FormProductsComponent implements OnInit {
   public product: Product = new Product();
   public fotoSeleccionada: File;
   progreso = 0;
+  urlBackend: string = URL_BACKEND;
   categories: string[] = ['ALIMENTACIÓN', 'INFORMÁTICA Y ELECTRÓNICA', 'ELECTRODOMÉSTICOS', 'HOGAR Y DECORACIÓN', 'DEPORTES', 'JUGUETES',
    'VIDEOJUEGOS', 'PERFUMERÍA Y PARAFARMACIA', 'JOYERÍA', 'LIBROS', ' CINE Y MÚSICA', 'EQUIPAJE', 'MASCOTAS', 'MODA', 'TELEFONÍA'];
   constructor(private productSevice: ProductService, private router: Router, private activatedRouter: ActivatedRoute,

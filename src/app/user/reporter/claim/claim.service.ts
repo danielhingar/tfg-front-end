@@ -6,14 +6,15 @@ import { Claim } from './claim';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../login/auth.service';
 import swal from 'sweetalert2';
+import { URL_BACKEND } from '../../../config/config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClaimService {
 
-  private urlEndPoint = 'http://localhost:8080/reporter/claim';
-  private urlEndPoint1 = 'http://localhost:8080/client/claim';
+  private urlEndPoint = URL_BACKEND + '/reporter/claim';
+  private urlEndPoint1 = URL_BACKEND + '/client/claim';
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }

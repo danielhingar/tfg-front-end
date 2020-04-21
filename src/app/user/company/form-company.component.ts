@@ -5,6 +5,7 @@ import { Company } from './company';
 import { CompanyService } from './company.service';
 import { AuthService } from '../../login/auth.service';
 import { HttpEventType } from '@angular/common/http';
+import { URL_BACKEND } from '../../config/config';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class FormCompanyComponent implements OnInit {
   public errores: string[];
   public fotoSeleccionada: File;
   progreso = 0;
+  urlBackend: string = URL_BACKEND;
   constructor(private companyService: CompanyService, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {

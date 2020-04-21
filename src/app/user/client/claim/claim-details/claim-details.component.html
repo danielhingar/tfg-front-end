@@ -44,7 +44,7 @@
             <hr *ngIf="claim?.answer">
             <div class="col-sm" style="margin-left: 80px;margin-bottom: 10px;" *ngIf="claim.id != null">
                 <img *ngIf="claim?.attachment" src="assets\img\iconfinder_files-folders-48_808600.png" alt="{{claim.attachment}}" class="img-thumbnail rounded" >
-                <a href="http://localhost:8080/company/product/uploads/img/{{claim.attachment}}" *ngIf="claim?.attachment">Descargar</a>
+                <a href="{{urlBackend}}/company/product/uploads/img/{{claim.attachment}}" *ngIf="claim?.attachment">Descargar</a>
             </div>
             <div class="input-group row" style="margin-bottom: 20px;" *ngIf="claim.id != null && this.authService.hasRole('ROLE_CLIENT')" >
                 <label for="name" class="col-form-label">Adjunto:</label>

@@ -69,7 +69,7 @@ import {MatIconModule} from '@angular/material/icon';
 
 
 const routes: Routes = [
-  {path: 'register', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_CLIENT'}},
+  {path: 'register', component: FormComponent},
   {path: 'edit', component: FormComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_CLIENT'}},
   {path: '', component: LoginComponent},
   {path: 'home/page/:page', component: HomeComponent},

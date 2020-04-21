@@ -36,6 +36,15 @@ a:hover{
   cursor:pointer;
 }
 
+.alert1{
+  width: 200%;
+  color: red;
+  font-size: small;
+  font-family: 'Roboto', sans-serif;
+  
+
+}
+
 @media screen and (max-width: 360px) {
   .container-xl {
     margin-top: 20%;

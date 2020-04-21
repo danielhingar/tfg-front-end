@@ -7,13 +7,15 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Comentario } from './comentario';
 import { formatDate } from '@angular/common';
+import { URL_BACKEND } from '../../../config/config';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommentService {
 
-  private urlEndPoint = 'http://localhost:8080/comment';
+  private urlEndPoint = URL_BACKEND + '/comment';
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }

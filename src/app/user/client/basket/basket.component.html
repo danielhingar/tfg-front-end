@@ -9,7 +9,7 @@
                     <tbody>
                         <tr *ngFor="let item of itemBasket">
                             <td>
-                                <img *ngIf="item.product?.photo" src="http://localhost:8080/company/product/uploads/img/{{item.product.photo}}" [routerLink]="['/detailsProduct', item.product.id]"
+                                <img *ngIf="item.product?.photo" src="{{urlBackend}}/company/product/uploads/img/{{item.product.photo}}" [routerLink]="['/detailsProduct', item.product.id]"
                                     alt="{{item.product.photo}}" class="img-thumbnail rounded"
                                     style="width: 64px;cursor: pointer;">
                                 <img *ngIf="!item.product?.photo" [routerLink]="['/detailsProduct', item.product.id]"
@@ -30,8 +30,15 @@
                             
                             <td>{{item.product.price.toFixed(2)}}€</td>
                             <td>
+                                
                                 <input type="number" min="1" max="{{item.product.stock}}" autocomplete="off" value="{{item.quantity}}"
-                                    class="form-control" (change)="updateQuantity(item.id,item.product.id,$event)">
+                                    class="form-control" [(ngModel)]="item.quantity" (change)="updateQuantity(item.id,item.product.id,$event)" (change)="comprobarStocks()"  (change)="comprobarStocks1()" #quantity="ngModel">
+                                    <div class="alert1" *ngIf="(quantity.dirty || quantity.touched)">
+                                        <div *ngIf="!comprobarStock(item)">
+                                            El máximo es: {{item.product.stock}}
+                                        </div>
+                                    </div>
+                               
                             </td>
                             <td style="font-weight: 700;color: darkred;">{{calculatePrice(item).toFixed(2)}}€</td>
                             <td>  <a  name="eliminar" (click)="delete(item)" class="btn-link">Eliminar</a></td>
@@ -78,7 +85,7 @@
                 </div>
             </div>
             <br>
-            <button type="button" (click)='createFactureUnify()'  name="facturar" class="btn" style="margin-left: 7%;width: 300px;margin-bottom: 5%;" [disabled]="itemBasket.length===0">Comenzar
+            <button type="button" (click)='createFactureUnify()'  name="facturar" class="btn" style="margin-left: 7%;width: 300px;margin-bottom: 5%;" [disabled]=" !res1">Comenzar
                 pedido</button>
             
         </div>

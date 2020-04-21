@@ -9,5 +9,7 @@
 
 <router-outlet *ngIf="(configuration.failSystem==false) || (configuration.failSystem===true  && authService.hasRole(('ROLE_ADMIN'))) || (configuration.failSystem===true  && authService.hasRole(('ROLE_ADMIN'))===false && authService.hasRole(('ROLE_CLIENT'))===false && authService.hasRole(('ROLE_COMPANY'))===false && authService.hasRole('ROLE_REPORTER')===false)"></router-outlet>
 
-<app-footer *ngIf="configuration.failSystem===false" ></app-footer>
+<app-footer  *ngIf="configuration.failSystem===false" ></app-footer>
 </div>
+
+

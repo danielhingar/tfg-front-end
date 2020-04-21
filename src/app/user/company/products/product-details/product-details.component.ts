@@ -9,6 +9,7 @@ import { Basket } from 'src/app/user/client/basket/basket';
 import { DOCUMENT } from '@angular/common';
 import { CommentService } from '../../../client/comment/comment.service';
 import { Comentario } from '../../../client/comment/comentario';
+import { URL_BACKEND } from '../../../../config/config';
 
 @Component({
   selector: 'app-product-details',
@@ -20,7 +21,8 @@ export class ProductDetailsComponent implements OnInit {
   public basket: Basket = new Basket();
   opcionSeleccionada = 'null';
   opcionSeleccionada1 = 'null';
-  urlEndPoint = 'http://localhost:8080/client/basket';
+  urlBackend: string = URL_BACKEND;
+  urlEndPoint = URL_BACKEND + '/client/basket';
   url: string;
   comments: Comentario[] = [];
   paginador: any;

@@ -6,6 +6,7 @@ import { Facture } from './facture';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../login/auth.service';
 import swal from 'sweetalert2';
+import { URL_BACKEND } from '../../../config/config';
 
 
 @Injectable({
@@ -13,9 +14,9 @@ import swal from 'sweetalert2';
 })
 export class FactureService {
 
-  private urlEndPoint = 'http://localhost:8080/client/facture';
-  private urlEndPoint1 = 'http://localhost:8080/company/facture';
-  private urlEndPoint2 = 'http://localhost:8080/reporter/facture';
+  private urlEndPoint = URL_BACKEND + '/client/facture';
+  private urlEndPoint1 = URL_BACKEND + '/company/facture';
+  private urlEndPoint2 = URL_BACKEND + '/reporter/facture';
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }

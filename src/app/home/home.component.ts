@@ -3,6 +3,8 @@ import { Company } from '../user/company/company';
 import { CompanyService } from '../user/company/company.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../login/auth.service';
+import { URL_BACKEND } from '../config/config';
+
 
 @Component({
   selector: 'app-home',
@@ -15,6 +17,7 @@ export class HomeComponent implements OnInit {
   businessName: string;
   paginador: any;
   companies1: Company[];
+  urlBackend: string = URL_BACKEND;
   constructor(private companyService: CompanyService, private router: Router, private activatedRoute: ActivatedRoute,
               public authService: AuthService ) { }
 
@@ -52,5 +55,7 @@ export class HomeComponent implements OnInit {
       this.ngOnInit();
     }
   }
+
+
 
 }

@@ -6,14 +6,15 @@ import { Usuario } from '../usuario';
 import { Router } from '@angular/router';
 import { AuthService } from '../../login/auth.service';
 import swal from 'sweetalert2';
+import { URL_BACKEND } from '../../config/config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
 
-  private urlEndPoint = 'http://localhost:8080/admin/';
-  private urlEndPoint1 = 'http://localhost:8080/admin/configuration';
+  private urlEndPoint = URL_BACKEND + '/admin/';
+  private urlEndPoint1 = URL_BACKEND +  '/admin/configuration';
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }

@@ -6,13 +6,15 @@ import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from '../../../login/auth.service';
 import swal from 'sweetalert2';
+import { URL_BACKEND } from '../../../config/config';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AboutService {
 
-  private urlEndPoint = 'http://localhost:8080/company/about';
+  private urlEndPoint = URL_BACKEND + '/company/about';
 
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 

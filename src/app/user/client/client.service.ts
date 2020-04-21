@@ -6,6 +6,7 @@ import { catchError} from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AuthService } from '../../login/auth.service';
 import swal from 'sweetalert2';
+import { URL_BACKEND } from '../../config/config';
 
 
 @Injectable({
@@ -13,7 +14,7 @@ import swal from 'sweetalert2';
 })
 export class ClientService {
 
-  private urlEndPoint = 'http://localhost:8080/client/';
+  private urlEndPoint = URL_BACKEND + '/client/';
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
   constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }

@@ -7,14 +7,16 @@ import { ItemBasket } from './itemBasket';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../login/auth.service';
 import swal from 'sweetalert2';
+import { URL_BACKEND } from '../../../config/config';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class BasketService {
 
-  urlEndPoint = 'http://localhost:8080/client/basket';
-  urlEndPoint1 = 'http://localhost:8080/client/itemBasket';
+  urlEndPoint = URL_BACKEND + '/client/basket';
+  urlEndPoint1 = URL_BACKEND + '/client/itemBasket';
   private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
   constructor(private http: HttpClient, private router: Router, private authService: AuthService) { }
 

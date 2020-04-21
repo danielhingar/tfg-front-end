@@ -5,7 +5,7 @@
         <form #companyForm="ngForm">
 
             <div class="col-sm" style="margin-left: 80px;margin-bottom: 10px;" *ngIf="company.id != null">
-                <img *ngIf="company?.image" src="http://localhost:8080/company/uploads/img/{{company.image}}" alt="{{company.image}}" class="img-thumbnail rounded">
+                <img *ngIf="company?.image" src="{{urlBackend}}/company/uploads/img/{{company.image}}" alt="{{company.image}}" class="img-thumbnail rounded">
             </div>
             <div class="input-group row" style="margin-bottom: 20px;" *ngIf="company.id != null">
                 <label for="name" class="col-form-label">Foto:</label>
