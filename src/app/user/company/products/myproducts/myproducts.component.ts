@@ -18,6 +18,7 @@ export class MyproductsComponent implements OnInit {
   products1: Product[];
   paginador: any;
   name: string;
+  loading = true;
   urlBackend: string = URL_BACKEND;
   constructor(private productService: ProductService, private authService: AuthService, private activatedRoute: ActivatedRoute,
               private companyService: CompanyService) { }
@@ -37,6 +38,9 @@ export class MyproductsComponent implements OnInit {
         products => {
           this.products = products.content as Product[];
           this.paginador = products;
+          setTimeout(() => {
+            this.loading = false;
+          }, 500);
         }
       );
     }

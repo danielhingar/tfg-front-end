@@ -57,6 +57,13 @@ input::placeholder{
     margin-left: 33%;
 }
 
+.spinner{
+    position: relative;
+    margin-left: 50%;
+    margin-bottom: 60%;
+    margin-top: 20%;
+}
+
 @media screen and (max-width:414px){
     .container{
         margin-top: 20%;

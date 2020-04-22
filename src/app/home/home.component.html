@@ -9,7 +9,7 @@
             <div class="animated zoomIn card"  *ngIf="loading===false">
                 
                 <img *ngIf="!company?.image" src="https://images.unsplash.com/photo-1551814360-3c38192c5688?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" class="card-img"> 
-                <img *ngIf="company?.image" src="{{urlBackend}}/company/uploads/img/{{company.image}}" class="card-img">
+                <img *ngIf="company?.image" src="{{company.image}}" class="card-img">
                 <a class="card-title center" href="/products/page/0/{{company.username}}" >{{company.businessName}}</a>
                 <h5>{{company.category}}</h5>
                 

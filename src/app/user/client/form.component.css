@@ -67,6 +67,12 @@ input:optional{
 input:focus:invalid{
   border-color: red;
 }
+.checkbox{
+  width: 10%;
+}
+.terms{
+  width: 70%;
+}
 
 @media screen and (max-width:414px){
   .card{

@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 export class ListShippingComponent implements OnInit {
 
   shippings: Shipping[] = [];
+  loading = true;
   constructor(private shippingService: ShippingService) { }
 
   ngOnInit() {
@@ -21,6 +22,9 @@ export class ListShippingComponent implements OnInit {
     this.shippingService.getShippings().subscribe(
       shippings => this.shippings = shippings
     );
+    setTimeout(() => {
+      this.loading = false;
+    }, 500);
   }
 
   delete(shipping: Shipping): void {

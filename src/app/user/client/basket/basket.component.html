@@ -9,7 +9,7 @@
                     <tbody>
                         <tr *ngFor="let item of itemBasket">
                             <td>
-                                <img *ngIf="item.product?.photo" src="{{urlBackend}}/company/product/uploads/img/{{item.product.photo}}" [routerLink]="['/detailsProduct', item.product.id]"
+                                <img *ngIf="item.product?.photo" src="{{item.product.photo}}" [routerLink]="['/detailsProduct', item.product.id]"
                                     alt="{{item.product.photo}}" class="img-thumbnail rounded"
                                     style="width: 64px;cursor: pointer;">
                                 <img *ngIf="!item.product?.photo" [routerLink]="['/detailsProduct', item.product.id]"

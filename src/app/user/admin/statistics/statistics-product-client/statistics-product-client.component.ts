@@ -13,7 +13,7 @@ export class StatisticsProductClientComponent implements OnInit {
   products: number[] = [];
   colores: string[] = [];
   graphic1 = [];
-
+  loading = true;
 
   constructor(private adminService: AdminService) { }
 
@@ -62,7 +62,9 @@ export class StatisticsProductClientComponent implements OnInit {
           }
         });
       }
+
     );
+    this.loading = false;
   }
 
 

@@ -44,24 +44,15 @@
             <hr *ngIf="claim?.answer">
             <div class="col-sm" style="margin-left: 80px;margin-bottom: 10px;" *ngIf="claim.id != null">
                 <img *ngIf="claim?.attachment" src="assets\img\iconfinder_files-folders-48_808600.png" alt="{{claim.attachment}}" class="img-thumbnail rounded" >
-                <a href="{{urlBackend}}/company/product/uploads/img/{{claim.attachment}}" *ngIf="claim?.attachment">Descargar</a>
+                <a href="{{claim.attachment}}" *ngIf="claim?.attachment">Descargar</a>
             </div>
-            <div class="input-group row" style="margin-bottom: 20px;" *ngIf="claim.id != null && this.authService.hasRole('ROLE_CLIENT')" >
-                <label for="name" class="col-form-label">Adjunto:</label>
-                <div class="custom-file" style="width: 600px;">
-                  <input (change)="seleccionarFoto($event)" type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
-                  <label class="custom-file-label" for="inputGroupFile04" style="width: 300px;margin-left: 13px;">Choose file</label>
+            <div class="form-group row">
+                <label for="attachment" class="col-form-label">Adjuntos:</label>
+                <div class="col-sm-4">
+                    <input type="url" class="form-control" [(ngModel)]="claim.attachment" name="attachment" style="width: 300px;">
+                   
                 </div>
-                <div class="input-group">
-                  <button (click)="subirFoto()" [disabled]="!fotoSeleccionada" class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04" style="margin-left: 430px;margin-top: -40px;height: 36px;">Subir</button>
-                </div>
-
-                <div *ngIf="progreso > 0" class="progress" style="margin-left: 120px;height: 25px;width: 600px;">
-                    <div class="progress-bar progress-bar-striped" role="progressbar" [ngStyle]="{width: progreso+'%'}" attr.aria-valuenow="{{progreso}}" aria-valuemin="0" aria-valuemax="100">
-                        {{progreso}}%
-                    </div>
-                  </div>
-              </div>
+            </div>
 
             <div class="form-group row">
                 <label for="title" class="col-form-label">Título:</label>

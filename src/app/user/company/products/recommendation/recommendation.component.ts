@@ -13,6 +13,7 @@ export class RecommendationComponent implements OnInit {
 
   public products: Product[] = [];
   urlBackend: string = URL_BACKEND;
+  loading = true;
   constructor(private productService: ProductService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
@@ -26,6 +27,9 @@ export class RecommendationComponent implements OnInit {
         this.productService.recommendation(id).subscribe(
           products => this.products = products.slice(0, 4)
         );
+        setTimeout(() => {
+          this.loading = false;
+        }, 500);
           }
     }
     );

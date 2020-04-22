@@ -170,7 +170,7 @@
                     <div class="row">
                         <div class="col-2" style="margin-left: 3%;">
                             <img *ngIf="item.product?.photo"
-                                src="{{urlBackend}}/company/product/uploads/img/{{item.product.photo}}"
+                                src="{{item.product.photo}}"
                                 alt="{{item.product.photo}}" class="img-thumbnail rounded"
                                 style="width: 100px;height: 100px;">
                             <img *ngIf="!item.product?.photo"

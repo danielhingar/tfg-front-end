@@ -8,9 +8,10 @@
     <button type="button" style="color: white;background-color: #ff6800;" name="create" class="btn btn-sm" [routerLink]="['/createShipping']" >Crear un nuevo método</button>
     <br>
     <br>
-    <div class="row" *ngIf="shippings?.length > 0">
-        <div class="col-lg" *ngFor="let shipping of shippings">
-            <div class="animated zoomIn card">
+    <mat-spinner class="spinner" diameter="50" strokeWidth="3" *ngIf="loading===true"></mat-spinner>
+    <div class="row" *ngIf="shippings?.length > 0" >
+        <div class="col-lg" *ngFor="let shipping of shippings" >
+            <div class="animated zoomIn card" *ngIf="loading===false">
                 
                 <img src="assets\img\iconfinder_box_1540166.png" class="card-img"> 
                 <div class="card-body">
