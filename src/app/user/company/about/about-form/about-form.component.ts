@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CompanyService } from '../../company.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { About } from '../about';
 import { AuthService } from '../../../../login/auth.service';
 import { AboutService } from '../about.service';
@@ -19,7 +19,7 @@ export class AboutFormComponent implements OnInit {
 
   ngOnInit() {
     this.cargarAbout();
-    console.log(this.about);
+   
   }
 
   cargarAbout(): void {

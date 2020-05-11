@@ -58,7 +58,6 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.usuario).subscribe(response => {
       this.authService.guardarUsuario(response.access_token);
       this.authService.guardarToken(response.access_token);
-      const usuario = this.authService.usuario;
       this.router.navigate(['/home/page/0']);
       const Toast = swal.mixin({
         toast: true,

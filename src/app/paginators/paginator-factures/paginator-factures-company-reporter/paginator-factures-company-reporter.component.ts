@@ -1,11 +1,10 @@
 import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FactureService } from '../../../user/client/facture/facture.service';
+
 
 @Component({
   selector: 'app-paginator-factures-company-reporter',
   templateUrl: './paginator-factures-company-reporter.component.html',
-  styleUrls: ['./paginator-factures-company-reporter.component.css']
 })
 export class PaginatorFacturesCompanyReporterComponent implements OnInit, OnChanges {
 

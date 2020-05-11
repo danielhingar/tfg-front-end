@@ -3,7 +3,7 @@ import { FactureService } from '../../client/facture/facture.service';
 import { Facture } from '../../client/facture/facture';
 import { ItemBasket } from '../../client/basket/itemBasket';
 import { Router, ActivatedRoute } from '@angular/router';
-import swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-factures-all-company',

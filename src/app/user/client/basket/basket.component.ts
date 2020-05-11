@@ -21,13 +21,13 @@ export class BasketComponent implements OnInit {
   facture: Facture = new Facture();
   urlBackend: string = URL_BACKEND;
   public res = true;
-  public res1;
+  public res1 = true;
   constructor(private basketService: BasketService, private clientService: ClientService, private authService: AuthService,
-    private router: Router, private factureService: FactureService) { }
+              private router: Router, private factureService: FactureService) { }
 
   ngOnInit() {
     this.loadBasket();
-
+   
   }
 
   loadBasket(): void {
@@ -176,7 +176,7 @@ export class BasketComponent implements OnInit {
     if (this.res1 === true) {
       this.res = true;
     }
-    console.log(this.res, '1');
+   
     return this.res;
   }
 
@@ -188,7 +188,6 @@ export class BasketComponent implements OnInit {
         this.res1 = true;
       }
     }
-    console.log(this.res1);
     return this.res1;
   }
 }

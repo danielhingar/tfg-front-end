@@ -5,9 +5,7 @@ import { AuthService } from '../../../../login/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ItemBasket } from '../../basket/itemBasket';
 import { ClaimService } from '../../../reporter/claim/claim.service';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { Claim } from '../../../reporter/claim/claim';
+
 
 
 @Component({

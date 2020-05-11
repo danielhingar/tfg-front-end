@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-paginator-products-list',
   templateUrl: './paginator-products-list.component.html',
-  styleUrls: ['./paginator-products-list.component.css']
 })
 export class PaginatorProductsListComponent implements OnInit, OnChanges {
 

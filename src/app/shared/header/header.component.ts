@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../login/auth.service';
 import swal from 'sweetalert2';
 import {Router} from '@angular/router';
-import { Client } from '../../user/client/client';
-import { ClientService } from '../../user/client/client.service';
 import { BasketService } from '../../user/client/basket/basket.service';
 import { ItemBasket } from '../../user/client/basket/itemBasket';
 import { ConfigurationService } from '../../user/admin/configuration/configuration.service';

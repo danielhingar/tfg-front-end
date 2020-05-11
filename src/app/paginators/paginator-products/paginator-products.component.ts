@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { AuthService } from '../../login/auth.service';
 import { CompanyService } from '../../user/company/company.service';
 import { Company } from '../../user/company/company';
 import { ActivatedRoute } from '@angular/router';
@@ -7,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-paginator-products',
   templateUrl: './paginator-products.component.html',
-  styleUrls: ['./paginator-products.component.css']
+
 })
 export class PaginatorProductsComponent implements OnInit, OnChanges {
 

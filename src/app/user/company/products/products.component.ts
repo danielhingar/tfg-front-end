@@ -33,7 +33,7 @@ export class ProductsComponent implements OnInit {
     this.pass = false;
     this.cargarProducts();
     this.cargarCompany();
-    console.log(this.category, this.name);
+    
 
   }
 

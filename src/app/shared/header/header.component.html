@@ -49,7 +49,7 @@
 
     <ul class="navbar-nav navbar-right">
       <li *ngIf="authService.isAuthenticated()" class="dropdown">
-        <img style="text-align: left;" src="assets\img\iconfinder_user_male4_172628.png" height="25" width="25"><a class="dropdown-toggle text-dark" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <img style="text-align: left;" alt="logo_user" src="assets\img\iconfinder_user_male4_172628.png" height="25" width="25"><a class="dropdown-toggle text-dark" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           {{authService.usuario.username}}
         </a>
         <div class="dropdown-menu dropdown-menu-right bg-light" aria-labelledby="dropdownMenuButton">
@@ -63,10 +63,6 @@
           <div class="dropdown-divider" *ngIf="authService.hasRole('ROLE_CLIENT')"></div>
           <a class="dropdown-item" href="myClaim/page/0" *ngIf="authService.hasRole('ROLE_CLIENT')"> Mis Reclamaciones</a>
           <div class="dropdown-divider" *ngIf="authService.hasRole('ROLE_CLIENT')"></div>
-        <!--  <a class="dropdown-item"  href="/myProducts" *ngIf="authService.hasRole('ROLE_COMPANY')">Mis productos</a>
-          <div class="dropdown-divider" *ngIf="authService.hasRole('ROLE_COMPANY')"></div>
-          <a class="dropdown-item"  href="/home" *ngIf="authService.hasRole('ROLE_COMPANY')">Mis facturas</a>
-          <div class="dropdown-divider" *ngIf="authService.hasRole('ROLE_COMPANY')"></div>-->
           <button (click)="logout()" class="dropdown-item text-danger" type="submit">Cerrar sesión</button>
         </div>
       </li>
@@ -79,6 +75,6 @@
 
   <div class="container" *ngIf="configuration?.banner">
     <div class="row align-items-center">
-      <img src="{{configuration.banner}}" width="100%" height="200px" style="margin-top: 40px;">
+      <img src="{{configuration.banner}}" alt="banner" width="100%" height="250px" style="margin-top: 40px;">
     </div>
   </div>

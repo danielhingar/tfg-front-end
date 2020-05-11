@@ -13,7 +13,7 @@
         <div class="col-lg" *ngFor="let shipping of shippings" >
             <div class="animated zoomIn card" *ngIf="loading===false">
                 
-                <img src="assets\img\iconfinder_box_1540166.png" class="card-img"> 
+                <img src="assets\img\iconfinder_box_1540166.png"  alt="box_shipping" class="card-img"> 
                 <div class="card-body">
                     <h3 class="title" [routerLink]="['/updateShipping', shipping.id]" style="color: white;">{{shipping.title.toUpperCase()}}</h3>
                     <h4 class="price" style="text-align: right;color: darkred;">{{shipping.price}}€</h4>

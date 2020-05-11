@@ -23,13 +23,11 @@
     margin-bottom: 10%;
 }
 
+
+
 .card-title{
     position: absolute;
     color: white;
-}
-
-
-.card-title{
     font-family: 'Rokkitt', serif;
     font-size: 300%;
     text-shadow: 0 1px 0 #ccc, 

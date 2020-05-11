@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-paginator-factures-client-reporter',
   templateUrl: './paginator-factures-client-reporter.component.html',
-  styleUrls: ['./paginator-factures-client-reporter.component.css']
+
 })
 export class PaginatorFacturesClientReporterComponent implements OnInit, OnChanges {
 
