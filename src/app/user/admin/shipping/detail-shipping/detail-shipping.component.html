@@ -1,5 +1,6 @@
 <div class="animated fadeInDown card bg-white text-dark">
-    <div class="card-header">Crear método de envío</div>
+    <div class="card-header" *ngIf="shipping.id === undefined">Crear método de envío</div>
+    <div class="card-header" *ngIf="shipping.id !== undefined">Editar método de envío</div>
     <div class="card-body">
         <br>
         <form #shippingForm="ngForm">

@@ -16,6 +16,7 @@ export class DetailShippingComponent implements OnInit {
 
   ngOnInit() {
     this.loadShipping();
+
   }
 
   loadShipping(): void {

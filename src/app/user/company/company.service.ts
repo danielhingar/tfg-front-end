@@ -132,4 +132,38 @@ export class CompanyService {
       })
     );
   }
+
+  getProductByCategory(username): Observable<Map<string, number>> {
+    return this.http.get(this.urlEndPoint + `statistics/productByCategory/${username}`, {headers: this.agregarAuthorizationHeader()}).pipe(
+      map(response => response as Map<string, number>),
+      catchError( e => {
+        if (this.isNoAutorizado(e)) {
+          return throwError(e);
+        }
+      })
+    );
+  }
+
+
+  getProductSold(username): Observable<Map<string, number>> {
+    return this.http.get(this.urlEndPoint + `statistics/productSold/${username}`, {headers: this.agregarAuthorizationHeader()}).pipe(
+      map(response => response as Map<string, number>),
+      catchError( e => {
+        if (this.isNoAutorizado(e)) {
+          return throwError(e);
+        }
+      })
+    );
+  }
+
+  getProductOffert(username): Observable<Map<string, number>> {
+    return this.http.get(this.urlEndPoint + `statistics/productOffert/${username}`, {headers: this.agregarAuthorizationHeader()}).pipe(
+      map(response => response as Map<string, number>),
+      catchError( e => {
+        if (this.isNoAutorizado(e)) {
+          return throwError(e);
+        }
+      })
+    );
+  }
 }

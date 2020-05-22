@@ -1,5 +1,9 @@
 <div class="container-xl">
-    <h1>Pedido {{facture.id}} </h1> 
+    <h1 *ngIf=" authService.hasRole('ROLE_CLIENT')">Pedido {{facture.id}} </h1> 
+    <h1 *ngIf=" authService.hasRole('ROLE_COMPANY')">Factura {{facture.id}} </h1> 
+    <h1 *ngIf=" facture.company !== null && authService.hasRole('ROLE_REPORTER')">Factura {{facture.id}} </h1> 
+    
+    <h1 *ngIf=" facture.company === null && authService.hasRole('ROLE_REPORTER')">Pedido {{facture.id}} </h1>
     <h4>{{facture.createDate}}</h4>
     <br>
     <div class="container" *ngIf="facture !== null  && authService.hasRole('ROLE_CLIENT') || authService.hasRole('ROLE_REPORTER') || authService.hasRole('ROLE_ADMIN')">

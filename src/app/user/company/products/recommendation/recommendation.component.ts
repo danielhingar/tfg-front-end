@@ -25,7 +25,7 @@ export class RecommendationComponent implements OnInit {
       const id = params.id;
       if (id) {
         this.productService.recommendation(id).subscribe(
-          products => this.products = products.slice(0, 4)
+          products => this.products = products
         );
         setTimeout(() => {
           this.loading = false;

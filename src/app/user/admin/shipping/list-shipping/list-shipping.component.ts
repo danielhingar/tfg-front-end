@@ -37,7 +37,7 @@ export class ListShippingComponent implements OnInit {
     });
     swalWithBootstrapButtons.fire({
       title: '¿Estás seguro/a?',
-      text: `¿Vas eliminar el método ${shipping.id}?`,
+      text: `¿Vas eliminar el método ${shipping.title}?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Si, eliminar',

@@ -1,0 +1,21 @@
+<div class="container">
+    <div> 
+        <div class="row" style="margin-top:10px;align-items: center;">  
+          <div class="col-sm-2">  
+            <button class="btn btn-outline-secondary" [routerLink]="['/statistics3']">Productos por Categoría</button>  
+          </div>  
+          <div class="col-sm-2">  
+            <button class="btn btn-outline-secondary" [routerLink]="['/statistics4']">Productos vendidos</button>  
+          </div>  
+          <div class="col-sm-2">  
+            <button class="btn btn-secondary disabled" [routerLink]="['/statistics5']">Productos en oferta</button>  
+          </div>  
+             
+        </div>  
+    </div>  
+    
+    
+    <h3 style="margin-top: 5%;">Productos en oferta</h3>
+    <mat-spinner class="spinner" diameter="50" strokeWidth="3" *ngIf="loading===true"></mat-spinner>
+    <canvas id="graphic1" style=" height:70vh; width:90vw;"  *ngIf="loading===false"></canvas>
+    </div>

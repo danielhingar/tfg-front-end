@@ -6,6 +6,7 @@
          No hay productos en su inventario 
      </div>
      <mat-spinner class="spinner" diameter="50" strokeWidth="3" *ngIf="loading===true"></mat-spinner>
+      <a class="nav-link" href="/createProduct"><mat-icon class="iconAdd" >add_circle</mat-icon>NUEVO PRODUCTO</a>
     <table class="table table-striped" *ngIf="products?.length > 0 && loading === false">
         <thead>
             <tr>

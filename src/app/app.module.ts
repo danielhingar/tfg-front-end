@@ -64,6 +64,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatProgressSpinnerModule} from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import { TermsComponent } from './shared/terms/terms.component';
+import { StatisticsByCategoryComponent } from './user/company/statistics/statistics-by-category/statistics-by-category.component';
+import { StatisticsSoldComponent } from './user/company/statistics/statistics-sold/statistics-sold.component';
+import { StatisticsOffertComponent } from './user/company/statistics/statistics-offert/statistics-offert.component';
 
 
 
@@ -106,7 +109,10 @@ const routes: Routes = [
   {path: 'statistics', component: StatisticsComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'statistics1', component: StatisticsProductClientComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'statistics2', component: StatisticsProductSoldCompanyComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_ADMIN'}},
-  {path: 'terms', component: TermsComponent}
+  {path: 'terms', component: TermsComponent},
+  {path: 'statistics3', component: StatisticsByCategoryComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_COMPANY'}},
+  {path: 'statistics4', component: StatisticsSoldComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_COMPANY'}},
+  {path: 'statistics5', component: StatisticsOffertComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_COMPANY'}}
 ];
 
 @NgModule({
@@ -158,6 +164,9 @@ const routes: Routes = [
     StatisticsProductClientComponent,
     StatisticsProductSoldCompanyComponent,
     TermsComponent,
+    StatisticsByCategoryComponent,
+    StatisticsSoldComponent,
+    StatisticsOffertComponent,
 
 
 

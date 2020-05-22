@@ -16,7 +16,7 @@ import { URL_BACKEND } from '../../../../config/config';
 export class FactureDetailsComponent implements OnInit {
 
   facture: Facture = new Facture();
-  status: string[] = ['PAGADO', 'EN PROCESO', 'ENVÍADO A SHOWCASE', 'DE CAMINO', 'RECIBIDO'];
+  status: string[] = [ 'EN PROCESO', 'ENVÍADO A SHOWCASE', 'DE CAMINO', 'RECIBIDO'];
   urlBackend: string = URL_BACKEND;
   constructor(private activatedRouter: ActivatedRoute, private factureService: FactureService, public authService: AuthService,
               private router: Router, private basketService: BasketService) { }
