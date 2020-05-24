@@ -40,6 +40,14 @@
     </ul>
     <ul class="navbar-nav navbar-right">
       <li class="nav-item" *ngIf="authService.hasRole('ROLE_CLIENT')">
+        <a class="btn" href="/wishList">
+          <mat-icon>favorite</mat-icon>
+        </a>
+       
+      </li>
+    </ul>
+    <ul class="navbar-nav navbar-right">
+      <li class="nav-item" *ngIf="authService.hasRole('ROLE_CLIENT')">
         <a class="btn" href="/myBasket">
           <mat-icon>shopping_cart</mat-icon>
         </a>

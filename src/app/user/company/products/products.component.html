@@ -1,6 +1,6 @@
 
 <div class="container">
-    <p class="animated zoomIn name">{{company.businessName}}</p>  <a [routerLink]="['/about', company.id]" role="button" style="background-color: darkorange;color: black; border-radius: 4px;width: 80px;">¿Quiénes somos?</a><a [routerLink]="['/about', company.id]" role="button" style="background-color: grey;color: black; border-radius: 4px;width: 80px;margin-left: 4%;">Contactar</a>
+    <p class="animated zoomIn name">{{company.businessName}}</p>  <a [routerLink]="['/about', company.id]" role="button" style="background-color: darkorange;color: black; border-radius: 4px;width: 80px;">¿Quiénes somos?</a><a [routerLink]="['/conversation', company.username]" role="button" style="background-color: grey;color: black; border-radius: 4px;width: 80px;margin-left: 4%;">Contactar</a>
     <br>
     <input  class="animated zoomIn form-control" [(ngModel)]="name" type="text" placeholder="Buscar..." aria-label="Buscar" #myInput (input)="Search()" style="width: 30%;float: right;margin-top:-3%;">
     <br>

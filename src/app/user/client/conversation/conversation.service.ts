@@ -146,4 +146,25 @@ getConversationsCompany(page: number, username): Observable<any> {
   );
 
 }
+
+createConversation(conversation: Conversation, userClient, userCompany): Observable<any> {
+  return this.http.post<Conversation>(`${this.urlEndPoint}/create/${userClient}/${userCompany}`, conversation,
+    { headers: this.agregarAuthorizationHeader() }).pipe(
+      catchError(e => {
+
+        if (this.isNoAutorizado(e)) {
+          return throwError(e);
+        }
+
+        if (e.status === 400) {
+          return throwError(e);
+        }
+        if (e.error.mensaje) {
+          console.error(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+
+}
 }

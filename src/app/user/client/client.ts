@@ -1,5 +1,6 @@
 import { Usuario } from '../usuario';
 import { Basket } from './basket/basket';
+import { Product } from '../company/products/product';
 export class Client extends Usuario {
     basket: Basket;
     address: string;
@@ -7,4 +8,5 @@ export class Client extends Usuario {
     codePostal: string;
     locality: string;
     province: string;
+    wishList: Product[] = [];
 }

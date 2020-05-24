@@ -19,7 +19,7 @@ export class FormProductsComponent implements OnInit {
   progreso = 0;
   urlBackend: string = URL_BACKEND;
   categories: string[] = ['ALIMENTACIÓN', 'INFORMÁTICA Y ELECTRÓNICA', 'ELECTRODOMÉSTICOS', 'HOGAR Y DECORACIÓN', 'DEPORTES', 'JUGUETES',
-   'VIDEOJUEGOS', 'PERFUMERÍA Y PARAFARMACIA', 'JOYERÍA', 'LIBROS', ' CINE Y MÚSICA', 'EQUIPAJE', 'MASCOTAS', 'MODA', 'TELEFONÍA'];
+   'VIDEOJUEGOS', 'PERFUMERÍA Y PARAFARMACIA', 'JOYERÍA', 'LIBROS', ' CINE Y MÚSICA', 'EQUIPAJE', 'MASCOTAS', 'MODA', 'TELEFONÍA', 'OTROS'];
   constructor(private productSevice: ProductService, private router: Router, private activatedRouter: ActivatedRoute,
               private authService: AuthService) { }
 
@@ -50,7 +50,7 @@ export class FormProductsComponent implements OnInit {
           width: 350,
           timer: 1800,
         });
-        console.log(this.product);
+
     }
     );
   }

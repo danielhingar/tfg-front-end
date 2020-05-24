@@ -65,6 +65,7 @@ import {MatProgressSpinnerModule} from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
+import {MatStepperModule} from '@angular/material/stepper';
 import { TermsComponent } from './shared/terms/terms.component';
 import { StatisticsByCategoryComponent } from './user/company/statistics/statistics-by-category/statistics-by-category.component';
 import { StatisticsSoldComponent } from './user/company/statistics/statistics-sold/statistics-sold.component';
@@ -77,6 +78,8 @@ import { PaginatorMyConversationsComponent } from './paginators/paginator-conver
 import { DetailConversationComponent } from './user/client/conversation/detail-conversation/detail-conversation.component';
 // tslint:disable-next-line: max-line-length
 import { ConversationListCompanyComponent } from './user/company/conversation/conversation-list-company/conversation-list-company.component';
+import { ConversationFormComponent } from './user/client/conversation/conversation-form/conversation-form.component';
+import { ListComponent } from './user/client/wish/list/list.component';
 
 
 
@@ -126,7 +129,10 @@ const routes: Routes = [
   {path: 'myConversations/page/:page', component: ConversationListComponent, canActivate: [AuthGuard, RoleGuard],
    data: {role: 'ROLE_CLIENT'}},
   {path: 'Conversations/page/:page', component: ConversationListCompanyComponent, canActivate: [AuthGuard, RoleGuard],
-   data: {role: 'ROLE_COMPANY'}}
+   data: {role: 'ROLE_COMPANY'}},
+  {path: 'conversation/:username', component: ConversationFormComponent, canActivate: [AuthGuard, RoleGuard],
+   data: {role: 'ROLE_CLIENT'}},
+  {path: 'wishList', component: ListComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_CLIENT'}},
 ];
 
 @NgModule({
@@ -185,6 +191,8 @@ const routes: Routes = [
     PaginatorMyConversationsComponent,
     DetailConversationComponent,
     ConversationListCompanyComponent,
+    ConversationFormComponent,
+    ListComponent,
 
   ],
   entryComponents: [DetailConversationComponent],
@@ -200,6 +208,7 @@ const routes: Routes = [
     MatIconModule,
     MatDialogModule,
     MatButtonModule,
+    MatStepperModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],

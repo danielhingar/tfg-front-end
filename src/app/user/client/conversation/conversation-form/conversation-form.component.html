@@ -1,0 +1,35 @@
+<div class="container">
+<mat-horizontal-stepper linear>
+    <mat-step label="Seleccionar">
+        <p>Elige un tema</p>
+        <div class="form-group row">
+            <div class="col-sm-4">
+                <select [(ngModel)]="conversation.issue" class="form-control" name="issue" style="width: 200px;">
+                    <option  *ngFor="let tema of temas" [ngValue]="tema">
+                        {{tema}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div>
+            <button mat-button matStepperNext style="background-color: #3f51b5;color:white" (click)="createConversation()" >Siguiente</button>
+        </div>
+    </mat-step>
+    <mat-step label="Escribir">
+        <p>Escribe tu texto</p>
+        <textarea type="text" class="form-control" [(ngModel)]="message.text" name="text" required  style="width: 50%;height: 200px;"></textarea>
+        <br>
+        <div>
+            <button mat-button matStepperNext style="background-color: #3f51b5;color:white" (click)="create()" >Siguiente</button>
+        </div>
+    </mat-step>
+    <mat-step label="Finalizar" >
+        <div class="alert alert-success" role="alert" style="width: 60%;">
+            Se ha envíado correctamente su mensaje, pronto recibirá una respuesta
+          </div>
+        <div>
+           <a href="/myConversations/page/0"> <button mat-button style="background-color: #3f51b5;color:white" >Terminar</button></a>
+        </div>
+    </mat-step>
+</mat-horizontal-stepper>
+</div>
