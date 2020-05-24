@@ -1,0 +1,61 @@
+<div class="container" *ngIf="authService.hasRole('ROLE_CLIENT')">
+    <h2 mat-dialog-title>Conversación con {{data.company.businessName}}</h2>
+    <mat-dialog-content class="mat-typography">
+    <div class="messages" *ngFor="let message of messages">
+        <p *ngIf="message.answer === false"
+            style="float:right;background-color: lightseagreen;width: 50%;margin-left: 1%;">{{message.text}}</p>
+        <span *ngIf="message.answer === false" style="float: right;color: #747474; ">{{message.createDate}}</span>
+        <p *ngIf="message.answer === true" style="float: left;background-color: lightgrey;width: 50%;margin-left: 1%;">{{message.text}}
+        </p>
+        <span *ngIf="message.answer === true"
+            style="float: left;color: #747474;margin-left: 1%; ">{{message.createDate}}</span>
+    </div>
+    </mat-dialog-content>
+    <form #commentForm="ngForm">
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Escribe un mensaje" [(ngModel)]="message.text" name="text" required />
+                <div class="input-group-append">
+                    <button type="button" (click)="create()" class="btn" [disabled]="messages.length > 1000000"
+                        style="align-items: flex-end;">
+                        <mat-icon>send</mat-icon>
+                    </button>
+                </div>
+                
+            </div>
+            <p *ngIf="messages.length > 1000000" style="color: red;">Lo sentimos, ha excedido el número de mensajes</p>
+        </div>
+
+    </form>
+</div>
+
+<div class="container" *ngIf="authService.hasRole('ROLE_COMPANY')">
+    <h2 mat-dialog-title>Conversación con {{data.client.username}}</h2>
+    <mat-dialog-content class="mat-typography">
+    <div class="messages" *ngFor="let message of messages">
+        <p *ngIf="message.answer === true"
+            style="float:right;background-color: lightseagreen;width: 50%;margin-left: 1%;">{{message.text}}</p>
+        <span *ngIf="message.answer === true" style="float: right;color: #747474; ">{{message.createDate}}</span>
+        <p *ngIf="message.answer === false" style="float: left;background-color: lightgrey;width: 50%;margin-left: 1%;">{{message.text}}
+        </p>
+        <span *ngIf="message.answer === false"
+            style="float: left;color: #747474;margin-left: 3%; ">{{message.createDate}}</span>
+    </div>
+    </mat-dialog-content>
+    <form #commentForm="ngForm">
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Escribe un mensaje" [(ngModel)]="message.text" name="text" required />
+                <div class="input-group-append">
+                    <button type="button" (click)="createCompany()" class="btn" [disabled]="messages.length > 1000000"
+                        style="align-items: flex-end;">
+                        <mat-icon>send</mat-icon>
+                    </button>
+                </div>
+                
+            </div>
+            <p *ngIf="messages.length > 1000000" style="color: red;">Lo sentimos, ha excedido el número de mensajes</p>
+        </div>
+
+    </form>
+</div>

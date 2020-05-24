@@ -63,10 +63,20 @@ import { StatisticsProductSoldCompanyComponent } from './user/admin/statistics/s
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatProgressSpinnerModule} from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
 import { TermsComponent } from './shared/terms/terms.component';
 import { StatisticsByCategoryComponent } from './user/company/statistics/statistics-by-category/statistics-by-category.component';
 import { StatisticsSoldComponent } from './user/company/statistics/statistics-sold/statistics-sold.component';
 import { StatisticsOffertComponent } from './user/company/statistics/statistics-offert/statistics-offert.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import { ConversationListComponent } from './user/client/conversation/conversation-list/conversation-list.component';
+// tslint:disable-next-line: max-line-length
+import { PaginatorMyConversationsComponent } from './paginators/paginator-conversations/paginator-my-conversations/paginator-my-conversations.component';
+import { DetailConversationComponent } from './user/client/conversation/detail-conversation/detail-conversation.component';
+// tslint:disable-next-line: max-line-length
+import { ConversationListCompanyComponent } from './user/company/conversation/conversation-list-company/conversation-list-company.component';
 
 
 
@@ -112,7 +122,11 @@ const routes: Routes = [
   {path: 'terms', component: TermsComponent},
   {path: 'statistics3', component: StatisticsByCategoryComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_COMPANY'}},
   {path: 'statistics4', component: StatisticsSoldComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_COMPANY'}},
-  {path: 'statistics5', component: StatisticsOffertComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_COMPANY'}}
+  {path: 'statistics5', component: StatisticsOffertComponent, canActivate: [AuthGuard, RoleGuard], data: {role: 'ROLE_COMPANY'}},
+  {path: 'myConversations/page/:page', component: ConversationListComponent, canActivate: [AuthGuard, RoleGuard],
+   data: {role: 'ROLE_CLIENT'}},
+  {path: 'Conversations/page/:page', component: ConversationListCompanyComponent, canActivate: [AuthGuard, RoleGuard],
+   data: {role: 'ROLE_COMPANY'}}
 ];
 
 @NgModule({
@@ -167,12 +181,13 @@ const routes: Routes = [
     StatisticsByCategoryComponent,
     StatisticsSoldComponent,
     StatisticsOffertComponent,
-
-
-
-
+    ConversationListComponent,
+    PaginatorMyConversationsComponent,
+    DetailConversationComponent,
+    ConversationListCompanyComponent,
 
   ],
+  entryComponents: [DetailConversationComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -182,7 +197,10 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule,
+    MatButtonModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -50,6 +50,7 @@ export class FormProductsComponent implements OnInit {
           width: 350,
           timer: 1800,
         });
+        console.log(this.product);
     }
     );
   }

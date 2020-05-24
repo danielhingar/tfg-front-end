@@ -63,6 +63,8 @@
           <div class="dropdown-divider" *ngIf="authService.hasRole('ROLE_CLIENT')"></div>
           <a class="dropdown-item" href="myClaim/page/0" *ngIf="authService.hasRole('ROLE_CLIENT')"> Mis Reclamaciones</a>
           <div class="dropdown-divider" *ngIf="authService.hasRole('ROLE_CLIENT')"></div>
+          <a class="dropdown-item" href="myConversations/page/0" *ngIf="authService.hasRole('ROLE_CLIENT')"> Mis Conversaciones</a>
+          <div class="dropdown-divider" *ngIf="authService.hasRole('ROLE_CLIENT')"></div>
           <button (click)="logout()" class="dropdown-item text-danger" type="submit">Cerrar sesión</button>
         </div>
       </li>

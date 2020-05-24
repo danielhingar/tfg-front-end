@@ -1,0 +1,35 @@
+
+<div class="animated fadeInDown container">
+    <h2>Mis conversaciones</h2>
+    <div *ngIf="conversations?.length == 0" class="alert alert-info" style="width: 40%;">
+         No hay ningúna conversación en su cuenta
+     </div>
+    <table class="table table-striped" *ngIf="conversations?.length > 0">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Tema</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Creada</th> 
+                <th scope="col"></th>
+            
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let conversation of conversations">
+                <td>{{conversation.id}}</td>
+                <td>{{conversation.issue}}</td>
+                <td>{{conversation.client.username}}</td>
+                <td>{{conversation.createDate}}</td>
+                
+                <td>
+                   <button mat-fab class="button2" (click)="openDialog(conversation)"><mat-icon> message</mat-icon></button>
+                </td>
+       
+
+            </tr>
+        </tbody>
+    </table>
+
+    <app-paginator-my-conversations *ngIf="paginador"  [paginador] ="paginador"></app-paginator-my-conversations>
+</div>

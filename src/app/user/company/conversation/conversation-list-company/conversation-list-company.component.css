@@ -1,0 +1,29 @@
+.container{
+    margin-top: 8%;
+    margin-bottom: 15%;
+}
+
+.button2 {
+    color: white;
+    background-color: #3CA8F7;
+  }
+
+  .button1 {
+  
+    background-color: #F13107;
+  }
+
+  @media screen and (max-width:414px){
+    .container{
+      margin-top: 20%;
+      
+    }
+  }
+  
+  @media screen and (max-width:360px){
+    
+      .container{
+        margin-top: 20%;
+      }
+      
+  }

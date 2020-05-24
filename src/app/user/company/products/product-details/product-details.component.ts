@@ -45,7 +45,7 @@ export class ProductDetailsComponent implements OnInit {
       const id = params.id;
       if (id) {
         this.productService.getProduct(id).subscribe( (product) => this.product = product);
-        
+
         this.puntuacion(id);
       }
 
