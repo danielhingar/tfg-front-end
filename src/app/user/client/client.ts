@@ -8,5 +8,5 @@ export class Client extends Usuario {
     codePostal: string;
     locality: string;
     province: string;
-    wishList: Product[] = [];
+    wishProducts: Product[] = [];
 }

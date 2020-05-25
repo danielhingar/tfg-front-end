@@ -17,6 +17,7 @@ export class ProductService {
   private urlEndPoint = URL_BACKEND + '/product';
   private urlEndPoint1 = URL_BACKEND + '/company/product';
   private urlEndPoint2 = URL_BACKEND + '/client/basket';
+  private urlEndPoint3 = URL_BACKEND + '/client';
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
 
@@ -174,6 +175,16 @@ export class ProductService {
 avgValoration(id): Observable<number> {
   return this.http.get(`${this.urlEndPoint}/avgValoration/${id}`, {headers: this.agregarAuthorizationHeader()}).pipe(
     map(response => response as number)
+  );
+}
+
+addWish(product: Product, username) {
+  return this.http.put<Product>(`${this.urlEndPoint3}/addWish/${username}/${product.id}`,
+   {headers: this.agregarAuthorizationHeader()}).pipe(
+    catchError( e => {
+      this.isNoAutorizado(e);
+      return throwError(e);
+    })
   );
 }
 }

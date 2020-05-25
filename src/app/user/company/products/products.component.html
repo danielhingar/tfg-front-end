@@ -22,6 +22,7 @@
                 
                 <img *ngIf="!product?.photo" src="https://i1.wp.com/www.lagraderia.com/wp-content/uploads/2018/12/no-imagen.jpg?fit=300%2C300" alt="NoImage" class="card-img"> 
                 <img *ngIf="product?.photo" src="{{product.photo}}" alt="PhotoProduct" class="card-img" >
+   
                 <div class="card-body">
                     <h5 class="offert"  *ngIf="product?.offert && product?.status !== 'SINSTOCK'">Descuento: {{product.offert}}%</h5>
                     <a class="title" href="/detailsProduct/{{product.id}}">{{product.name.toUpperCase()}}</a>
@@ -30,6 +31,14 @@
                     <span class="price" *ngIf="product?.offert && product?.status !== 'SINSTOCK'">Antes: {{product.price}}€</span>
                     <h4 class="offert" *ngIf="product?.offert && product?.status !== 'SINSTOCK'">Ahora:{{rebaja(product).toFixed(2)}}€</h4>
                     <h4 class="offert" *ngIf="product?.status === 'SINSTOCK'">SIN STOCK</h4>
+                </div>
+                <div class="container">
+                    <button mat-mini-fab color="grey" (click)="addWish(product)" (click)="openSnackBar('Se ha añadido a tu lista de deseados', 'Ver deseados')" style="float: right;" *ngIf="dislike(product)">
+                        <mat-icon>favorite_border</mat-icon>
+                    </button>
+                    <button mat-mini-fab color="grey" style="float: right;" *ngIf="like(product)">
+                        <mat-icon>favorite</mat-icon>
+                    </button>
                 </div>
                 
             </div>

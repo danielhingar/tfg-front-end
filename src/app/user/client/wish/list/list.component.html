@@ -1,11 +1,12 @@
 <div class="container">
-    <div class="alert alert-warning" role="alert" style="width: 60%;" *ngIf="client.wishList.length === 0">
+    <div class="alert alert-warning" role="alert" style="width: 60%;" *ngIf="products.length === 0">
         No hay ningún producto en su lista de deseados
       </div>
-<div class="card mb-3" style="max-width: 540px;" *ngFor="let product of client.wishList">
+<div class="row">
+<div class="card mb-2" style="max-width: 40%;max-height: 10%; margin-left: 5%;" *ngFor="let product of products">
     <div class="row no-gutters">
       <div class="col-md-4">
-        <img src="product.image" class="card-img" alt="image">
+        <img src="{{product.photo}}" class="card-img" alt="image">
       </div>
       <div class="col-md-8">
         <div class="card-body">
@@ -16,4 +17,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

@@ -7,6 +7,9 @@ import { Observable } from 'rxjs';
 import { ProductService } from './product.service';
 import { AuthService } from '../../../login/auth.service';
 import { URL_BACKEND } from '../../../config/config';
+import { ClientService } from '../../client/client.service';
+import swal from 'sweetalert2';
+import { MatSnackBar } from '@angular/material';
 
 
 
@@ -25,15 +28,18 @@ export class ProductsComponent implements OnInit {
   categories: string[] = [];
   pass: boolean;
   loading = true;
+  wishList: Product[] = [];
   urlBackend: string = URL_BACKEND;
   constructor(private companyService: CompanyService, private router: Router, private activatedRoute: ActivatedRoute,
-              private productService: ProductService, private authService: AuthService) { }
+              private productService: ProductService, private authService: AuthService, private clientService: ClientService,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit() {
+    this.loadClient();
+    console.log(this.wishList);
     this.pass = false;
     this.cargarProducts();
     this.cargarCompany();
-    
 
   }
 
@@ -130,5 +136,43 @@ export class ProductsComponent implements OnInit {
         return false;
       }
     }
+
+    loadClient(): void {
+      const client1 =  this.authService.usuario.username;
+
+      if (client1) {
+      this.clientService.getClient(this.authService.usuario.username).subscribe( (client) => this.wishList = client.wishProducts);
+      }
+    }
+
+  like(product: Product): boolean {
+    if (this.wishList.includes(product)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  dislike(product: Product): boolean {
+    if (!(this.wishList.includes(product))) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  openSnackBar(message, action) {
+   const snackBarRef = this.snackBar.open(message, action, {duration: 4000});
+   snackBarRef.onAction().subscribe(() => {
+    this.router.navigate(['wishList']);
+  });
+  }
+  addWish(product: Product) {
+    this.productService.addWish(product, this.authService.usuario.username).subscribe(
+      response => {
+        this.wishList.push(response);
+      }
+    );
+  }
   }
 
