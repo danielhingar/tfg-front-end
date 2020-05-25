@@ -33,12 +33,10 @@
                     <h4 class="offert" *ngIf="product?.status === 'SINSTOCK'">SIN STOCK</h4>
                 </div>
                 <div class="container">
-                    <button mat-mini-fab color="grey" (click)="addWish(product)" (click)="openSnackBar('Se ha añadido a tu lista de deseados', 'Ver deseados')" style="float: right;" *ngIf="dislike(product)">
+                    <button mat-mini-fab color="grey" (click)="addWish(product)" (click)="openSnackBar('Se ha añadido a tu lista de deseados', 'Ver deseados')" style="float: right;" >
                         <mat-icon>favorite_border</mat-icon>
                     </button>
-                    <button mat-mini-fab color="grey" style="float: right;" *ngIf="like(product)">
-                        <mat-icon>favorite</mat-icon>
-                    </button>
+                   
                 </div>
                 
             </div>

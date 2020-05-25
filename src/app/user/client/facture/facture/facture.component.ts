@@ -49,8 +49,12 @@ export class FactureComponent implements OnInit {
   }
 
   public calculatePrice(itemBasket: ItemBasket): number {
+    if (itemBasket.product.offert) {
+      return (itemBasket.quantity * (itemBasket.product.price - (itemBasket.product.price * (itemBasket.product.offert / 100))));
+    } else {
     return (itemBasket.quantity * itemBasket.product.price);
-}
+    }
+  }
 
   public caculateTotal(facture: Facture): number {
     let total = 0.00;

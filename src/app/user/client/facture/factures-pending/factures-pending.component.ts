@@ -36,8 +36,12 @@ export class FacturesPendingComponent implements OnInit {
   }
 
   public calculatePrice(itemBasket: ItemBasket): number {
+    if (itemBasket.product.offert) {
+      return (itemBasket.quantity * (itemBasket.product.price - (itemBasket.product.price * (itemBasket.product.offert / 100))));
+    } else {
     return (itemBasket.quantity * itemBasket.product.price);
-}
+    }
+  }
 
 public caculateTotal(): number {
   let total = 0.00;

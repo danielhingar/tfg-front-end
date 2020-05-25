@@ -27,7 +27,7 @@ export class BasketComponent implements OnInit {
 
   ngOnInit() {
     this.loadBasket();
-   
+
   }
 
   loadBasket(): void {
@@ -35,7 +35,11 @@ export class BasketComponent implements OnInit {
   }
 
   public calculatePrice(itemBasket: ItemBasket): number {
+    if (itemBasket.product.offert) {
+      return (itemBasket.quantity * (itemBasket.product.price - (itemBasket.product.price * (itemBasket.product.offert / 100))));
+    } else {
     return (itemBasket.quantity * itemBasket.product.price);
+    }
   }
 
   updateQuantity(id1: number, id: number, event: any): void {

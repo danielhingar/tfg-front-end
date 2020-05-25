@@ -181,8 +181,10 @@
                             <p style="margin-top: 1%;margin-left: -20%;">{{item.product.description}}</p>
                         </div>
                         <div class="col-6">
-                            <p style="font-weight: 500;color:darkslategrey;"> Precio Unidad:
+                            <p style="font-weight: 500;color:darkslategrey;" *ngIf="!item.product.offert"> Precio Unidad:
                                 {{item.product.price.toFixed(2)}} €</p>
+                            <p style="font-weight: 500;color:darkslategrey;" *ngIf="item.product.offert"> Precio Unidad:
+                                    {{( (item.product.price - (item.product.price * (item.product.offert / 100)))).toFixed(2)}}€</p>
                             <p style="font-weight: 500;color:darkslategrey;"> Cantidad: {{item.quantity}}</p>
                             <p style="font-weight: 500;color:darkslategrey;" *ngIf="item?.size != 'null'"> Talla:
                                 {{item.size}}</p>

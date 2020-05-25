@@ -28,7 +28,8 @@
                             </td>
 
                             
-                            <td>{{item.product.price.toFixed(2)}}€</td>
+                            <td *ngIf="!item.product.offert">{{item.product.price.toFixed(2)}}€</td>
+                            <td *ngIf="item.product.offert">{{(item.quantity * (item.product.price - (item.product.price * (item.product.offert / 100)))).toFixed(2)}}€</td>
                             <td>
                                 
                                 <input type="number" min="1" max="{{item.product.stock}}" autocomplete="off" value="{{item.quantity}}"

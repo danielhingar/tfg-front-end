@@ -8,6 +8,7 @@ import swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../login/auth.service';
 import { URL_BACKEND } from '../../../config/config';
+import { Client } from '../../client/client';
 
 @Injectable({
   providedIn: 'root'
@@ -178,8 +179,8 @@ avgValoration(id): Observable<number> {
   );
 }
 
-addWish(product: Product, username) {
-  return this.http.put<Product>(`${this.urlEndPoint3}/addWish/${username}/${product.id}`,
+addWish(client: Client , product, username): Observable<Client> {
+  return this.http.put<Client>(`${this.urlEndPoint3}/addWish/${username}/${product.id}`, client,
    {headers: this.agregarAuthorizationHeader()}).pipe(
     catchError( e => {
       this.isNoAutorizado(e);

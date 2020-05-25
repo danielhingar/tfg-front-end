@@ -16,7 +16,7 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
     this.loadClient();
-    console.log(this.products);
+
   }
 
   loadClient(): void {

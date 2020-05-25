@@ -6,11 +6,12 @@
 <div class="card mb-2" style="max-width: 40%;max-height: 10%; margin-left: 5%;" *ngFor="let product of products">
     <div class="row no-gutters">
       <div class="col-md-4">
-        <img src="{{product.photo}}" class="card-img" alt="image">
+        <img *ngIf="!product?.photo" src="https://i1.wp.com/www.lagraderia.com/wp-content/uploads/2018/12/no-imagen.jpg?fit=300%2C300" alt="NoImage" class="card-img"> 
+        <img *ngIf="product?.photo" src="{{product.photo}}" alt="PhotoProduct"  class="card-img" >
       </div>
       <div class="col-md-8">
         <div class="card-body">
-          <h5 class="card-title">{{product.name}}</h5>
+          <h5 class="card-title">{{product.name}}</h5> 
           <p class="card-text">{{product.description}}</p>
           <p class="card-text"><small class="text-muted">{{product.createDate}}</small></p>
         </div>
