@@ -24,7 +24,7 @@
                 <th scope="col">Cliente</th>
                 <th scope="col">Nº productos</th> 
                 <th scope="col">Importe</th>
-                <th scope="col">Ver</th>
+                <th scope="col">Detalles</th>
             </tr>
         </thead>
         <tbody>
@@ -35,7 +35,7 @@
                 <td>{{count(facture)}}</td>
                 <td>{{caculateTotal(facture).toFixed(2)}}€</td>
                 <td>
-                    <button type="button" name="details" style="color: white;background-color: #ff6800;" [routerLink]="['/detailsFacture', facture.id]"  class="btn btn-sm">Ver detalles</button>
+                    <button mat-mini-fab matTooltip="Ver detalle" style="background-color: transparent;color: black;" type="button" name="details" [routerLink]="['/detailsFacture', facture.id]"  class="btn btn-sm"><mat-icon>info</mat-icon></button>
                 </td>
                 
 

@@ -23,9 +23,9 @@
                 <td>{{conversation.createDate}}</td>
                 
                 <td>
-                   <button mat-fab class="button2" (click)="openDialog(conversation)"><mat-icon> message</mat-icon></button>
+                   <button mat-fab  matTooltip="Ver mensajes" class="button2" (click)="openDialog(conversation)"><mat-icon> message</mat-icon></button>
                 </td>
-                <td><button mat-fab class="button1" (click)="delete(conversation)"><mat-icon>delete</mat-icon></button></td>
+                <td><button mat-fab  matTooltip="Eliminar" class="button1" (click)="delete(conversation)"><mat-icon>delete</mat-icon></button></td>
 
             </tr>
         </tbody>

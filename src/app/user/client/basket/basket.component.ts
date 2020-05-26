@@ -180,7 +180,7 @@ export class BasketComponent implements OnInit {
     if (this.res1 === true) {
       this.res = true;
     }
-   
+
     return this.res;
   }
 

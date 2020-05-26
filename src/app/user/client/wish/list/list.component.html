@@ -11,9 +11,16 @@
       </div>
       <div class="col-md-8">
         <div class="card-body">
-          <h5 class="card-title">{{product.name}}</h5> 
+          
+          <h5 class="card-title"><a  style="color: black;" href="/detailsProduct/{{product.id}}">{{product.name}}</a></h5>
+       
           <p class="card-text">{{product.description}}</p>
+          <div class="row">
           <p class="card-text"><small class="text-muted">{{product.createDate}}</small></p>
+          
+          <button mat-mini-fab  matTooltip="Eliminar" style="background-color: #F13107;margin-left: 3%;" (click)="removeWish(product)"><mat-icon>delete</mat-icon></button>
+       
+        </div>
         </div>
       </div>
     </div>

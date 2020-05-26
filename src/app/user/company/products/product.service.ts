@@ -188,4 +188,14 @@ addWish(client: Client , product, username): Observable<Client> {
     })
   );
 }
+
+removeWish(client: Client , product, username): Observable<Client> {
+  return this.http.delete<Client>(`${this.urlEndPoint3}/removeWish/${username}/${product.id}`,
+   {headers: this.agregarAuthorizationHeader()}).pipe(
+    catchError( e => {
+      this.isNoAutorizado(e);
+      return throwError(e);
+    })
+  );
+}
 }

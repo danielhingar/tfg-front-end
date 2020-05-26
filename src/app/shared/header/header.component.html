@@ -9,18 +9,19 @@
     
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" *ngIf="authService.isAuthenticated()">
-        <a class="btn" href="/home/page/0">
-        <mat-icon href="/home/page/0">home</mat-icon>
-        </a>
+        <button mat-icon-button  matTooltip="Inicio" style="background-color: transparent;color: black;margin-right: 2%;" type="button" name="details" [routerLink]="['/home/page/0']"  class="btn btn-sm"><mat-icon>home</mat-icon></button>
       </li>
       <li class="nav-item" *ngIf="authService.hasRole('ROLE_ADMIN')">
-        <a class="nav-link"  href="/configuration"><mat-icon>settings</mat-icon></a>
+        <button mat-icon-button  matTooltip="Configuración" style="background-color: transparent;color: black;margin-right: 2%;" type="button" name="details" [routerLink]="['/configuration']"  class="btn btn-sm"><mat-icon>settings</mat-icon></button>
+       
       </li>
       <li class="nav-item" *ngIf="authService.hasRole('ROLE_ADMIN')">
-        <a class="nav-link"  href="/shippings">  <mat-icon> local_shipping</mat-icon></a>
+        <button mat-icon-button  matTooltip="Métodos de envíos" style="background-color: transparent;color: black;margin-right: 2%;" type="button" name="details" [routerLink]="['/shippings']"  class="btn btn-sm"><mat-icon>local_shipping</mat-icon></button>
+
       </li>
-      <li class="nav-item" *ngIf="authService.hasRole('ROLE_ADMIN')" title="nav2">
-        <a class="nav-link"  href="/statistics"> <mat-icon>equalizer</mat-icon> </a>
+      <li class="nav-item" *ngIf="authService.hasRole('ROLE_ADMIN')">
+        <button mat-icon-button  matTooltip="Estadísticas" style="background-color: transparent;color: black;margin-right: 2%;" type="button" name="details" [routerLink]="['/statistics']"  class="btn btn-sm"><mat-icon>equalizer</mat-icon></button>
+
       </li>
       <li *ngIf="authService.hasRole('ROLE_ADMIN')" class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -40,18 +41,13 @@
     </ul>
     <ul class="navbar-nav navbar-right">
       <li class="nav-item" *ngIf="authService.hasRole('ROLE_CLIENT')">
-        <a class="btn" href="/wishList">
-          <mat-icon>favorite</mat-icon>
-        </a>
+        <button mat-icon-button  matTooltip="Productos deseados" style="background-color: transparent;color: black;margin-right: 2%;" type="button" name="details" [routerLink]="['/wishList']"  class="btn btn-sm"><mat-icon>favorite</mat-icon></button>
        
       </li>
     </ul>
     <ul class="navbar-nav navbar-right">
       <li class="nav-item" *ngIf="authService.hasRole('ROLE_CLIENT')">
-        <a class="btn" href="/myBasket">
-          <mat-icon>shopping_cart</mat-icon>
-        </a>
-       
+        <button mat-icon-button  matTooltip="Ver cesta" style="background-color: transparent;color: black;" type="button" name="details" [routerLink]="['/myBasket']"  class="btn btn-sm"><mat-icon>shopping_cart</mat-icon></button> 
       </li>
     </ul>
 

@@ -33,10 +33,11 @@
                 <td>{{claim.facture.id}}</td>
                 <td>{{claim.status}}</td>
                 <td>
-                    <button type="button" style="color: white;background-color: #ff6800;" name="details" *ngIf="claim.reporter === null" class="btn btn-sm" [routerLink]="['/showClaim', claim.id]" >Detalles</button>
+                    <button mat-mini-fab matTooltip="Ver detalle" style="background-color: transparent;color: black;" type="button" name="details" [routerLink]="['/showClaim', claim.id]" *ngIf="claim.reporter === null" class="btn btn-sm"><mat-icon>info</mat-icon></button>
+    
                 </td>
                 <td>
-                    <button type="button" style="  color: white;background-color: #ff6800;" name="assign" (click)="assign(claim)"  class="btn btn-sm" *ngIf="claim.reporter === null">Asignar</button>
+                    <button mat-mini-fab matTooltip="Asignar" style="background-color: transparent;color: black;" type="button" name="details" (click)="assign(claim)" *ngIf="claim.reporter === null" class="btn btn-sm"><mat-icon>loupe</mat-icon></button>
                 </td>
                 
                 

@@ -66,6 +66,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { TermsComponent } from './shared/terms/terms.component';
 import { StatisticsByCategoryComponent } from './user/company/statistics/statistics-by-category/statistics-by-category.component';
@@ -211,6 +213,8 @@ const routes: Routes = [
     MatButtonModule,
     MatStepperModule,
     MatSnackBarModule,
+    MatTabsModule,
+    MatTooltipModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],

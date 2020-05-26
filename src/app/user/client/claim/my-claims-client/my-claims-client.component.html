@@ -23,10 +23,12 @@
                 <td>{{claim.facture.id}}</td>
                 <td>{{claim.status}}</td>
                 <td>
-                    <button type="button" style="color: white;background-color: #ff6800;" name="details" class="btn btn-sm" [routerLink]="['/showClaim', claim.id]" >Detalles</button>
+                    <button mat-mini-fab  matTooltip="Ver detalle" style="background-color: transparent;color: black;" type="button" name="details" [routerLink]="['/showClaim', claim.id]"  class="btn btn-sm"><mat-icon>info</mat-icon></button>
+                   
                 </td>
                 <td>
-                    <button type="button" name="eliminar" (click)="delete(claim)" class="btn btn-danger btn-sm" *ngIf="claim.status === 'DENEGADA' || claim.status === 'ACEPTADA'">Eliminar</button>
+
+                    <button mat-mini-fab  matTooltip="Eliminar" style="background-color: #F13107" class="button1" (click)="delete(claim)"><mat-icon>delete</mat-icon></button>
                 </td>
 
             </tr>

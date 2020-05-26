@@ -1,7 +1,12 @@
 .container{
     margin-top: 8%;
     margin-bottom: 15%;
-    
+    margin-left: 10%;
+}
+
+.card-title{
+    cursor: pointer;
+    color: black;
 }
 
 @media screen and (max-width:414px){

@@ -117,7 +117,7 @@
         <span class="fa fa-star checked" *ngFor="let element of arrayStarts(comment)"></span> <span class="fa fa-star" *ngFor="let element of arrayStartsEmpty(comment)"></span>
         
       </div>
-      <div class="card-footer text-muted">{{ comment.createDate }} <button type="button" name="eliminar" (click)="delete(comment)" class="btn1 btn-sm" style="color: darkred;background-color: white;font-weight: 600;" *ngIf="condition(comment) === true">Eliminar</button></div>
+      <div class="card-footer text-muted">{{ comment.createDate }} <button mat-mini-fab matTooltip="Eliminar" style="background-color: #F13107" class="button1" (click)="delete(comment)"><mat-icon>delete</mat-icon></button>
 
     </div>
     <br />

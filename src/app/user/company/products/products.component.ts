@@ -140,7 +140,7 @@ export class ProductsComponent implements OnInit {
 
     loadClient(): void {
 
-      this.clientService.getClient(this.authService.usuario.username).subscribe( (client) => this.wishList = client.wishProducts);
+      this.clientService.getClient(this.authService.usuario.username).subscribe( (client) => this.client = client);
 
     }
 
@@ -159,6 +159,22 @@ export class ProductsComponent implements OnInit {
 
       }
     );
+  }
+
+  productLikes(product: Product): boolean{
+    if (!(this.client.wishProducts.find( x => x.id === product.id))) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  productNoLikes(product: Product): boolean{
+    if ((this.client.wishProducts.find( x => x.id === product.id))) {
+      return true;
+    } else {
+      return false;
+    }
   }
   }
 

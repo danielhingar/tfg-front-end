@@ -33,7 +33,7 @@
                 <td>{{claim.facture.id}}</td>
                 <td>{{claim.status}}</td>
                 <td>
-                    <button type="button" style="color: white;background-color: #ff6800;" name="details" class="btn btn-sm" [routerLink]="['/showClaim', claim.id]" *ngIf="claim.status === 'Pendiente de respuesta' || claim.status === 'EN PROCESO'" >Resolver</button>
+                    <button mat-mini-fab matTooltip="Resolver" style="background-color: transparent;color: black;" type="button" name="details" [routerLink]="['/showClaim', claim.id]" *ngIf="claim.status === 'Pendiente de respuesta' || claim.status === 'EN PROCESO'"   class="btn btn-sm"><mat-icon> rate_review</mat-icon></button>
                 </td>
                 
                 
