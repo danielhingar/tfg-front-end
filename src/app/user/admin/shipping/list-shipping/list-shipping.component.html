@@ -17,7 +17,7 @@
                 <div class="card-body">
                     <h3 class="title" [routerLink]="['/updateShipping', shipping.id]" style="color: white;">{{shipping.title.toUpperCase()}}</h3>
                     <h4 class="price" style="text-align: right;color: darkred;">{{shipping.price}}€</h4>
-                    <button mat-mini-fab style="background-color: #F13107" class="button1" (click)="delete(shipping)"><mat-icon>delete</mat-icon></button>
+                    <button mat-mini-fab matTooltip="Eliminar" style="background-color:  #F13107" class="button1" (click)="delete(shipping)"><mat-icon>delete</mat-icon></button>
                 </div>
                 
             </div>

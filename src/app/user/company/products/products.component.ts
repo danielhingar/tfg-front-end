@@ -22,7 +22,12 @@ import { Client } from '../../client/client';
 export class ProductsComponent implements OnInit {
   public company: Company = new Company();
   name: string;
+  priceMin: number;
+  priceMax: number;
   category: string;
+  category1 = 'None';
+  stock: boolean;
+  offert: boolean;
   products: Product[] = [];
   products1: Product[] = [];
   wishList: Product[] = [];
@@ -42,6 +47,61 @@ export class ProductsComponent implements OnInit {
     this.cargarProducts();
     this.cargarCompany();
 
+  }
+
+  search() {
+    if (this.category !== undefined && this.category !== 'None' && this.name !== undefined) {
+      this.products = [];
+      this.products = this.products1.filter(res => {
+        if (res.category.toLocaleUpperCase() === this.category.toLocaleUpperCase() &&
+        res.name.toLocaleUpperCase().match(this.name.toLocaleUpperCase())) {
+          return this.products.push(res);
+        }
+      });
+    }
+    if (this.category !== undefined && this.category !== 'None' && this.name !== undefined && this.offert === true) {
+      this.products = [];
+      this.products = this.products1.filter(res => {
+        if (res.category.toLocaleUpperCase() === this.category.toLocaleUpperCase() &&
+        res.name.toLocaleUpperCase().match(this.name.toLocaleUpperCase()) && res.offert) {
+          return this.products.push(res);
+        }
+      });
+    }
+    if (this.category !== undefined && this.category !== 'None' && this.name === undefined) {
+      this.products = [];
+      this.products = this.products1.filter( res => {
+        return res.category.toLocaleUpperCase().match(this.category.toLocaleUpperCase());
+      });
+    }
+    if (this.name !== undefined && (this.category === 'None' || this.category === undefined)) {
+      this.products = [];
+      this.products = this.products1.filter( res => {
+        return res.name.toLocaleUpperCase().match(this.name.toLocaleUpperCase());
+      });
+    }
+    if ((this.category === 'None' || this.category === undefined) && this.name === undefined && (this.offert === false
+      || this.offert === undefined)) {
+      this.ngOnInit();
+    }
+    if (this.offert === true && (this.name === undefined || this.name === '')
+    && (this.category === undefined || this.category === 'None')) {
+      this.products = [];
+      this.products = this.products1.filter(res => {
+        if (res.offert) {
+          return this.products.push(res);
+        }
+      });
+    }
+    if (this.offert === true && (this.name === undefined || this.name === '')
+    && this.category !== undefined && this.category !== 'None') {
+      this.products = [];
+      this.products = this.products1.filter(res => {
+        if (res.offert && res.category.toLocaleUpperCase() === this.category.toLocaleUpperCase()) {
+          return this.products.push(res);
+        }
+      });
+    }
   }
 
 
@@ -75,28 +135,6 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  Search() {
-    if (this.category !== '' && this.name !== '' && this.category !== undefined) {
-      this.pass = true;
-      this.products = [];
-      this.products = this.products1.filter(res1 => {
-        if (res1.category.toLocaleUpperCase() === this.category.toLocaleUpperCase()
-         && res1.name.toLocaleLowerCase().match(this.name.toLocaleLowerCase())) {
-          return this.products.push(res1);
-        }
-      });
-    }
-    if (this.name !== '' && (this.category === '' || this.category === undefined)) {
-      this.pass = true;
-      this.products = this.products1.filter(res => {
-        return res.name.toLocaleLowerCase().match(this.name.toLocaleLowerCase());
-      });
-
-    } else if (this.name === '') {
-      this.ngOnInit();
-    }
-  }
-
   rebaja(product: Product): number {
     return product.price - (product.price * (product.offert / 100));
   }
@@ -110,47 +148,36 @@ export class ProductsComponent implements OnInit {
     return this.categories;
   }
 
-  SearchCategory(category1) {
-    this.category = category1;
-    if (this.category !== '') {
-      this.pass = true;
-      this.products = this.products1.filter(res => {
-        return res.category.toLocaleLowerCase().match(this.category.toLocaleLowerCase());
-      });
-      } else if (this.category === '') {
-        this.ngOnInit();
-      }
-
-    }
 
   cleanFilter() {
-      this.name = '';
-      this.category = '';
-      this.pass = false;
-      this.cargarProducts();
+    this.name = '';
+    this.category = '';
+    this.pass = false;
+    this.cargarProducts();
+  }
+
+
+  loadClient(): void {
+
+    this.clientService.getClient(this.authService.usuario.username).subscribe((client) => this.client = client);
+
+  }
+
+  formatLabel(value: number) {
+    if (value >= 1000) {
+      return Math.round(value / 1000) + 'k';
     }
 
-  igual(category1): boolean {
-      if (this.category === category1) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-
-    loadClient(): void {
-
-      this.clientService.getClient(this.authService.usuario.username).subscribe( (client) => this.client = client);
-
-    }
+    return value;
+  }
 
 
 
   openSnackBar(message, action) {
-   const snackBarRef = this.snackBar.open(message, action, {duration: 4000});
-   snackBarRef.onAction().subscribe(() => {
-    this.router.navigate(['wishList']);
-  });
+    const snackBarRef = this.snackBar.open(message, action, { duration: 4000 });
+    snackBarRef.onAction().subscribe(() => {
+      this.router.navigate(['wishList']);
+    });
   }
 
   addWish(product: Product) {
@@ -161,20 +188,20 @@ export class ProductsComponent implements OnInit {
     );
   }
 
-  productLikes(product: Product): boolean{
-    if (!(this.client.wishProducts.find( x => x.id === product.id))) {
+  productLikes(product: Product): boolean {
+    if (!(this.client.wishProducts.find(x => x.id === product.id))) {
       return true;
     } else {
       return false;
     }
   }
 
-  productNoLikes(product: Product): boolean{
-    if ((this.client.wishProducts.find( x => x.id === product.id))) {
+  productNoLikes(product: Product): boolean {
+    if ((this.client.wishProducts.find(x => x.id === product.id))) {
       return true;
     } else {
       return false;
     }
   }
-  }
+}
 

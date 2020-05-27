@@ -58,14 +58,6 @@
     color: black;
 }
 
-input{
-    border: 2px solid;
-    border-color: cadetblue;
-}
-
-input::placeholder{
-    font-family: 'Noto Serif SC', serif;
-}
 
 span{
     text-decoration: line-through;

@@ -68,7 +68,13 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatInputModule} from '@angular/material/input';
+import {MatSliderModule} from '@angular/material';
+import {MatCardModule} from '@angular/material/card';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatExpansionModule} from '@angular/material/expansion';
 import { TermsComponent } from './shared/terms/terms.component';
 import { StatisticsByCategoryComponent } from './user/company/statistics/statistics-by-category/statistics-by-category.component';
 import { StatisticsSoldComponent } from './user/company/statistics/statistics-sold/statistics-sold.component';
@@ -215,6 +221,12 @@ const routes: Routes = [
     MatSnackBarModule,
     MatTabsModule,
     MatTooltipModule,
+    MatSelectModule,
+    MatExpansionModule,
+    MatInputModule,
+    MatSliderModule,
+    MatCardModule,
+    MatSlideToggleModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],

@@ -1,50 +1,107 @@
-
 <div class="container">
-    <p class="animated zoomIn name">{{company.businessName}}</p>  <a [routerLink]="['/about', company.id]" role="button" style="background-color: darkorange;color: black; border-radius: 4px;width: 80px;">¿Quiénes somos?</a><a [routerLink]="['/conversation', company.username]" role="button" style="background-color: grey;color: black; border-radius: 4px;width: 80px;margin-left: 4%;">Contactar</a>
+    <p class="animated zoomIn name">{{company.businessName}}</p> <a [routerLink]="['/about', company.id]" role="button"
+        style="background-color: darkorange;color: black; border-radius: 4px;width: 80px;">¿Quiénes somos?</a><a
+        [routerLink]="['/conversation', company.username]" role="button"
+        style="background-color: grey;color: black; border-radius: 4px;width: 80px;margin-left: 4%;">Contactar</a>
     <br>
-    <input  class="animated zoomIn form-control" [(ngModel)]="name" type="text" placeholder="Buscar..." aria-label="Buscar" #myInput (input)="Search()" style="width: 30%;float: right;margin-top:-3%;">
-    <br>
-    <mat-spinner class="spinner" diameter="50" strokeWidth="3" *ngIf="loading===true"></mat-spinner>
-    <button class="btn btn-outline-dark" *ngFor="let category1 of loadCategories()" (click)='SearchCategory(category1)' [disabled]="igual(category1)">{{category1}}</button>
-    <button class="btn btn-outline-info"  (click)='cleanFilter()'>Borrar filtros</button>
 
-    <div *ngIf="products?.length == 0  && (( name === undefined && category === undefined) || ( name === '' && category === ''))" class="alert alert-info" style="width: 70%;">
-        Lo sentimos, no hay productos todavía de esta empresa
-     </div>
-     <div *ngIf="products?.length == 0 && (name !== '' || category !== '') && (name !== undefined || category !== undefined)" class="alert alert-info" style="width: 70%;">
-        Lo sentimos, no hay productos que cumplan esos requisitos
+    <mat-spinner class="spinner" diameter="50" strokeWidth="3" *ngIf="loading===true"></mat-spinner>
+    <br>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                FILTROS
+            </mat-panel-title>
+
+        </mat-expansion-panel-header>
+
+        <mat-form-field>
+            <mat-label>Nombre</mat-label>
+            <input matInput placeholder="Camiseta" [(ngModel)]="name" type="text" (input)="search()">
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field>
+            <mat-label>Categoría</mat-label>
+            <mat-select [(ngModel)]="category" (selectionChange)="search()">
+                <mat-option [value]="category1">Ninguna</mat-option>
+                <mat-option *ngFor="let category of loadCategories()" [value]="category">{{category}}</mat-option>
+            </mat-select>
+        </mat-form-field>
         
-     </div>
+        <br>
+        <br>
+        <mat-card-content>
+            <div class="row" style="margin-left: 0.5%;">
+            <h6>Oferta</h6>
+            <mat-slide-toggle [(ngModel)]="offert" (change)="search()" color="primary"></mat-slide-toggle>
+            <h6 style="margin-left: 3%;">En stock</h6>
+            <mat-slide-toggle [(ngModel)]="stock" color="primary"></mat-slide-toggle>
+            
+        </div>
+        </mat-card-content>
+        <br>
+        <mat-card-content>
+            <h6>Precio mínimo</h6>
+            <mat-slider thumbLabel [displayWith]="formatLabel" [(ngModel)]="priceMin" tickInterval="1" min="1" max="1000"></mat-slider>
+        
+        </mat-card-content>
+        <mat-card-content>
+            <h6>Precio máximo</h6>
+            <mat-slider thumbLabel [displayWith]="formatLabel" [(ngModel)]="priceMax" tickInterval="0.5" min="{{priceMin}}" max="10000"></mat-slider>
+        </mat-card-content>
+
+
+    </mat-expansion-panel>
+
+
+    <div *ngIf="products?.length == 0  && (( name === undefined && category === undefined) || ( name === '' && category === ''))"
+        class="alert alert-info" style="width: 70%;">
+        Lo sentimos, no hay productos todavía de esta empresa
+    </div>
+    <div *ngIf="products?.length == 0 && (name !== '' || category !== '') && (name !== undefined || category !== undefined)"
+        class="alert alert-info" style="width: 70%;">
+        Lo sentimos, no hay productos que cumplan esos requisitos
+
+    </div>
     <div class="row" *ngIf="products?.length > 0">
-       
+
         <div class="col-sm" *ngFor="let product of products">
             <div class="animated zoomIn card" *ngIf="loading===false">
-                
-                <img *ngIf="!product?.photo" src="https://i1.wp.com/www.lagraderia.com/wp-content/uploads/2018/12/no-imagen.jpg?fit=300%2C300" alt="NoImage" class="card-img"> 
-                <img *ngIf="product?.photo" src="{{product.photo}}" alt="PhotoProduct" class="card-img" >
-   
+
+                <img *ngIf="!product?.photo"
+                    src="https://i1.wp.com/www.lagraderia.com/wp-content/uploads/2018/12/no-imagen.jpg?fit=300%2C300"
+                    alt="NoImage" class="card-img">
+                <img *ngIf="product?.photo" src="{{product.photo}}" alt="PhotoProduct" class="card-img">
+
                 <div class="card-body">
-                    <h5 class="offert"  *ngIf="product?.offert && product?.status !== 'SINSTOCK'">Descuento: {{product.offert}}%</h5>
+                    <h5 class="offert" *ngIf="product?.offert && product?.status !== 'SINSTOCK'">Descuento:
+                        {{product.offert}}%</h5>
                     <a class="title" href="/detailsProduct/{{product.id}}">{{product.name.toUpperCase()}}</a>
                     <h4 class="price" *ngIf="!product?.offert">{{product.price}}€</h4>
                     <br>
-                    <span class="price" *ngIf="product?.offert && product?.status !== 'SINSTOCK'">Antes: {{product.price}}€</span>
-                    <h4 class="offert" *ngIf="product?.offert && product?.status !== 'SINSTOCK'">Ahora:{{rebaja(product).toFixed(2)}}€</h4>
+                    <span class="price" *ngIf="product?.offert && product?.status !== 'SINSTOCK'">Antes:
+                        {{product.price}}€</span>
+                    <h4 class="offert" *ngIf="product?.offert && product?.status !== 'SINSTOCK'">
+                        Ahora:{{rebaja(product).toFixed(2)}}€</h4>
                     <h4 class="offert" *ngIf="product?.status === 'SINSTOCK'">SIN STOCK</h4>
                 </div>
                 <div class="container">
-                    <button mat-mini-fab matTooltip="Añadir a deseados" color="grey" (click)="addWish(product)" *ngIf="(productLikes(product))" (click)="openSnackBar('Se ha añadido a tu lista de deseados', 'Ver deseados')" style="float: right;" >
+                    <button mat-mini-fab matTooltip="Añadir a deseados" color="grey" (click)="addWish(product)"
+                        *ngIf="(productLikes(product))"
+                        (click)="openSnackBar('Se ha añadido a tu lista de deseados', 'Ver deseados')"
+                        style="float: right;">
                         <mat-icon>favorite_border</mat-icon>
                     </button>
-                    <button mat-mini-fab  matTooltip="Añadido" color="grey"  *ngIf="(productNoLikes(product))" style="float: right;" disabled>
+                    <button mat-mini-fab matTooltip="Añadido" color="grey" *ngIf="(productNoLikes(product))"
+                        style="float: right;" disabled>
                         <mat-icon>favorite</mat-icon>
                     </button>
-                   
+
                 </div>
-                
+
             </div>
         </div>
     </div>
     <br>
-    <app-paginator-products-list *ngIf="paginador"  [paginador] ="paginador"></app-paginator-products-list>
+    <app-paginator-products-list *ngIf="paginador" [paginador]="paginador"></app-paginator-products-list>
 </div>
