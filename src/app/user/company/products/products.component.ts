@@ -32,6 +32,7 @@ export class ProductsComponent implements OnInit {
   offert: boolean;
   products: Product[] = [];
   products1: Product[] = [];
+  products2: Product[] = [];
   wishList: Product[] = [];
   paginador: any;
   categories: string[] = [];
@@ -99,8 +100,52 @@ export class ProductsComponent implements OnInit {
         });
       }
     }
-
-
+    if (this.name === undefined ) {
+      this.products = [];
+      this.name = '';
+      this.products = this.products1.filter(res => {
+        return res.name.toLocaleUpperCase().match(this.name.toLocaleUpperCase());
+      });
+      if (this.category !== undefined && this.category !== this.category1) {
+        this.products = this.products.filter(res => {
+          return res.category.toLocaleUpperCase().match(this.category.toLocaleUpperCase());
+        });
+      }
+      if (this.offert === true) {
+        this.products = this.products.filter(res => {
+          if ( res.offert) {
+            return this.products.push(res);
+          }
+        });
+      }
+      if (this.stock === true) {
+        this.products = this.products.filter(res => {
+          if ( +res.stock !== 0) {
+            return this.products.push(res);
+          }
+        });
+      }
+      if (this.priceMin !== undefined && this.priceMin !== 1) {
+        this.products = this.products.filter(res => {
+          if (res.offert && this.rebaja(res) > this.priceMin) {
+            return this.products.push(res);
+          }
+          if (res.price > this.priceMin && !res.offert) {
+            return this.products.push(res);
+          }
+        });
+      }
+      if (this.priceMax !== undefined && this.priceMax !== this.priceMin) {
+        this.products = this.products.filter(res => {
+          if (res.offert && this.rebaja(res) < this.priceMax) {
+            return this.products.push(res);
+          }
+          if (res.price < this.priceMax && !res.offert) {
+            return this.products.push(res);
+          }
+        });
+      }
+    }
   }
 
 
@@ -115,6 +160,7 @@ export class ProductsComponent implements OnInit {
         products => {
           this.products = products.content as Product[];
           this.products1 = products.content as Product[];
+          this.products2 = products.content as Product[];
           this.paginador = products;
           setTimeout(() => {
             this.loading = false;
