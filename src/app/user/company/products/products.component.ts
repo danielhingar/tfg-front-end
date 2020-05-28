@@ -23,9 +23,11 @@ export class ProductsComponent implements OnInit {
   public company: Company = new Company();
   name: string;
   priceMin: number;
+  priceMin1: number;
   priceMax: number;
   category: string;
   category1 = 'None';
+  priceMax1: number;
   stock: boolean;
   offert: boolean;
   products: Product[] = [];
@@ -38,70 +40,67 @@ export class ProductsComponent implements OnInit {
   client: Client = new Client();
   urlBackend: string = URL_BACKEND;
   constructor(private companyService: CompanyService, private router: Router, private activatedRoute: ActivatedRoute,
-              private productService: ProductService, private authService: AuthService, private clientService: ClientService,
-              private snackBar: MatSnackBar) { }
+    private productService: ProductService, private authService: AuthService, private clientService: ClientService,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.loadClient();
     this.pass = false;
     this.cargarProducts();
     this.cargarCompany();
+    this.loadPriceMin();
+    this.loadPriceMax();
 
   }
 
   search() {
-    if (this.category !== undefined && this.category !== 'None' && this.name !== undefined) {
+    if (this.name !== undefined ) {
       this.products = [];
       this.products = this.products1.filter(res => {
-        if (res.category.toLocaleUpperCase() === this.category.toLocaleUpperCase() &&
-        res.name.toLocaleUpperCase().match(this.name.toLocaleUpperCase())) {
-          return this.products.push(res);
-        }
-      });
-    }
-    if (this.category !== undefined && this.category !== 'None' && this.name !== undefined && this.offert === true) {
-      this.products = [];
-      this.products = this.products1.filter(res => {
-        if (res.category.toLocaleUpperCase() === this.category.toLocaleUpperCase() &&
-        res.name.toLocaleUpperCase().match(this.name.toLocaleUpperCase()) && res.offert) {
-          return this.products.push(res);
-        }
-      });
-    }
-    if (this.category !== undefined && this.category !== 'None' && this.name === undefined) {
-      this.products = [];
-      this.products = this.products1.filter( res => {
-        return res.category.toLocaleUpperCase().match(this.category.toLocaleUpperCase());
-      });
-    }
-    if (this.name !== undefined && (this.category === 'None' || this.category === undefined)) {
-      this.products = [];
-      this.products = this.products1.filter( res => {
         return res.name.toLocaleUpperCase().match(this.name.toLocaleUpperCase());
       });
+      if (this.category !== undefined && this.category !== this.category1) {
+        this.products = this.products.filter(res => {
+          return res.category.toLocaleUpperCase().match(this.category.toLocaleUpperCase());
+        });
+      }
+      if (this.offert === true) {
+        this.products = this.products.filter(res => {
+          if ( res.offert) {
+            return this.products.push(res);
+          }
+        });
+      }
+      if (this.stock === true) {
+        this.products = this.products.filter(res => {
+          if ( +res.stock !== 0) {
+            return this.products.push(res);
+          }
+        });
+      }
+      if (this.priceMin !== undefined && this.priceMin !== 1) {
+        this.products = this.products.filter(res => {
+          if (res.offert && this.rebaja(res) > this.priceMin) {
+            return this.products.push(res);
+          }
+          if (res.price > this.priceMin && !res.offert) {
+            return this.products.push(res);
+          }
+        });
+      }
+      if (this.priceMax !== undefined && this.priceMax !== this.priceMin) {
+        this.products = this.products.filter(res => {
+          if (res.offert && this.rebaja(res) < this.priceMax) {
+            return this.products.push(res);
+          }
+          if (res.price < this.priceMax && !res.offert) {
+            return this.products.push(res);
+          }
+        });
+      }
     }
-    if ((this.category === 'None' || this.category === undefined) && this.name === undefined && (this.offert === false
-      || this.offert === undefined)) {
-      this.ngOnInit();
-    }
-    if (this.offert === true && (this.name === undefined || this.name === '')
-    && (this.category === undefined || this.category === 'None')) {
-      this.products = [];
-      this.products = this.products1.filter(res => {
-        if (res.offert) {
-          return this.products.push(res);
-        }
-      });
-    }
-    if (this.offert === true && (this.name === undefined || this.name === '')
-    && this.category !== undefined && this.category !== 'None') {
-      this.products = [];
-      this.products = this.products1.filter(res => {
-        if (res.offert && res.category.toLocaleUpperCase() === this.category.toLocaleUpperCase()) {
-          return this.products.push(res);
-        }
-      });
-    }
+
+
   }
 
 
@@ -147,6 +146,33 @@ export class ProductsComponent implements OnInit {
     }
     return this.categories;
   }
+
+  loadPriceMin() {
+    for (const product of this.products) {
+      if (this.priceMin1 > product.price) {
+        this.priceMin1 = this.priceMin1;
+      }
+      if (this.priceMin1 < product.price) {
+        this.priceMin1 = product.price;
+      }
+
+    }
+    return this.priceMin1;
+  }
+
+  loadPriceMax() {
+    for (const product of this.products) {
+      if (this.priceMin1 > product.price) {
+        this.priceMin1 = this.priceMin1;
+      }
+      if (this.priceMin1 < product.price) {
+        this.priceMin1 = product.price;
+      }
+
+    }
+    return this.priceMax1 + 20;
+  }
+
 
 
   cleanFilter() {

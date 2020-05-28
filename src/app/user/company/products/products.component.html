@@ -10,7 +10,7 @@
     <mat-expansion-panel>
         <mat-expansion-panel-header>
             <mat-panel-title>
-                FILTROS
+               <h4>FILTROS</h4> 
             </mat-panel-title>
 
         </mat-expansion-panel-header>
@@ -35,19 +35,22 @@
             <h6>Oferta</h6>
             <mat-slide-toggle [(ngModel)]="offert" (change)="search()" color="primary"></mat-slide-toggle>
             <h6 style="margin-left: 3%;">En stock</h6>
-            <mat-slide-toggle [(ngModel)]="stock" color="primary"></mat-slide-toggle>
+            <mat-slide-toggle [(ngModel)]="stock" (change)="search()" color="primary"></mat-slide-toggle>
             
         </div>
         </mat-card-content>
         <br>
         <mat-card-content>
             <h6>Precio mínimo</h6>
-            <mat-slider thumbLabel [displayWith]="formatLabel" [(ngModel)]="priceMin" tickInterval="1" min="1" max="1000"></mat-slider>
-        
+            <div class="row">
+            <mat-slider thumbLabel [displayWith]="formatLabel" [(ngModel)]="priceMin" tickInterval="1" min="1" max="{{priceMin1}}" (change)="search()"></mat-slider> &nbsp; <h6>{{priceMin}} € </h6>
+        </div>
         </mat-card-content>
         <mat-card-content>
             <h6>Precio máximo</h6>
-            <mat-slider thumbLabel [displayWith]="formatLabel" [(ngModel)]="priceMax" tickInterval="0.5" min="{{priceMin}}" max="10000"></mat-slider>
+            <div class="row">
+                <mat-slider thumbLabel [displayWith]="formatLabel" [(ngModel)]="priceMax" tickInterval="1" min="{{priceMin}}" max="{{1000}}" (change)="search()"></mat-slider> &nbsp; <h6>{{priceMax}} € </h6>
+            </div>
         </mat-card-content>
 
 
