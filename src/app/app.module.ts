@@ -72,6 +72,9 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatInputModule} from '@angular/material/input';
 import {MatSliderModule} from '@angular/material';
+import {MatTableModule} from '@angular/material/table';
+import {MatNativeDateModule} from '@angular/material';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatCardModule} from '@angular/material/card';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -226,6 +229,9 @@ const routes: Routes = [
     MatInputModule,
     MatSliderModule,
     MatCardModule,
+    MatTableModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatSlideToggleModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],

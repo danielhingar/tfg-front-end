@@ -1,38 +1,90 @@
-
 <div class="animated fadeInDown container">
-    <h2>Inventario</h2>
-    <input  class="form-control" [(ngModel)]="name" type="text" placeholder="Buscar..." aria-label="Buscar" #myInput (input)="Search()" style="width: 30%;float: right;margin-bottom: 2%;">
-    <div *ngIf="products?.length == 0" class="alert alert-info" style="width: 40%;">
-         No hay productos en su inventario 
-     </div>
-     <mat-spinner class="spinner" diameter="50" strokeWidth="3" *ngIf="loading===true"></mat-spinner>
-      <a class="nav-link" href="/createProduct"><mat-icon class="iconAdd" >add_circle</mat-icon>NUEVO PRODUCTO</a>
-    <table class="table table-striped" *ngIf="products?.length > 0 && loading === false">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Categoría</th>
-                <th scope="col">Precio</th> 
-                <th scope="col"></th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let product of products">
-                <td>
-                    <img *ngIf="product?.photo" src="{{product.photo}}" alt="{{product.photo}}" class="img-thumbnail rounded" style="width: 64px;cursor: pointer;" [routerLink]="['/edit/product', product.id]">
-                    <img *ngIf="!product?.photo" src="https://i1.wp.com/www.lagraderia.com/wp-content/uploads/2018/12/no-imagen.jpg?fit=300%2C300" alt="Sin foto" class="img-thumbnail rounded" style="width: 64px;cursor: pointer;" [routerLink]="['/edit/product', product.id]">
-                </td>
-                <td>{{product.name}}</td>
-                <td>{{product.category}}</td>
-                <td>{{product.price}}€</td>
-                <td><button mat-mini-fab  matTooltip="Eliminar" style="background-color: #F13107" class="button1" (click)="delete(product)"><mat-icon>delete</mat-icon></button></td>
-                <td><button mat-mini-fab  matTooltip="Editar" style="background-color: transparent; color: grey" class="button1" [routerLink]="['/edit/product', product.id]"><mat-icon>edit</mat-icon></button></td>
+  <h2>Inventario</h2>
+  
+  <div *ngIf="products?.length == 0" class="alert alert-info" style="width: 40%;">
+       No hay productos en su inventario 
+   </div>
+   <mat-spinner class="spinner" diameter="50" strokeWidth="3" *ngIf="loading===true"></mat-spinner>
+    <a class="nav-link" href="/createProduct"><mat-icon class="iconAdd" >add_circle</mat-icon>NUEVO PRODUCTO</a>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+          <mat-panel-title>
+             <h4><mat-icon>filter_alt</mat-icon>FILTROS</h4> 
+          </mat-panel-title>
 
-            </tr>
-        </tbody>
-    </table>
+      </mat-expansion-panel-header>
+      &nbsp;
+      <mat-form-field>
+        <mat-label>Fecha</mat-label>
+        <input matInput placeholder="Camiseta" [(ngModel)]="date" type="date" (change)="search()">
+        
+    </mat-form-field>
+    <button mat-mini-fab matTooltip="Eliminar" color="grey" (click)="removeDate()" (click)="search()"
+                         >
+                        <mat-icon>remove_circle</mat-icon>
+                    </button>
+    &nbsp;
+      <mat-form-field>
+          <mat-label>Nombre</mat-label>
+          <input matInput placeholder="Camiseta" [(ngModel)]="name" type="text" (input)="search()">
+      </mat-form-field>
+      <mat-card-content>
+        <div class="row" style="margin-left: 0.5%;">
+        <h6>Oferta</h6>
+        <mat-slide-toggle [(ngModel)]="offert" (change)="search()" color="primary"></mat-slide-toggle>
+        <h6 style="margin-left: 3%;">En stock</h6>
+        <mat-slide-toggle [(ngModel)]="stock" (change)="search()" color="primary"></mat-slide-toggle>
+        
+    </div>
+    </mat-card-content>
+      &nbsp;
+      <mat-form-field>
+          <mat-label>Categoría</mat-label>
+          <mat-select [(ngModel)]="category" (selectionChange)="search()">
+              <mat-option [value]="category1">Ninguna</mat-option>
+              <mat-option *ngFor="let category of loadCategories()" [value]="category">{{category}}</mat-option>
+          </mat-select>
+      </mat-form-field>
+      
+      <br>
+    
+      
+       
+     
+      
 
-    <app-paginator-products *ngIf="paginador"  [paginador] ="paginador"></app-paginator-products>
+
+  </mat-expansion-panel>
+  <div class="table-responsive">
+  <table class="table table-striped" *ngIf="products?.length > 0 && loading === false">
+      <thead>
+          <tr>
+              <th scope="col">#</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Categoría</th>
+              <th scope="col">Precio</th> 
+              <th scope="col">Fecha</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let product of products">
+              <td>
+                  <img *ngIf="product?.photo" src="{{product.photo}}" alt="{{product.photo}}" class="img-thumbnail rounded" style="width: 64px;cursor: pointer;" [routerLink]="['/edit/product', product.id]">
+                  <img *ngIf="!product?.photo" src="https://i1.wp.com/www.lagraderia.com/wp-content/uploads/2018/12/no-imagen.jpg?fit=300%2C300" alt="Sin foto" class="img-thumbnail rounded" style="width: 64px;cursor: pointer;" [routerLink]="['/edit/product', product.id]">
+              </td>
+              <td>{{product.name}}</td>
+              <td>{{product.category}}</td>
+              <td>{{product.price}}€</td>
+              <td>{{product.createDate}}</td>
+              <td><button mat-mini-fab  matTooltip="Eliminar" style="background-color: #F13107" class="button1" (click)="delete(product)"><mat-icon>delete</mat-icon></button></td>
+              <td><button mat-mini-fab  matTooltip="Editar" style="background-color: transparent; color: grey" class="button1" [routerLink]="['/edit/product', product.id]"><mat-icon>edit</mat-icon></button></td>
+
+          </tr>
+      </tbody>
+  </table>
 </div>
+  <app-paginator-products *ngIf="paginador"  [paginador] ="paginador"></app-paginator-products>
+</div>
+

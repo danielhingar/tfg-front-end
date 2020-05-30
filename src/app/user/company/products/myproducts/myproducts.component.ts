@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { ActivatedRoute } from '@angular/router';
 import { CompanyService } from '../../company.service';
 import { URL_BACKEND } from '../../../../config/config';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-myproducts',
@@ -14,22 +15,32 @@ import { URL_BACKEND } from '../../../../config/config';
 })
 export class MyproductsComponent implements OnInit {
 
+  category: string;
+  category1 = 'None';
+  categories: string[] = [];
+  stock: boolean;
+  offert: boolean;
+  date: string;
   products: Product[];
   products1: Product[];
   paginador: any;
   name: string;
   loading = true;
   urlBackend: string = URL_BACKEND;
+
+
   constructor(private productService: ProductService, private authService: AuthService, private activatedRoute: ActivatedRoute,
-              private companyService: CompanyService) { }
+    private companyService: CompanyService) { }
 
   ngOnInit() {
     this.loadProducts();
-    this.loadProducts1();
+
+    this.loadCategories();
+
   }
 
   loadProducts(): void {
-    this.activatedRoute.paramMap.subscribe( params => {
+    this.activatedRoute.paramMap.subscribe(params => {
       let page: number = +params.get('page');
       if (!page) {
         page = 0;
@@ -37,6 +48,7 @@ export class MyproductsComponent implements OnInit {
       this.productService.getProductsCompany(page, this.authService.usuario.username).subscribe(
         products => {
           this.products = products.content as Product[];
+          this.products1 = products.content as Product[];
           this.paginador = products;
           setTimeout(() => {
             this.loading = false;
@@ -46,11 +58,7 @@ export class MyproductsComponent implements OnInit {
     }
     );
   }
-  loadProducts1(): void {
-  if (this.authService.usuario.username) {
-        this.companyService.getCompany(this.authService.usuario.username).subscribe((company) => this.products1 = company.products);
-    }
-  }
+
 
   delete(product: Product): void {
     const swalWithBootstrapButtons = Swal.mixin({
@@ -84,14 +92,122 @@ export class MyproductsComponent implements OnInit {
       }
     });
   }
-  Search() {
-    if (this.name !== '') {
+  search() {
+
+    if (this.name !== undefined) {
+      this.products = [];
       this.products = this.products1.filter(res => {
-        return res.name.toLocaleLowerCase().match(this.name.toLocaleLowerCase());
+        return res.name.toLocaleUpperCase().match(this.name.toLocaleUpperCase());
       });
-    } else if (this.name === '') {
-      this.ngOnInit();
+      if (this.category !== undefined && this.category !== this.category1) {
+        this.products = this.products.filter(res => {
+          return res.category.toLocaleUpperCase().match(this.category.toLocaleUpperCase());
+        });
+      }
+      if (this.offert === true) {
+        this.products = this.products.filter(res => {
+          if (res.offert) {
+            return this.products.push(res);
+          }
+        });
+      }
+      if (this.stock === true) {
+        this.products = this.products.filter(res => {
+          if (+res.stock !== 0) {
+            return this.products.push(res);
+          }
+        });
+      }
+      if (this.date !== undefined) {
+        this.products = this.products.filter(res => {
+          const date3 = moment(this.date).format('YYYY-MM-DD');
+
+          const date4 = moment(res.createDate).format('YYYY-MM-DD');
+          if (moment(date3).isBefore(date4)) {
+              return this.products.push(res);
+            }
+        });
+      }
     }
+    if (this.name === undefined && this.date === undefined) {
+
+      this.products = [];
+      this.name = '';
+      this.products = this.products1.filter(res => {
+        return res.name.toLocaleUpperCase().match(this.name.toLocaleUpperCase());
+      });
+      if (this.category !== undefined && this.category !== this.category1) {
+        this.products = this.products.filter(res => {
+          return res.category.toLocaleUpperCase().match(this.category.toLocaleUpperCase());
+        });
+      }
+      if (this.offert === true) {
+        this.products = this.products.filter(res => {
+          if (res.offert) {
+            return this.products.push(res);
+          }
+        });
+      }
+      if (this.stock === true) {
+        this.products = this.products.filter(res => {
+          if (+res.stock !== 0) {
+            return this.products.push(res);
+          }
+        });
+      }
+
+    }
+
+    if (this.date !== undefined && this.name === undefined) {
+      this.products = [];
+      this.products = this.products1.filter(res => {
+        const date3 = moment(this.date).format('YYYY-MM-DD');
+
+        const date4 = moment(res.createDate).format('YYYY-MM-DD');
+        if (moment(date3).isBefore(date4)) {
+            return this.products.push(res);
+          }
+      });
+      if (this.name !== undefined) {
+        this.products = [];
+        this.products = this.products.filter(res => {
+          return res.name.toLocaleUpperCase().match(this.name.toLocaleUpperCase());
+        });
+      }
+      if (this.category !== undefined && this.category !== this.category1) {
+        this.products = this.products.filter(res => {
+          return res.category.toLocaleUpperCase().match(this.category.toLocaleUpperCase());
+        });
+      }
+      if (this.offert === true) {
+        this.products = this.products.filter(res => {
+          if (res.offert) {
+            return this.products.push(res);
+          }
+        });
+      }
+      if (this.stock === true) {
+        this.products = this.products.filter(res => {
+          if (+res.stock !== 0) {
+            return this.products.push(res);
+          }
+        });
+      }
+    }
+
+  }
+
+  loadCategories() {
+    for (const product of this.products) {
+      if (!this.categories.includes(product.category)) {
+        this.categories.push(product.category);
+      }
+    }
+    return this.categories;
+  }
+
+  removeDate(){
+    this.date = undefined;
   }
 
 }
