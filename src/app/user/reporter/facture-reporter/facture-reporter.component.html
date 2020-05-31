@@ -3,19 +3,48 @@
     <div *ngIf="factures1?.length == 0" class="alert alert-info" style="width: 40%;">
          No hay pedidos en el sistema
      </div>
-     <div class="row" style="margin-bottom: 2%;margin-top: 1%;">
-        <select value="{{opcionSeleccionada1}}" [(ngModel)]="opcionSeleccionada1" class="form-control" style="width: 200px;" (change)="searchClient($event)">
-        <option disabled selected value>---------</option>
-        <option  *ngFor="let client of loadClients()" >
-            {{client}}
-        </option>
-    </select> 
-    <button class="btn btn-outline-info" style="margin-left: 3%" (click)='cleanFilter()'>Borrar filtros</button>
-    </div>
+     <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <h4>
+                    <mat-icon>filter_alt</mat-icon>FILTROS
+                </h4>
+            </mat-panel-title>
+
+        </mat-expansion-panel-header>
+        &nbsp;
+        <mat-form-field>
+            <mat-label>Desde</mat-label>
+            <input matInput [(ngModel)]="date" type="date" (change)="search()">
+
+        </mat-form-field>
+        <button mat-mini-fab matTooltip="Eliminar" color="grey" (click)="removeDate()" (click)="search()">
+            <mat-icon>remove_circle</mat-icon>
+        </button>
+        &nbsp;
+        <mat-form-field>
+            <mat-label>Hasta</mat-label>
+            <input matInput [(ngModel)]="date1" type="date" (change)="search()">
+
+        </mat-form-field>
+        <button mat-mini-fab matTooltip="Eliminar" color="grey" (click)="removeDate1()" (click)="search()">
+            <mat-icon>remove_circle</mat-icon>
+        </button>
+        &nbsp;
+        <mat-form-field>
+            <mat-label>Clientes</mat-label>
+            <mat-select [(ngModel)]="opcionSeleccionada1" (selectionChange)="search()">
+                <mat-option [value]="client1">Ninguno</mat-option>
+                <mat-option *ngFor="let client of loadClients()" [value]="client">{{client.toLocaleUpperCase()}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+    </mat-expansion-panel>
     <br>
     <div *ngIf="factures?.length == 0" class="alert alert-info" style="width: 40%;">
-        No hay facturas con ese filtro
+        No hay facturas que cumplan esos requisitos
     </div>
+    <div class="table-responsive">
     <table class="table table-striped" *ngIf="factures?.length > 0">
         <thead>
             <tr>
@@ -42,6 +71,6 @@
             </tr>
         </tbody>
     </table>
-
+</div>
     <app-paginator-factures-client-reporter *ngIf="paginador"  [paginador] ="paginador"></app-paginator-factures-client-reporter>
 </div>

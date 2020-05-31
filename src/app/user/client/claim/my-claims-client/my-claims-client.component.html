@@ -1,8 +1,9 @@
 <div class="animated fadeInDown container">
-    <h2>Quejas Showcase</h2>
+    <h2>Mis quejas</h2>
     <div *ngIf="claims?.length == 0" class="alert alert-info" style="width: 40%;">
          No hay quejas en el sistema
      </div>
+     <div class="table-responsive">
     <table class="table table-striped" *ngIf="claims?.length > 0">
         <thead>
             <tr>
@@ -26,15 +27,15 @@
                     <button mat-mini-fab  matTooltip="Ver detalle" style="background-color: transparent;color: black;" type="button" name="details" [routerLink]="['/showClaim', claim.id]"  class="btn btn-sm"><mat-icon>info</mat-icon></button>
                    
                 </td>
-                <td>
+                <td >
 
-                    <button mat-mini-fab  matTooltip="Eliminar" style="background-color: #F13107" class="button1" (click)="delete(claim)"><mat-icon>delete</mat-icon></button>
+                    <button mat-mini-fab  matTooltip="Eliminar" style="background-color: #F13107" class="button1" (click)="delete(claim)" *ngIf="claim.status !== 'Pendiente de respuesta'"><mat-icon>delete</mat-icon></button>
                 </td>
 
             </tr>
         </tbody>
     </table>
-
+</div>
     <app-paginator-claims-client  *ngIf="paginador"  [paginador] ="paginador"></app-paginator-claims-client>
 </div>
 

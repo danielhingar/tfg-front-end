@@ -3,15 +3,58 @@
     <div *ngIf="claims1?.length == 0" class="alert alert-info" style="width: 40%;">
          No hay quejas en el sistema
      </div>
-     <div class="row"  style="margin-top: 2%;">
-        <button class="btn btn-outline-dark" style="margin-right: 3%;margin-bottom: 2%;" *ngFor="let state1 of status" (click)='SearchStatus(state1)' [disabled]="igual(state1)">{{state1}}</button>
-        <button class="btn btn-outline-info" style="margin-left: 3%;margin-bottom: 2%;" (click)='cleanFilter()'>Borrar filtros</button>
-    </div>
+    
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <h4>
+                    <mat-icon>filter_alt</mat-icon>FILTROS
+                </h4>
+            </mat-panel-title>
 
+        </mat-expansion-panel-header>
+        &nbsp;
+        <mat-form-field>
+            <mat-label>Desde</mat-label>
+            <input matInput [(ngModel)]="date" type="date" (change)="search()">
+
+        </mat-form-field>
+        <button mat-mini-fab matTooltip="Eliminar" color="grey" (click)="removeDate()" (click)="search()">
+            <mat-icon>remove_circle</mat-icon>
+        </button>
+        &nbsp;
+        <mat-form-field>
+            <mat-label>Hasta</mat-label>
+            <input matInput [(ngModel)]="date1" type="date" (change)="search()">
+
+        </mat-form-field>
+        <button mat-mini-fab matTooltip="Eliminar" color="grey" (click)="removeDate1()" (click)="search()">
+            <mat-icon>remove_circle</mat-icon>
+        </button>
+        &nbsp;
+        <mat-form-field>
+            <mat-label>Cliente</mat-label>
+            <mat-select [(ngModel)]="opcionSeleccionada1" (selectionChange)="search()">
+                <mat-option [value]="company1">Ninguno</mat-option>
+                <mat-option *ngFor="let client of loadClients()" [value]="client">{{client.toLocaleUpperCase()}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field>
+            <mat-label>Estado</mat-label>
+            <mat-select [(ngModel)]="opcionSeleccionada2" (selectionChange)="search()">
+                <mat-option [value]="company1">Ninguno</mat-option>
+                <mat-option *ngFor="let statu of status" [value]="statu">{{statu.toLocaleUpperCase()}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+    </mat-expansion-panel>
     <br>
-    <div *ngIf="claims?.length == 0 &&  pass===true" class="alert alert-info" style="width: 40%;">
-        No hay quejas con ese filtro
+    <br>
+    <div *ngIf="claims?.length == 0" class="alert alert-info" style="width: 40%;">
+        No hay quejas que cumplan los criterios
     </div>
+    <div class="table-responsive">
     <table class="table table-striped" *ngIf="claims?.length > 0">
         <thead>
             <tr>
@@ -42,6 +85,6 @@
             </tr>
         </tbody>
     </table>
-
+</div>
     <app-paginator-claims-reporter-me *ngIf="paginador"  [paginador] ="paginador"></app-paginator-claims-reporter-me>
 </div>

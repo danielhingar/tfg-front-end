@@ -3,6 +3,7 @@
     <div *ngIf="factures?.length == 0" class="alert alert-info" style="width: 40%;">
          No hay ningún pedido en su cuenta
      </div>
+     <div class="table-responsive">
     <table class="table table-striped" *ngIf="factures?.length > 0">
         <thead>
             <tr>
@@ -33,6 +34,6 @@
             </tr>
         </tbody>
     </table>
-
+</div>
     <app-paginator-factures-client *ngIf="paginador"  [paginador] ="paginador"></app-paginator-factures-client>
 </div>

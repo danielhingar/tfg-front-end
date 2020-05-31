@@ -1,33 +1,71 @@
 <div class="animated fadeInDown container">
     <h2>Mis facturas</h2>
-    <div *ngIf="factures?.length == 0" class="alert alert-info" style="width: 40%;">
-         No hay ningún factura destinada a su compañía
-     </div>
-    <table class="table table-striped" *ngIf="factures?.length > 0">
-        <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Fecha de compra</th>
-                <th scope="col">Nº productos</th> 
-                <th scope="col">Importe</th>
-                <th scope="col">Detalles</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let facture of factures">
-                <td>{{facture.id}}</td>
-                <td>{{facture.createDate}}</td>
-                <td>{{count(facture)}}</td>
-                <td>{{caculateTotal(facture).toFixed(2)}}€</td>
-                <td>
-                    <button mat-mini-fab  matTooltip="Ver detalle" style="background-color: transparent;color: black;" type="button" name="details" [routerLink]="['/detailsFacture', facture.id]"  class="btn btn-sm"><mat-icon>info</mat-icon></button>
-                </td>
-                
-                
+    <div *ngIf="factures1?.length == 0" class="alert alert-info" style="width: 100%;">
+        No hay ningún factura destinada a su compañía
+    </div>
+    <div *ngIf="factures?.length == 0" class="alert alert-info" style="width: 100%;">
+        No hay ningún factura que cumpla los requisitos
+    </div>
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <h4>
+                    <mat-icon>filter_alt</mat-icon>FILTROS
+                </h4>
+            </mat-panel-title>
 
-            </tr>
-        </tbody>
-    </table>
+        </mat-expansion-panel-header>
+        &nbsp;
+        <mat-form-field>
+            <mat-label>Desde</mat-label>
+            <input matInput [(ngModel)]="date" type="date" (change)="search()">
 
-    <app-paginator-factures-company *ngIf="paginador"  [paginador] ="paginador"></app-paginator-factures-company>
+        </mat-form-field>
+        <button mat-mini-fab matTooltip="Eliminar" color="grey" (click)="removeDate()" (click)="search()">
+            <mat-icon>remove_circle</mat-icon>
+        </button>
+        &nbsp;
+        <mat-form-field>
+            <mat-label>Hasta</mat-label>
+            <input matInput [(ngModel)]="date1" type="date" (change)="search()">
+
+        </mat-form-field>
+        <button mat-mini-fab matTooltip="Eliminar" color="grey" (click)="removeDate1()" (click)="search()">
+            <mat-icon>remove_circle</mat-icon>
+        </button>
+        &nbsp;
+
+    </mat-expansion-panel>
+    <div class="table-responsive">
+        <table class="table table-striped" *ngIf="factures?.length > 0"> 
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Fecha de compra</th>
+                    <th scope="col">Nº productos</th>
+                    <th scope="col">Importe</th>
+                    <th scope="col">Detalles</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let facture of factures">
+                    <td>{{facture.id}}</td>
+                    <td>{{facture.createDate}}</td>
+                    <td>{{count(facture)}}</td>
+                    <td>{{caculateTotal(facture).toFixed(2)}}€</td>
+                    <td>
+                        <button mat-mini-fab matTooltip="Ver detalle"
+                            style="background-color: transparent;color: black;" type="button" name="details"
+                            [routerLink]="['/detailsFacture', facture.id]" class="btn btn-sm">
+                            <mat-icon>info</mat-icon>
+                        </button>
+                    </td>
+
+
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <app-paginator-factures-company *ngIf="paginador" [paginador]="paginador"></app-paginator-factures-company>
 </div>

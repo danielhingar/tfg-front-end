@@ -42,17 +42,7 @@
             </div>
 
             <hr *ngIf="claim?.answer">
-            <div class="col-sm" style="margin-left: 80px;margin-bottom: 10px;" *ngIf="claim.id != null">
-                <img *ngIf="claim?.attachment" src="assets\img\iconfinder_files-folders-48_808600.png" alt="{{claim.attachment}}" class="img-thumbnail rounded" >
-                <a href="{{claim.attachment}}" *ngIf="claim?.attachment">Descargar</a>
-            </div>
-            <div class="form-group row">
-                <label for="attachment" class="col-form-label">Adjuntos:</label>
-                <div class="col-sm-4">
-                    <input type="url" class="form-control" [(ngModel)]="claim.attachment" name="attachment" style="width: 300px;">
-                   
-                </div>
-            </div>
+            
 
             <div class="form-group row">
                 <label for="title" class="col-form-label">Título:</label>
@@ -82,7 +72,7 @@
 
             <div class="form-group row" *ngIf="this.authService.hasRole('ROLE_REPORTER')">
                 <div class="col-lg-6">
-                    <button class="btn btn-primary" role="button" (click)="update()"  [disabled]="!claimForm.form.valid">Editar queja</button>
+                    <button class="btn btn-primary" role="button" (click)="update()"  [disabled]="!claimForm.form.valid">Resolver queja</button>
                 </div>
             </div>
 

@@ -55,10 +55,7 @@ h5{
     
 }
 
-input{
-    width: 20%;
-     margin-left: 78%;
-}
+
 
 
 img{
@@ -107,12 +104,16 @@ p{
     margin-top: 8%;
 }
 
+.searchIcon{
+    font-size: 20px;
+}
+
 @media screen and (max-width:414px){
-    input{
-      margin-top: 25%;
-      width: 30%;
-      margin-right: 20%;
+
+    .container{
+        margin-top: 20%;
     }
+   
     .iconAdd{
        
         margin-left: 87%;
@@ -121,12 +122,11 @@ p{
   }
   
   @media screen and (max-width:360px){
-    
-      input{
-        margin-top: 25%;
-        width: 30%;
-        margin-right: 20%;
-      }
+
+    .container{
+        margin-top: 20%;
+    }
+     
       .iconAdd{
        
         margin-left: 87%;

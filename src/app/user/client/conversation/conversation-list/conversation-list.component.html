@@ -4,6 +4,7 @@
     <div *ngIf="conversations?.length == 0" class="alert alert-info" style="width: 40%;">
          No hay ningúna conversación en su cuenta
      </div>
+     <div class="table-responsive">
     <table class="table table-striped" *ngIf="conversations?.length > 0">
         <thead>
             <tr>
@@ -30,6 +31,6 @@
             </tr>
         </tbody>
     </table>
-
+</div>
     <app-paginator-my-conversations *ngIf="paginador"  [paginador] ="paginador"></app-paginator-my-conversations>
 </div>

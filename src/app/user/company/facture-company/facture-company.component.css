@@ -1,5 +1,18 @@
 .container{
     margin-top: 8%;
     margin-bottom: 15%;
+    width: 100%;
 }
 
+@media screen and (max-width:414px){
+    .container{
+        margin-top: 20%;
+    }
+  }
+  
+  @media screen and (max-width:360px){
+    
+      .container{
+        margin-top: 20%;
+      }
+  }

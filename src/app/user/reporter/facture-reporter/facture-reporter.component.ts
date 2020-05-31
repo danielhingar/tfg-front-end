@@ -4,6 +4,7 @@ import { Facture } from '../../client/facture/facture';
 import { ItemBasket } from '../../client/basket/itemBasket';
 import { Router, ActivatedRoute } from '@angular/router';
 import swal from 'sweetalert2';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-facture-reporter',
@@ -18,6 +19,9 @@ export class FactureReporterComponent implements OnInit {
   factures1: Facture[] = [];
   paginador: any;
   clients: string[] = [];
+  client1 = 'None';
+  date: string;
+  date1: string;
   pass: boolean;
   constructor(private factureService: FactureService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
@@ -95,21 +99,79 @@ export class FactureReporterComponent implements OnInit {
       return this.clients;
     }
 
-    searchClient( event: any): void {
-      const client: string = event.target.value as string;
-      if (client !== '') {
-        this.pass = true;
-        this.factures = this.factures1.filter(res => {
-          return res.client.username.toLocaleLowerCase().match(client.toLocaleLowerCase());
-        });
-        } else if (client === '') {
-          this.ngOnInit();
+    search() {
+      if (this.date === undefined && this.date1 === undefined) {
+        this.factures = [];
+        this.factures = this.factures1;
+        if (this.opcionSeleccionada1 !== undefined && this.opcionSeleccionada1 !== this.client1) {
+          this.factures = this.factures.filter(res => {
+            return res.client.username.toLocaleUpperCase().match(this.opcionSeleccionada1.toLocaleUpperCase());
+          });
         }
       }
 
-      cleanFilter() {
-        this.loadFactures();
-        this.pass = false;
+      if (this.date !== undefined ) {  
+        this.factures = [];
+        this.factures = this.factures1.filter(res => {
+          const date3 = moment(this.date).format('YYYY-MM-DD');
+          const date4 = moment(res.createDate).format('YYYY-MM-DD');
+          if (moment(date3).isBefore(date4)) {
+            return this.factures.push(res);
+          }
+        });
+        if (this.date1 !== undefined) {
+          this.factures = this.factures.filter(res => {
+            const date3 = moment(this.date1).format('YYYY-MM-DD');
+            const date4 = moment(res.createDate).format('YYYY-MM-DD');
+            if (moment(date4).isBefore(date3)) {
+              return this.factures.push(res);
+            }
+          });
+        }
+        if (this.opcionSeleccionada1 !== undefined && this.opcionSeleccionada1 !== this.client1) {
+          this.factures = this.factures.filter(res => {
+            return res.client.username.toLocaleUpperCase().match(this.opcionSeleccionada1.toLocaleUpperCase());
+          });
+        }
+
       }
+
+      if (this.date1 !== undefined ) {
+
+        this.factures = [];
+        this.factures = this.factures1.filter(res => {
+          const date3 = moment(this.date1).format('YYYY-MM-DD');
+  
+          const date4 = moment(res.createDate).format('YYYY-MM-DD');
+          if (moment(date4).isBefore(date3)) {
+            return this.factures.push(res);
+          }
+        });
+        if (this.date !== undefined) {
+          this.factures = this.factures.filter(res => {
+            const date3 = moment(this.date).format('YYYY-MM-DD');
+
+            const date4 = moment(res.createDate).format('YYYY-MM-DD');
+            if (moment(date3).isBefore(date4)) {
+              return this.factures.push(res);
+            }
+          });
+        }
+        if (this.opcionSeleccionada1 !== undefined && this.opcionSeleccionada1 !== this.client1) {
+          this.factures = this.factures.filter(res => {
+            return res.client.username.toLocaleUpperCase().match(this.opcionSeleccionada1.toLocaleUpperCase());
+          });
+        }
+
+      }
+  
+    }
+    removeDate() {
+      this.date = undefined;
+    }
+  
+    removeDate1() {
+      this.date1 = undefined;
+    }
 }
 
