@@ -21,7 +21,7 @@ export class DetailConversationComponent implements OnInit {
 
   ngOnInit() {
     this.loadMessages();
-    console.log(this.messages);
+
 
   }
 

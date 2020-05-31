@@ -11,71 +11,52 @@
                     <h3 style="width: 300px;">{{claim.status}}</h3>
                 </div>
             </div>
+            
+        </h2>
+            <br>
+            <mat-label>Respuesta recibida</mat-label>
 
             <div class="form-group row" *ngIf="claim?.answer && this.authService.hasRole('ROLE_CLIENT')">
-                <label for="answer" class="col-form-label">Respuesta del intermediario:</label>
                 <div class="col-sm-4">
                     <textarea type="text" class="form-control" [(ngModel)]="claim.answer" name="answer" style="width: 300px;" disabled></textarea>
-                </div>
+        <div class="form-group " *ngIf="this.authService.hasRole('ROLE_REPORTER') && claim.reporter !=null && (claim.reporter.username === this.authService.usuario.username)">
+                    {{statu}}
             </div>
 
             <div class="form-group row" *ngIf="this.authService.hasRole('ROLE_REPORTER') && claim.reporter !=null && (claim.reporter.username === this.authService.usuario.username)">
                 <label for="status" class="col-form-label">Estado:</label>
                 <select value="{{claim.status}"  name="status" class="form-control" style="width: 200px;margin-left: 4%;" [(ngModel)]="claim.status">
                     <option  *ngFor="let statu of status" >
-                        {{statu}}
                     </option>
                 </select>
                 </div>
+        </mat-form-field>
+        <hr *ngIf="claim?.answer">
+        <mat-form-field style="width: 100%;" appearance="legacy">
+            <mat-label>Título</mat-label>
+            <input matInput class="form-control" [(ngModel)]="claim.title" name="title" required #title="ngModel" style="color: black" disabled >
+            <mat-error *ngIf="title.invalid && (title.dirty || title.touched) && title.errors.required">
+                Este campo es obligatorio
+              </mat-error>
+              
+        </mat-form-field>
 
-            <div class="form-group row" *ngIf="this.authService.hasRole('ROLE_REPORTER') && claim.reporter !=null && (claim.reporter.username === this.authService.usuario.username)">
-                <label for="answer" class="col-form-label">Escribir respuesta:</label>
-                <div class="col-sm-4">
-                    <textarea type="text" class="form-control" [(ngModel)]="claim.answer" name="answer" style="width: 300px;" required #answer="ngModel"></textarea>
-                    <div class="alert" *ngIf="answer.invalid && (answer.dirty || answer.touched)">
-                        <div *ngIf="answer.errors.required">
-                            Este campo es obligatorio
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
+        <mat-form-field style="width: 100%;">
+            <mat-label>Descripción</mat-label>
+            <textarea matInput class="form-control" [(ngModel)]="claim.description" name="description" required #description="ngModel" style="color: black" disabled></textarea>
+            <mat-error *ngIf="description.invalid && (description.dirty || description.touched) && description.errors.required">
+                Este campo es obligatorio
+              </mat-error>
+          </mat-form-field>
 
-            <hr *ngIf="claim?.answer">
-            
+        
 
-            <div class="form-group row">
-                <label for="title" class="col-form-label">Título:</label>
-                <div class="col-sm-4">
-                    <input type="text" class="form-control" [(ngModel)]="claim.title" name="title" style="width: 300px;" required #title="ngModel" disabled>
-                    <div class="alert" *ngIf="title.invalid && (title.dirty || title.touched)">
-                        <div *ngIf="title.errors.required">
-                            Este campo es obligatorio
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div *ngIf="this.authService.hasRole('ROLE_REPORTER') && claim.reporter !=null && (claim.reporter.username === this.authService.usuario.username)">
+                <button mat-raised-button style="float: right;" (click)="update()"  [disabled]="!claimForm.form.valid" >Resolver queja</button>
 
-            <div class="form-group row">
-                <label for="description" class="col-form-label">Descripción:</label>
-                <div class="col-sm-4">
-                    <textarea type="text" class="form-control" [(ngModel)]="claim.description" name="description" required #description="ngModel" disabled></textarea>
-                    <div class="alert" *ngIf="description.invalid && (description.dirty || description.touched)">
-                        <div *ngIf="description.errors.required">
-                            Este campo es obligatorio
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
 
-            
-
-            <div class="form-group row" *ngIf="this.authService.hasRole('ROLE_REPORTER')">
-                <div class="col-lg-6">
-                    <button class="btn btn-primary" role="button" (click)="update()"  [disabled]="!claimForm.form.valid">Resolver queja</button>
-                </div>
-            </div>
-
-        </form>
-    </div>
+    </form>
 </div>
+
+

@@ -62,7 +62,7 @@
             </div>
             
             <div class="form-group row" *ngIf="!client.id">
-                <label for="password" class="col-form-label">Contraseña</label>
+                <label for="password" class="col-form-label">Contraseña:</label>
                 <div class="col-sm-4">
                     <input type="password" class="form-control" [(ngModel)]="client.password" name="password" required minlength="6" #password="ngModel">
                     <div class="alert" *ngIf="password.invalid && (password.dirty || password.touched)">
