@@ -1,35 +1,44 @@
-<div class="animated fadeInDown card bg-white text-dark">
-    <div class="card-header">Queja de la factura {{claim.facture.id}}</div>
-    <div class="card-body">
-        
-        <form #claimForm="ngForm">
-            <button type="button" style="margin-bottom: 10%;" name="details" [routerLink]="['/detailsFacture', claim.facture.id]"  class="btn btn-sm" *ngIf="authService.hasRole('ROLE_REPORTER')">Ver factura</button>
+<div class=" animated fadeInDown container" >
+    <h2>Detalles de la queja</h2>
+    <span><a mat-button   [routerLink]="['/detailsFacture', claim.facture.id]" target="_blank">Factura {{claim.facture.id}}</a></span>
+    
+    <br>
+    <br>
             
-            <div class="form-group row" *ngIf="claim?.answer &&  this.authService.hasRole('ROLE_CLIENT')">
-                <label for="status" class="col-form-label">Estado:</label>
-                <div class="col-sm-4">
-                    <h3 style="width: 300px;">{{claim.status}}</h3>
-                </div>
-            </div>
+    <form #claimForm="ngForm">
+        <h2 *ngIf="claim?.answer &&  this.authService.hasRole('ROLE_CLIENT')">Resolución
             
         </h2>
+        <hr *ngIf="claim?.answer">
+        <br>
+        <div *ngIf="claim?.answer &&  this.authService.hasRole('ROLE_CLIENT')">
+            
+            <h4>Estado: {{claim.status}}</h4>
             <br>
+        </div>
+        
+        <mat-form-field style="width: 100%;" appearance="legacy" *ngIf="claim?.answer &&  this.authService.hasRole('ROLE_CLIENT')">
             <mat-label>Respuesta recibida</mat-label>
+            <input matInput class="form-control" [(ngModel)]="claim.answer" name="answer" style="color: black" disabled >
+              
+        </mat-form-field>
 
-            <div class="form-group row" *ngIf="claim?.answer && this.authService.hasRole('ROLE_CLIENT')">
-                <div class="col-sm-4">
-                    <textarea type="text" class="form-control" [(ngModel)]="claim.answer" name="answer" style="width: 300px;" disabled></textarea>
         <div class="form-group " *ngIf="this.authService.hasRole('ROLE_REPORTER') && claim.reporter !=null && (claim.reporter.username === this.authService.usuario.username)">
+            <label for="status" class="col-form-label">Estado:</label>
+            <select value="{{claim.status}"  name="status" class="form-control"  [(ngModel)]="claim.status">
+                <option  *ngFor="let statu of status" >
                     {{statu}}
+                </option>
+            </select>
             </div>
 
-            <div class="form-group row" *ngIf="this.authService.hasRole('ROLE_REPORTER') && claim.reporter !=null && (claim.reporter.username === this.authService.usuario.username)">
-                <label for="status" class="col-form-label">Estado:</label>
-                <select value="{{claim.status}"  name="status" class="form-control" style="width: 200px;margin-left: 4%;" [(ngModel)]="claim.status">
-                    <option  *ngFor="let statu of status" >
-                    </option>
-                </select>
-                </div>
+        <mat-form-field style="width: 100%;" appearance="legacy" *ngIf="this.authService.hasRole('ROLE_REPORTER') && claim.reporter !=null && (claim.reporter.username === this.authService.usuario.username)">
+            <mat-label>Escribir respuesta</mat-label>
+            <textarea matInput class="form-control" [(ngModel)]="claim.answer" name="answer" required #answer="ngModel" ></textarea>
+            <mat-error *ngIf="answer.invalid && (answer.dirty || answer.touched) && answer.errors.required">
+                Este campo es obligatorio
+              </mat-error>
+              
         </mat-form-field>
         <hr *ngIf="claim?.answer">
         <mat-form-field style="width: 100%;" appearance="legacy">
