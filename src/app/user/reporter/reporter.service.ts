@@ -43,6 +43,13 @@ export class ReporterService {
     return false;
   }
 
+  private nombreUsado(e): boolean {
+    if (e.status === 409) {
+      swal.fire('Error', 'Ese nombre de usuario está en uso, pruebe con otro', 'warning');
+      return true;
+    }
+  }
+
   create(reporter: Reporter): Observable<Reporter> {
     return this.http.post<Reporter>(this.urlEndPoint + 'create', reporter, {headers: this.agregarAuthorizationHeader()}).pipe(
       catchError( e => {
@@ -52,6 +59,9 @@ export class ReporterService {
         }
 
         if (e.status === 400) {
+          return throwError(e);
+        }
+        if (this.nombreUsado(e)) {
           return throwError(e);
         }
         if ( e.error.mensaje) {

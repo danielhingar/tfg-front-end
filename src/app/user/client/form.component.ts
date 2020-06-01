@@ -45,6 +45,9 @@ export class FormComponent implements OnInit {
           width: 350,
           timer: 1800,
         });
+    },
+    err => {
+      this.errores = err.error.errors as string[];
     }
     );
   }

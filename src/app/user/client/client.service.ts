@@ -43,6 +43,13 @@ export class ClientService {
     return false;
   }
 
+  private nombreUsado(e): boolean {
+    if (e.status === 409) {
+      swal.fire('Error', 'Ese nombre de usuario está en uso, pruebe con otro', 'warning');
+      return true;
+    }
+  }
+
   create(client: Client): Observable<Client> {
     return this.http.post<Client>(this.urlEndPoint + 'create', client, {headers: this.agregarAuthorizationHeader()}).pipe(
       catchError( e => {
@@ -52,6 +59,9 @@ export class ClientService {
         }
 
         if (e.status === 400) {
+          return throwError(e);
+        }
+        if (this.nombreUsado(e)) {
           return throwError(e);
         }
         if ( e.error.mensaje) {

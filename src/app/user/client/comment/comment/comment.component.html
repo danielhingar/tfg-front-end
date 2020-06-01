@@ -7,99 +7,47 @@
       <div class="card-body">
         <br />
         <form #commentForm="ngForm">
-          <div class="form-group row">
-            <div class="col-sm-3">
-              <label for="title" class="col-form-label">Titulo* :</label>
-              <input
-                type="text"
-                class="form-control"
-                [(ngModel)]="comentario.title"
-                name="title"
-                required
-                minlength="4"
-                maxlength="30"
-                #title="ngModel"
-              />
-              <div
-                class="alert"
-                *ngIf="title.invalid && (title.dirty || title.touched)"
-              >
-                <div *ngIf="title.errors.required">
-                  Este campo es obligatorio
-                </div>
-                <div *ngIf="title.errors.minlength">
-                  Debe ser mayor a 3 caracteres
-                </div>
-              </div>
-            </div>
+          <div class="form-group">
+            <div class="row">
+              <mat-form-field style="width: 50%;" appearance="legacy">
+                <mat-label>Título</mat-label>
+                <input matInput class="form-control" [(ngModel)]="comentario.title" name="title" required #title="ngModel" >
+               
+                  
+            </mat-form-field>
           </div>
-          <div class="form-group row">
-            <div class="col-md">
-              <label for="description" class="col-form-label">Opinión* :</label>
-              <textarea
-                type="text"
-                class="form-control"
-                [(ngModel)]="comentario.description"
-                name="description"
+          <div class="row">
+            <mat-form-field style="width: 70%;" >
+                <mat-label>Descripción</mat-label>
+                <textarea matInput  class="form-control" [(ngModel)]="comentario.description" name="description" required #description="ngModel" ></textarea>
                 
-                required
-                #description="ngModel"
-              ></textarea>
-              <div
-                class="alert"
-                *ngIf="
-                  description.invalid &&
-                  (description.dirty || description.touched)
-                "
-              >
-                <div *ngIf="description.errors.required">
-                  Este campo es obligatorio
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <div class="col-12">
+              <mat-form-field style="width: 30%;margin-left: -1%;"  appearance="legacy">
+                <mat-label>Valoración</mat-label>
+                <input matInput   class="form-control" [(ngModel)]="comentario.valoration" name="valoration" type="number" required min="0" max="5" #valoration="ngModel" >
+                <div style="color: red;" *ngIf="comprobarMax(comentario)">
+                  La máxima puntuación es de 5 estrellas
                 </div>
-              </div>
+             
+                  
+            </mat-form-field>
+
+            <button mat-raised-button style="float: right;margin-top: 5%" color="primary" (click)="create()"
+              
+              
+              [disabled]="comprobarMax(comentario) || !commentForm.form.valid ">Añadir</button>
             </div>
           </div>
-          <div class="form-group row">
-            <div class="col-sm-3">
-              <label for="valoration" class="col-form-label"
-                >Valoración* :</label
-              >
-              <input
-                type="number"
-                class="form-control"
-                [(ngModel)]="comentario.valoration"
-                name="valoration"
-                required
-                min="0"
-                max="5"
-                #valoration="ngModel"
-              />
-              <div
-                class="alert"
-                *ngIf="
-                  valoration.invalid && (valoration.dirty || valoration.touched)
-                "
-              >
-                <div *ngIf="valoration.errors.required">
-                  Este campo es obligatorio
-                </div>
-              </div>
-            </div>
-            <div class="col-lg">
-              <button
-                type="button"
-                (click)="create()"
-                name="factura"
-                class="btn"
-                [disabled]="!commentForm.form.valid"
-              >
-                Agregar
-              </button>
-            </div>
+          
           </div>
         </form>
       </div>
     </div>
   </div>
+ 
   <br />
   <div class="row-cols-lg-1" *ngFor="let comment of comments">
     <div class="card">
@@ -117,10 +65,11 @@
         <span class="fa fa-star checked" *ngFor="let element of arrayStarts(comment)"></span> <span class="fa fa-star" *ngFor="let element of arrayStartsEmpty(comment)"></span>
         
       </div>
-      <div class="card-footer text-muted">{{ comment.createDate }} <button mat-mini-fab matTooltip="Eliminar" style="background-color: #F13107" class="button1" (click)="delete(comment)"><mat-icon>delete</mat-icon></button>
+      <div class="card-footer text-muted">{{ comment.createDate }} <button mat-mini-fab matTooltip="Eliminar" style="background-color: #F13107;float: right;" class="button1" (click)="delete(comment)"><mat-icon>delete</mat-icon></button>
 
     </div>
-    <br />
+    
   </div>
+<br>
 </div>
 

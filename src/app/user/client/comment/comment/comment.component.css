@@ -40,14 +40,7 @@ input:valid{
     font-size: medium;
   }
 
-  button {
-    height: 50px;
-    font-size: 19px;
-    color: white;
-    background-color: #ff6800;
-    float: right;
-    margin-bottom: 2%;
-  }
+
 
   .col-lg{
     top: 40px;

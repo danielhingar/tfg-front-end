@@ -43,6 +43,13 @@ export class CompanyService {
     return false;
   }
 
+  private nombreUsado(e): boolean {
+    if (e.status === 409) {
+      swal.fire('Error', 'Ese nombre de usuario está en uso, pruebe con otro', 'warning');
+      return true;
+    }
+  }
+
   getCompanies(page: number): Observable<any> {
     return this.http.get<Company[]>(this.urlEndPoint + 'list' + '/page/' + page).pipe(
       map((response: any) => {
@@ -72,6 +79,9 @@ export class CompanyService {
         }
 
         if (e.status === 400) {
+          return throwError(e);
+        }
+        if (this.nombreUsado(e)) {
           return throwError(e);
         }
         if ( e.error.mensaje) {

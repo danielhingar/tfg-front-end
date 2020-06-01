@@ -41,6 +41,7 @@ export class CommentComponent implements OnInit {
           }
         );
       }
+    
       return this.comentario = new Comentario();
     });
   }
@@ -125,6 +126,15 @@ export class CommentComponent implements OnInit {
       }
 
     });
+  }
+
+  comprobarMax(comentario: Comentario) {
+    if(comentario.valoration > 5) {
+      return true;
+    }
+    if(comentario.valoration < 5) {
+      return false;
+    }
   }
 
 }
