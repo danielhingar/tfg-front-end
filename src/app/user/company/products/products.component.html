@@ -2,7 +2,7 @@
     <p class="animated zoomIn name">{{company.businessName}}</p> <a [routerLink]="['/about', company.id]" role="button"
         style="background-color: darkorange;color: black; border-radius: 4px;width: 80px;">¿Quiénes somos?</a><a
         [routerLink]="['/conversation', company.username]" role="button"
-        style="background-color: grey;color: black; border-radius: 4px;width: 80px;margin-left: 4%;">Contactar</a>
+        style="background-color: grey;color: black; border-radius: 4px;width: 80px;margin-left: 4%;" *ngIf="authService.hasRole('ROLE_CLIENT')">Contactar</a>
     <br>
 
     <mat-spinner class="spinner" diameter="50" strokeWidth="3" *ngIf="loading===true"></mat-spinner>
@@ -88,7 +88,7 @@
                         Ahora:{{rebaja(product).toFixed(2)}}€</h4>
                     <h4 class="offert" *ngIf="product?.status === 'SINSTOCK'">SIN STOCK</h4>
                 </div>
-                <div class="container">
+                <div class="container" *ngIf="authService.hasRole('ROLE_CLIENT')">
                     <button mat-mini-fab matTooltip="Añadir a deseados" color="grey" (click)="addWish(product)"
                         *ngIf="(productLikes(product))"
                         (click)="openSnackBar('Se ha añadido a tu lista de deseados', 'Ver deseados')"

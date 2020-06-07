@@ -41,11 +41,13 @@ export class ProductsComponent implements OnInit {
   client: Client = new Client();
   urlBackend: string = URL_BACKEND;
   constructor(private companyService: CompanyService, private router: Router, private activatedRoute: ActivatedRoute,
-    private productService: ProductService, private authService: AuthService, private clientService: ClientService,
+    private productService: ProductService, public authService: AuthService, private clientService: ClientService,
     private snackBar: MatSnackBar) { }
 
   ngOnInit() {
+    if (this.authService.hasRole('ROLE_CLIENT')){
     this.loadClient();
+    }
     this.pass = false;
     this.cargarProducts();
     this.cargarCompany();

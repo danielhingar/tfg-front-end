@@ -56,7 +56,10 @@
             <div class="form-group row">
                 <label for="answer" class="col-form-label">Observaciones:</label>
                 <div class="col-sm-4">
-                    <textarea type="text" class="form-control" [(ngModel)]="shipping.observation" name="observation" style="width: 300px;"  #observation="ngModel"></textarea>
+                    <textarea type="text" class="form-control" [(ngModel)]="shipping.observation" name="observation" style="width: 300px;" maxlength="255"  #observation="ngModel"></textarea>
+                    <div *ngIf="dateMax.errors.maxlength">
+                        No puede exceder los 256 caracteres
+                    </div>
                 </div>
             </div>
  

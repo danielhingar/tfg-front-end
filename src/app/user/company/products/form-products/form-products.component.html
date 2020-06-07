@@ -35,10 +35,13 @@
             <div class="form-group row">
                 <label for="description" class="col-form-label">Descripción:</label>
                 <div class="col-sm-4">
-                    <textarea type="text" class="form-control" [(ngModel)]="product.description" name="description" required #description="ngModel"></textarea>
+                    <textarea type="text" class="form-control" [(ngModel)]="product.description" name="description" required maxlength="255" #description="ngModel"></textarea>
                     <div class="alert" *ngIf="description.invalid && (description.dirty || description.touched)">
                         <div *ngIf="description.errors.required">
                             Este campo es obligatorio
+                        </div>
+                        <div *ngIf="description.errors.required">
+                            No puede exceder los 256 caracteres
                         </div>
                     </div>
                 </div>
